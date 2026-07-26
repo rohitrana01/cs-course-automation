@@ -132,54 +132,6 @@ youtube_automation/
 
 ---
 
-## Customisation
-
-### Change the TTS voice
-
-Edit `.env` or the GitHub Secret `TTS_VOICE`. Options:
-
-```
-en-US-AriaNeural      (warm female — default)
-en-US-GuyNeural       (clear male)
-en-US-JennyNeural     (professional female)
-en-US-BrianNeural     (engaging male)
-en-GB-SoniaNeural     (British female)
-en-IN-NeerjaNeural    (Indian English female)
-```
-
-### Change upload time
-
-Edit `.github/workflows/daily_upload.yml`:
-```yaml
-- cron: '30 3 * * *'   # 3:30 AM UTC = 9:00 AM IST
-```
-Use [crontab.guru](https://crontab.guru) to build your schedule.
-
-### Upload as unlisted first (recommended for testing)
-
-In `.env`:
-```
-VIDEO_PRIVACY=unlisted
-```
-Switch to `public` when you're happy with the output.
-
-### Add your own topics
-
-Edit `curriculum.json` — add entries to the `topics` array:
-```json
-{
-  "id": "cs101",
-  "day": 101,
-  "title": "Your Custom Topic",
-  "module": "Module Name",
-  "level": "Beginner",
-  "tags": ["tag1", "tag2"],
-  "uploaded": false
-}
-```
-
----
-
 ## Troubleshooting
 
 **`ANTHROPIC_API_KEY` not working**

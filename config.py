@@ -27,6 +27,20 @@ CHANNEL_NAME  = os.getenv("CHANNEL_NAME", "LearnCS Daily")
 TTS_VOICE     = os.getenv("TTS_VOICE", "en-US-AriaNeural")
 VIDEO_PRIVACY = os.getenv("VIDEO_PRIVACY", "public")
 
+# Niche & Art Style Configurations (Strictly G-Rated & Child-Friendly)
+NICHE                 = os.getenv("NICHE", "Computer Science")
+CHARACTER_DESCRIPTION = os.getenv("CHARACTER_DESCRIPTION", "A friendly cute cartoon teacher mascot wearing glasses and a blue sweater, wholesome 3rd-grade educational style, clean vector art")
+VISUAL_STYLE          = os.getenv("VISUAL_STYLE", "cute child-friendly educational cartoon, G-rated, wholesome, bright pastel colors, clean vector illustration, safe for work, SFW")
+
+# Safety & Image Provider Settings
+IMAGE_PROVIDER        = os.getenv("IMAGE_PROVIDER", "online").lower()  # "online" (Pollinations AI) or "local" (Procedural Pillow)
+SAFE_MODE             = os.getenv("SAFE_MODE", "true").lower() in ("true", "1", "yes")
+
+# Audio & Background Music Configurations
+ENABLE_MUSIC          = os.getenv("ENABLE_MUSIC", "true").lower() in ("true", "1", "yes")
+BACKGROUND_MUSIC_FOLDER = os.getenv("BACKGROUND_MUSIC_FOLDER", "resources/music")
+BACKGROUND_MUSIC_VOLUME = float(os.getenv("BACKGROUND_MUSIC_VOLUME", "0.10"))
+
 # Paths
 OUTPUT_DIR       = "output"
 CURRICULUM_FILE  = "curriculum.json"
