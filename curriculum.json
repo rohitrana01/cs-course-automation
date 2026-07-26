@@ -29,7 +29,10 @@
         "ENIAC",
         "generations"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "channel": "LearnCS Daily",
+      "video_id": "Mh6MPfxfd7Y",
+      "upload_date": "2026-07-26T15:06:55.243828+00:00"
     },
     {
       "id": "cs003",
