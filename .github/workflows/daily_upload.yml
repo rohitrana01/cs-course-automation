@@ -52,12 +52,16 @@ jobs:
       # ── Validate secrets ─────────────────────────────────────────────────
       - name: Check required secrets
         run: |
-          [ -z "$ANTHROPIC_API_KEY" ]      && echo "❌ ANTHROPIC_API_KEY missing"      && exit 1 || true
+          if [ -z "$GEMINI_API_KEY" ] && [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "❌ Neither GEMINI_API_KEY nor ANTHROPIC_API_KEY is configured in Secrets"
+            exit 1
+          fi
           [ -z "$YOUTUBE_CLIENT_ID" ]      && echo "❌ YOUTUBE_CLIENT_ID missing"      && exit 1 || true
           [ -z "$YOUTUBE_CLIENT_SECRET" ]  && echo "❌ YOUTUBE_CLIENT_SECRET missing"  && exit 1 || true
           [ -z "$YOUTUBE_REFRESH_TOKEN" ]  && echo "❌ YOUTUBE_REFRESH_TOKEN missing"  && exit 1 || true
-          echo "✅ All secrets present"
+          echo "✅ All required secrets present"
         env:
+          GEMINI_API_KEY:         ${{ secrets.GEMINI_API_KEY }}
           ANTHROPIC_API_KEY:      ${{ secrets.ANTHROPIC_API_KEY }}
           YOUTUBE_CLIENT_ID:      ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET:  ${{ secrets.YOUTUBE_CLIENT_SECRET }}
@@ -66,7 +70,10 @@ jobs:
       # ── Run pipeline ─────────────────────────────────────────────────────
       - name: Run automation pipeline
         env:
+          LLM_PROVIDER:           ${{ secrets.LLM_PROVIDER || 'gemini' }}
+          GEMINI_API_KEY:         ${{ secrets.GEMINI_API_KEY }}
           ANTHROPIC_API_KEY:      ${{ secrets.ANTHROPIC_API_KEY }}
+          IMAGE_PROVIDER:         ${{ secrets.IMAGE_PROVIDER || 'online' }}
           YOUTUBE_CLIENT_ID:      ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET:  ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN:  ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
