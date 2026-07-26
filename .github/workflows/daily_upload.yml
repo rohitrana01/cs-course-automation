@@ -77,8 +77,8 @@ jobs:
           YOUTUBE_CLIENT_ID:      ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET:  ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN:  ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
-          CHANNEL_NAME:           ${{ secrets.CHANNEL_NAME }}
-          TTS_VOICE:              ${{ secrets.TTS_VOICE }}
+          CHANNEL_NAME:           ${{ secrets.CHANNEL_NAME || 'LearnCS Daily' }}
+          TTS_VOICE:              ${{ secrets.TTS_VOICE || 'en-US-AriaNeural' }}
           VIDEO_PRIVACY:          ${{ vars.VIDEO_PRIVACY || 'public' }}
           DRY_RUN:                ${{ github.event.inputs.dry_run || 'false' }}
         run: python pipeline.py

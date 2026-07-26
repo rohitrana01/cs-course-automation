@@ -23,9 +23,9 @@ YOUTUBE_CLIENT_SECRET = os.getenv("YOUTUBE_CLIENT_SECRET", "")
 YOUTUBE_REFRESH_TOKEN = os.getenv("YOUTUBE_REFRESH_TOKEN", "")
 
 # Channel settings
-CHANNEL_NAME  = os.getenv("CHANNEL_NAME", "LearnCS Daily")
-TTS_VOICE     = os.getenv("TTS_VOICE", "en-US-AriaNeural")
-VIDEO_PRIVACY = os.getenv("VIDEO_PRIVACY", "public")
+CHANNEL_NAME  = os.getenv("CHANNEL_NAME") or "LearnCS Daily"
+TTS_VOICE     = os.getenv("TTS_VOICE") or "en-US-AriaNeural"
+VIDEO_PRIVACY = os.getenv("VIDEO_PRIVACY") or "public"
 
 # Niche & Art Style Configurations (Strictly G-Rated & Child-Friendly)
 NICHE                 = os.getenv("NICHE", "Computer Science")

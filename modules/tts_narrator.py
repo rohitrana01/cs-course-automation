@@ -21,7 +21,9 @@ def generate_segment_narration(narration_text: str, output_dir: str, seg_idx: in
     Generate TTS audio for a single script segment and calculate estimated word timing subtitles.
     Returns (audio_path, subtitles_list, duration_seconds)
     """
-    voice = voice or TTS_VOICE
+    voice = (voice or TTS_VOICE or "en-US-AriaNeural").strip()
+    if not voice:
+        voice = "en-US-AriaNeural"
     os.makedirs(output_dir, exist_ok=True)
     audio_path = os.path.join(output_dir, f"segment_{seg_idx}_narration.mp3")
 
