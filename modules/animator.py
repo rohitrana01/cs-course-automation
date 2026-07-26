@@ -301,3 +301,80 @@ def create_animation(script_data: dict, topic: dict,
         ffmpeg_params=["-crf", "23", "-preset", "fast"]
     )
     return output_path
+
+
+def create_segment_animation(
+    image_path: str,
+    board_elements: list[str],
+    diagram_path: str | None,
+    subtitles: list[dict],
+    duration: float,
+    audio_path: str,
+    output_path: str
+) -> str:
+    """
+    Renders a 1920x1080 chalkboard slide clip with a character image on the left,
+    animated board elements on the right, optional sticker illustration, subtitle captions, and audio.
+    """
+    os.makedirs(os.path.dirname(output_path) or ".", exist_ok=True)
+    from moviepy.editor import VideoClip, AudioFileClip
+    
+    # Load base image
+    if os.path.exists(image_path):
+        base_img = Image.open(image_path).convert("RGBA").resize((W, H))
+    else:
+        base_img = Image.new("RGBA", (W, H), (35, 75, 55, 255))
+        
+    diagram_img = None
+    if diagram_path and os.path.exists(diagram_path):
+        diagram_img = Image.open(diagram_path).convert("RGBA").resize((320, 320))
+
+    def make_frame(t):
+        frame = base_img.copy()
+        draw = ImageDraw.Draw(frame)
+        f = _fonts()
+        
+        # Board elements progress
+        progress = min(max(t / max(duration, 1.0), 0.0), 1.0)
+        num_elements = len(board_elements)
+        visible_count = max(1, int(progress * (num_elements + 1)))
+        
+        y = 160
+        for idx, elem in enumerate(board_elements[:visible_count]):
+            color = (255, 255, 255) if idx == 0 else (254, 240, 138)
+            y = _wrap(draw, f"• {elem}", 920, y, f["body_b"], color, 840) + 15
+            
+        # Composite diagram sticker
+        if diagram_img and progress > 0.3:
+            frame.paste(diagram_img, (1480, 520), diagram_img)
+            
+        # Draw subtitle caption line
+        current_sub = ""
+        for sub in subtitles:
+            if sub["start"] <= t <= sub["end"]:
+                current_sub = sub["text"]
+                break
+                
+        if current_sub:
+            sub_y = 950
+            draw.rounded_rectangle([360, sub_y, 1560, sub_y + 80], radius=20, fill=(0, 0, 0, 180))
+            draw.text((W // 2, sub_y + 40), current_sub, font=f["body_b"], fill=(255, 255, 255), anchor="mm")
+            
+        _progress(draw, progress)
+        return np.array(frame.convert("RGB"))
+
+    video = VideoClip(make_frame, duration=duration)
+    if audio_path and os.path.exists(audio_path):
+        audio = AudioFileClip(audio_path)
+        video = video.set_audio(audio)
+
+    video.write_videofile(
+        output_path,
+        fps=24,
+        codec="libx264",
+        audio_codec="aac",
+        threads=4,
+        logger=None,
+        ffmpeg_params=["-crf", "23", "-preset", "fast"]
+    )
+    return output_path
