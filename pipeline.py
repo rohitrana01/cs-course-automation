@@ -1,32 +1,28 @@
 """
 pipeline.py — Main automation orchestrator
-Run this daily to generate 3rd-grade style animated explainer videos:
+Run this daily (via GitHub Actions cron) to:
   1. Pick the next topic from curriculum.json
-  2. Generate script segments (narration + chalkboard text + diagram descriptions)
-  3. For each segment:
-     - Generate TTS narration audio + word timings for subtitles
-     - Download customized base chalkboard scene with chibi teacher pose
-     - Download optional sticker diagram/illustration
-     - Render chalkboard slide animation with sequential points + sticker reveal
-  4. Concatenate segments and mix lofi music
-  5. Generate anime thumbnail
-  6. Upload final video to YouTube
-  7. Mark topic as completed in curriculum.json
+  2. Generate script with LLM API (Gemini / Claude)
+  3. Create TTS narration audio
+  4. Render animated video slides
+  5. Assemble final video (video + audio)
+  6. Generate thumbnail
+  7. Upload to YouTube
+  8. Mark topic as uploaded in curriculum.json
 """
 import os
 import sys
 import json
-import glob
+import shutil
 from datetime import datetime, timezone
 
 from config import OUTPUT_DIR, CURRICULUM_FILE, CHANNEL_NAME
-from modules.script_generator    import generate_script
-from modules.tts_narrator        import generate_segment_narration
-from modules.image_generator     import generate_image, generate_diagram
-from modules.animator            import create_segment_animation
-from modules.video_assembler     import assemble_video
+from modules.script_generator   import generate_script
+from modules.tts_narrator       import generate_narration
+from modules.animator           import create_animation
+from modules.video_assembler    import assemble_video
 from modules.thumbnail_generator import create_thumbnail
-from modules.youtube_uploader    import upload_video
+from modules.youtube_uploader   import upload_video
 
 
 # ── Curriculum helpers ────────────────────────────────────────────────────────
@@ -61,7 +57,7 @@ def mark_uploaded(curriculum: dict, topic_id: str, video_id: str):
 
 def run():
     print("\n" + "═" * 60)
-    print("  🚀  3rd-Grade Explainer Video Automation Pipeline")
+    print("  🚀  YouTube Automation Pipeline")
     print("═" * 60)
 
     dry_run = os.getenv("DRY_RUN", "false").lower() in ("true", "1", "yes")
@@ -69,15 +65,11 @@ def run():
         print("🔍  DRY RUN MODE ENABLED — No actual upload or curriculum save will occur.")
 
     # ── 0. Load curriculum ──────────────────────────────────────────────────
-    if not os.path.exists(CURRICULUM_FILE):
-        print(f"❌ Error: '{CURRICULUM_FILE}' not found! Run generate_curriculum.py first.")
-        sys.exit(1)
-        
     curriculum = load_curriculum()
     topic = get_next_topic(curriculum)
 
     if topic is None:
-        print("✅  All topics in the curriculum have been uploaded! Course complete.")
+        print("✅  All 100 topics have been uploaded! Course complete.")
         sys.exit(0)
 
     print(f"\n📚  Day {topic['day']:03d}: {topic['title']}")
@@ -88,70 +80,39 @@ def run():
     out = os.path.join(OUTPUT_DIR, topic["id"])
     os.makedirs(out, exist_ok=True)
 
-    # Inject channel name into topic dictionary for subtitle/thumbnail branding
-    topic["channel"] = CHANNEL_NAME
-
-    # ── 1. Generate script segments ─────────────────────────────────────────
-    print("\n[1/6] 🤖  Generating 3rd-grade storyboard script via LLM...")
+    # ── 1. Generate script ───────────────────────────────────────────────────
+    print("\n[1/6] 🤖  Generating script via LLM API…")
     script_data = generate_script(topic)
     print(f"       Title  : {script_data['video_title']}")
-    print(f"       Segs   : {len(script_data.get('segments', []))} segments generated")
+    print(f"       Segs   : {len(script_data.get('segments', []))} segments")
 
     # Save script for debugging
     with open(os.path.join(out, "script.json"), "w", encoding="utf-8") as f:
         json.dump(script_data, f, indent=2, ensure_ascii=False)
 
-    # ── 2 & 3. Process Segment assets & Render video clips ──────────────────
-    print("\n[2-3/6] 🎨 Processing and animating blackboard segments...")
-    segment_paths = []
-    
-    segments = script_data.get("segments", [])
-    if not segments:
-        print("❌ Error: No segments generated in script.")
-        sys.exit(1)
-        
-    for idx, seg in enumerate(segments):
-        print(f"\n--- Segment {idx+1} / {len(segments)}: {seg.get('title', 'Untitled')} ---")
-        
-        # A. TTS Audio + Word Timing Subtitles
-        audio_path, subtitles, duration = generate_segment_narration(
-            seg["narration"], out, idx
-        )
-        
-        # B. Download base classroom image
-        img_path = os.path.join(out, f"scene_{idx}.jpg")
-        generate_image(seg["character_pose"], img_path)
-        
-        # C. Download optional diagram sticker illustration
-        diagram_path = None
-        diagram_prompt = seg.get("diagram_prompt")
-        if diagram_prompt:
-            diagram_path = os.path.join(out, f"scene_{idx}_diagram.png")
-            generate_diagram(diagram_prompt, diagram_path)
-        
-        # D. Render the chalkboard slide animation clip
-        video_clip_path = os.path.join(out, f"segment_{idx}.mp4")
-        create_segment_animation(
-            image_path=img_path,
-            board_elements=seg.get("board_elements", []),
-            diagram_path=diagram_path,
-            subtitles=subtitles,
-            duration=duration,
-            audio_path=audio_path,
-            output_path=video_clip_path
-        )
-        segment_paths.append(video_clip_path)
+    # ── 2. Generate TTS narration ────────────────────────────────────────────
+    print("\n[2/6] 🎙️   Generating TTS narration…")
+    audio_path, audio_duration = generate_narration(
+        script_data["narration"], out
+    )
+    print(f"       Duration: {audio_duration:.1f}s")
 
-    # ── 4. Assemble final video (Merge clips + Background Music) ─────────────
-    print("\n[4/6] 🎬  Assembling final video with background music...")
-    final_path = assemble_video(segment_paths, out)
+    # ── 3. Render animation ──────────────────────────────────────────────────
+    print("\n[3/6] 🎨  Rendering animation slides…")
+    anim_path = os.path.join(out, "animation.mp4")
+    topic["channel"] = CHANNEL_NAME or "LearnCS Daily"
+    create_animation(script_data, topic, audio_duration, anim_path)
+
+    # ── 4. Assemble final video ──────────────────────────────────────────────
+    print("\n[4/6] 🎬  Assembling final video…")
+    final_path = assemble_video(anim_path, audio_path, out)
 
     # ── 5. Generate thumbnail ────────────────────────────────────────────────
-    print("\n[5/6] 🖼️   Generating thumbnail...")
+    print("\n[5/6] 🖼️   Generating thumbnail…")
     thumb_path = create_thumbnail(topic, out)
 
     # ── 6. Upload to YouTube ─────────────────────────────────────────────────
-    print("\n[6/6] 📤  Uploading to YouTube...")
+    print("\n[6/6] 📤  Uploading to YouTube…")
     if dry_run:
         print("       [DRY RUN] Skipping YouTube upload. Using mock video ID.")
         video_id = "mock_video_id"
@@ -171,21 +132,6 @@ def run():
         mark_uploaded(curriculum, topic["id"], video_id)
         save_curriculum(curriculum)
 
-    # ── 8. Update Local Interactive Dashboard Database ──────────────────────
-    print("\n[7/7] 💾 Updating local dashboard database...")
-    try:
-        from modules.db_manager import update_database
-        video_rel = os.path.join("output", topic["id"], "final_video.mp4")
-        thumb_rel = os.path.join("output", topic["id"], "thumbnail.jpg")
-        update_database(
-            topic_id=topic["id"],
-            quiz_questions=script_data.get("quiz", []),
-            video_rel_path=video_rel,
-            thumbnail_rel_path=thumb_rel
-        )
-    except Exception as e:
-        print(f"       ⚠️ Warning: Could not update data.js database: {e}")
-
     # ── Summary ──────────────────────────────────────────────────────────────
     print("\n" + "═" * 60)
     print(f"  ✅  SUCCESS — Day {topic['day']} uploaded!")
@@ -194,22 +140,20 @@ def run():
     print(f"  📅  {remaining} topics remaining in the course")
     print("═" * 60 + "\n")
 
-    # ── Cleanup intermediate media assets ───────────────────────────────────
-    _cleanup_intermediates(out, keep=["script.json", "thumbnail.jpg", "final_video.mp4"])
+    # ── Optional: clean up large intermediates ───────────────────────────────
+    keep_files = ["script.json", "thumbnail.jpg"]
+    if dry_run:
+        keep_files.append("final_video.mp4")
+    _cleanup(out, keep=keep_files)
 
 
-def _cleanup_intermediates(out_dir: str, keep: list[str]):
-    """Delete segment audio, images, and videos to save disk space."""
-    print("🧹  Cleaning intermediate assets...")
-    for pattern in ["segment_*.mp3", "scene_*.jpg", "scene_*_diagram.png", "segment_*.mp4"]:
-        files = glob.glob(os.path.join(out_dir, pattern))
-        for f in files:
-            fname = os.path.basename(f)
-            if fname not in keep:
-                try:
-                    os.remove(f)
-                except Exception as e:
-                    print(f"  [cleanup] Failed to delete {fname}: {e}")
+def _cleanup(out_dir: str, keep: list[str]):
+    """Remove large video intermediates to save disk space."""
+    for fname in ["animation.mp4", "narration.mp3", "final_video.mp4"]:
+        if fname not in keep:
+            p = os.path.join(out_dir, fname)
+            if os.path.exists(p):
+                os.remove(p)
 
 
 if __name__ == "__main__":

@@ -1,8 +1,8 @@
 """
 modules/animator.py
-Generates a styled silent MP4 animation from the script data.
+Generates styled, high-quality dark-theme slide animations from the script data.
 Uses Pillow for frame rendering and MoviePy for video assembly.
-No heavy 3D renderer needed — clean dark-theme slide animations.
+100% clean, offline, fast, and elegant.
 """
 import os
 import math
@@ -32,9 +32,9 @@ def _load_fonts():
         os.path.join(os.environ.get("SystemRoot", "C:\\Windows"), "Fonts") + "/",
     ]
     families = {
-        "bold":  ["DejaVuSans-Bold.ttf", "LiberationSans-Bold.ttf", "arialbd.ttf", "seguib.ttf"],
-        "regular": ["DejaVuSans.ttf", "LiberationSans-Regular.ttf", "arial.ttf", "segoeui.ttf"],
-        "mono":  ["DejaVuSansMono.ttf", "LiberationMono-Regular.ttf", "consola.ttf", "cour.ttf"],
+        "bold":      ["DejaVuSans-Bold.ttf", "LiberationSans-Bold.ttf", "arialbd.ttf", "seguib.ttf"],
+        "regular":   ["DejaVuSans.ttf", "LiberationSans-Regular.ttf", "arial.ttf", "segoeui.ttf"],
+        "mono":      ["DejaVuSansMono.ttf", "LiberationMono-Regular.ttf", "consola.ttf", "cour.ttf"],
         "mono_bold": ["DejaVuSansMono-Bold.ttf", "LiberationMono-Bold.ttf", "consolab.ttf", "courbd.ttf"],
     }
 
@@ -80,7 +80,7 @@ def _base(draw):
 
 def _progress(draw, pct):
     draw.rectangle([0, H-5, W, H], fill=(30, 41, 59))
-    draw.rectangle([0, H-5, int(W * pct), H], fill=ACCENT)
+    draw.rectangle([0, H-5, int(W * max(0.0, min(pct, 1.0))), H], fill=ACCENT)
 
 
 def _wrap(draw, text, x, y, font, color, max_w):
@@ -114,20 +114,11 @@ def _code_block(draw, code, x, y, max_h):
     draw.text((x+16, y+10), "● code", font=f["small"], fill=MUTED)
 
     cy = y + 44
-    keywords = {"def", "class", "import", "from", "return", "if", "else",
-                "elif", "for", "while", "in", "not", "and", "or", "True",
-                "False", "None", "pass", "break", "continue", "lambda"}
     for line in lines:
         if line.strip().startswith("#"):
             draw.text((x+16, cy), line, font=f["code"], fill=(107, 174, 91))
-        elif any(f'"{w}' in line or f"'{w}" in line for w in ["", " "]):
-            draw.text((x+16, cy), line, font=f["code"], fill=(206, 145, 120))
         else:
-            # Token-level keyword highlight
-            tokens = line.split()
-            tx = x + 16
-            full_line = line
-            draw.text((tx, cy), full_line, font=f["code"], fill=(212, 212, 212))
+            draw.text((x+16, cy), line, font=f["code"], fill=(212, 212, 212))
         cy += 38
 
 
@@ -143,7 +134,7 @@ def _title_slide(topic, pct):
     d.text((97, 68), f"DAY {topic['day']}", font=f["badge"], fill=(255, 255, 255))
 
     # Module label
-    d.text((80, 120), topic["module"].upper(), font=f["small"], fill=ACCENT)
+    d.text((80, 120), str(topic.get("module", "Computer Science")).upper(), font=f["small"], fill=ACCENT)
 
     # Title — large, centered vertically
     cy = H // 2 - 60
@@ -153,7 +144,7 @@ def _title_slide(topic, pct):
     d.rectangle([80, cy + 16, 80 + 120, cy + 22], fill=ACCENT)
 
     # Tagline
-    d.text((80, cy + 40), f"5-minute lesson  ·  {topic['level']} level", font=f["body"], fill=MUTED)
+    d.text((80, cy + 40), f"5-minute lesson  ·  {topic.get('level', 'Beginner')} level", font=f["body"], fill=MUTED)
 
     # Channel
     d.text((80, H - 60), f"🖥  {topic.get('channel', 'LearnCS Daily')}", font=f["small"], fill=ACCENT)
@@ -229,7 +220,7 @@ def _outro_slide(next_topic, pct):
     if next_topic:
         d.rectangle([80, cy + 195, W - 80, cy + 197], fill=(51, 65, 85))
         d.text((80, cy + 210), "Next →", font=f["small"], fill=MUTED)
-        d.text((80, cy + 240), next_topic, font=f["body_b"], fill=(255, 255, 255))
+        d.text((80, cy + 240), str(next_topic), font=f["body_b"], fill=(255, 255, 255))
 
     _progress(d, 1.0)
     return np.array(img)
@@ -296,83 +287,6 @@ def create_animation(script_data: dict, topic: dict,
         fps=24,
         codec="libx264",
         audio=False,
-        threads=4,
-        logger=None,
-        ffmpeg_params=["-crf", "23", "-preset", "fast"]
-    )
-    return output_path
-
-
-def create_segment_animation(
-    image_path: str,
-    board_elements: list[str],
-    diagram_path: str | None,
-    subtitles: list[dict],
-    duration: float,
-    audio_path: str,
-    output_path: str
-) -> str:
-    """
-    Renders a 1920x1080 chalkboard slide clip with a character image on the left,
-    animated board elements on the right, optional sticker illustration, subtitle captions, and audio.
-    """
-    os.makedirs(os.path.dirname(output_path) or ".", exist_ok=True)
-    from moviepy.editor import VideoClip, AudioFileClip
-    
-    # Load base image
-    if os.path.exists(image_path):
-        base_img = Image.open(image_path).convert("RGBA").resize((W, H))
-    else:
-        base_img = Image.new("RGBA", (W, H), (35, 75, 55, 255))
-        
-    diagram_img = None
-    if diagram_path and os.path.exists(diagram_path):
-        diagram_img = Image.open(diagram_path).convert("RGBA").resize((320, 320))
-
-    def make_frame(t):
-        frame = base_img.copy()
-        draw = ImageDraw.Draw(frame)
-        f = _fonts()
-        
-        # Board elements progress
-        progress = min(max(t / max(duration, 1.0), 0.0), 1.0)
-        num_elements = len(board_elements)
-        visible_count = max(1, int(progress * (num_elements + 1)))
-        
-        y = 160
-        for idx, elem in enumerate(board_elements[:visible_count]):
-            color = (255, 255, 255) if idx == 0 else (254, 240, 138)
-            y = _wrap(draw, f"• {elem}", 920, y, f["body_b"], color, 840) + 15
-            
-        # Composite diagram sticker
-        if diagram_img and progress > 0.3:
-            frame.paste(diagram_img, (1480, 520), diagram_img)
-            
-        # Draw subtitle caption line
-        current_sub = ""
-        for sub in subtitles:
-            if sub["start"] <= t <= sub["end"]:
-                current_sub = sub["text"]
-                break
-                
-        if current_sub:
-            sub_y = 950
-            draw.rounded_rectangle([360, sub_y, 1560, sub_y + 80], radius=20, fill=(0, 0, 0, 180))
-            draw.text((W // 2, sub_y + 40), current_sub, font=f["body_b"], fill=(255, 255, 255), anchor="mm")
-            
-        _progress(draw, progress)
-        return np.array(frame.convert("RGB"))
-
-    video = VideoClip(make_frame, duration=duration)
-    if audio_path and os.path.exists(audio_path):
-        audio = AudioFileClip(audio_path)
-        video = video.set_audio(audio)
-
-    video.write_videofile(
-        output_path,
-        fps=24,
-        codec="libx264",
-        audio_codec="aac",
         threads=4,
         logger=None,
         ffmpeg_params=["-crf", "23", "-preset", "fast"]
