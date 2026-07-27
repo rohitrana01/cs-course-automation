@@ -46,7 +46,10 @@
         "monitor",
         "IO"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "channel": "LearnCS Daily",
+      "video_id": "krqV8uC9Was",
+      "upload_date": "2026-07-27T06:54:03.379118+00:00"
     },
     {
       "id": "cs004",
