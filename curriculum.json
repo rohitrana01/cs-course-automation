@@ -80,7 +80,10 @@
         "HDD",
         "memory"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "channel": "LearnCS Daily",
+      "video_id": "ThnywSQA9og",
+      "upload_date": "2026-07-29T06:17:56.642927+00:00"
     },
     {
       "id": "cs006",
