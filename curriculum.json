@@ -97,7 +97,10 @@
         "Linux",
         "macOS"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "channel": "LearnCS Daily",
+      "video_id": "Z2sXiJXsVVE",
+      "upload_date": "2026-07-30T06:12:51.003372+00:00"
     },
     {
       "id": "cs007",
