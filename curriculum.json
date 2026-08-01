@@ -131,7 +131,10 @@
         "WAN",
         "router"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "channel": "LearnCS Daily",
+      "video_id": "vIBXwYNtnwM",
+      "upload_date": "2026-08-01T06:16:52.685825+00:00"
     },
     {
       "id": "cs009",
