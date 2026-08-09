@@ -1,6 +1,6 @@
-# 🖥️ Automated Faceless YouTube Channel — CS Course Bot
+# 🖥️ Automated CS Course Video Bot (cs-course-automation)
 
-Uploads a **daily 5-minute animated educational video** to YouTube — fully automated, 100% free.
+Uploads a **daily animated educational video** to YouTube — fully automated, 100% free.
 
 **100 topics · Basic → Advanced · No manual work after setup**
 
