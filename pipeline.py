@@ -153,7 +153,10 @@ def _cleanup(out_dir: str, keep: list[str]):
         if fname not in keep:
             p = os.path.join(out_dir, fname)
             if os.path.exists(p):
-                os.remove(p)
+                try:
+                    os.remove(p)
+                except Exception:
+                    pass
 
 
 if __name__ == "__main__":

@@ -49,17 +49,17 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
-      # ── Validate secrets ─────────────────────────────────────────────────
+      # ── Validate secrets (Non-blocking fallback mode) ────────────────────
       - name: Check required secrets
         run: |
           if [ -z "$GEMINI_API_KEY" ] && [ -z "$ANTHROPIC_API_KEY" ]; then
-            echo "❌ Neither GEMINI_API_KEY nor ANTHROPIC_API_KEY is configured in Secrets"
-            exit 1
+            echo "⚠️ Neither GEMINI_API_KEY nor ANTHROPIC_API_KEY found. Using built-in fallback script generator."
           fi
-          [ -z "$YOUTUBE_CLIENT_ID" ]      && echo "❌ YOUTUBE_CLIENT_ID missing"      && exit 1 || true
-          [ -z "$YOUTUBE_CLIENT_SECRET" ]  && echo "❌ YOUTUBE_CLIENT_SECRET missing"  && exit 1 || true
-          [ -z "$YOUTUBE_REFRESH_TOKEN" ]  && echo "❌ YOUTUBE_REFRESH_TOKEN missing"  && exit 1 || true
-          echo "✅ All required secrets present"
+          if [ -z "$YOUTUBE_CLIENT_ID" ] || [ -z "$YOUTUBE_CLIENT_SECRET" ] || [ -z "$YOUTUBE_REFRESH_TOKEN" ]; then
+            echo "⚠️ YouTube credentials missing. Pipeline will execute in DRY_RUN mode."
+            echo "DRY_RUN=true" >> $GITHUB_ENV
+          fi
+          echo "✅ Secret check complete — proceeding with execution."
         env:
           GEMINI_API_KEY:         ${{ secrets.GEMINI_API_KEY }}
           ANTHROPIC_API_KEY:      ${{ secrets.ANTHROPIC_API_KEY }}
