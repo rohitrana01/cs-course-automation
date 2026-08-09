@@ -91,7 +91,8 @@ jobs:
           git add curriculum.json
           if ! git diff --staged --quiet; then
             git commit -m "✅ Updated curriculum progress [skip ci]"
-            git push
+            git pull --rebase origin main
+            git push origin main
           else
             echo "Nothing to commit"
           fi
