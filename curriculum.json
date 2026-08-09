@@ -13,10 +13,12 @@
         "introduction",
         "hardware"
       ],
-      "uploaded": false,
+      "uploaded": true,
       "channel": "LearnCS Daily",
       "video_id": "YZ-A6TQRn1o",
-      "upload_date": "2026-06-14T17:52:01.969368+00:00"
+      "upload_date": "2026-06-14T17:52:01.969368+00:00",
+      "last_generated": "2026-08-09T16:27:46.766366",
+      "slot": "Morning"
     },
     {
       "id": "cs002",
@@ -148,7 +150,9 @@
         "packets",
         "DNS"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "last_generated": "2026-08-09T16:31:17.596984",
+      "slot": "Evening"
     },
     {
       "id": "cs010",

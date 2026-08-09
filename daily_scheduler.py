@@ -1,5 +1,6 @@
 """
 Daily 2 Shorts Automation Pipeline (Morning & Evening)
+With Dynamic Topic-Matched 1080p Photo Selection
 Powered by MoneyPrinterTurbo REST API
 """
 import sys
@@ -20,6 +21,22 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
 CURRICULUM_PATH = os.path.join(os.path.dirname(__file__), "curriculum.json")
 API_BASE_URL = os.environ.get("MONEYPRINTER_API_URL", "http://127.0.0.1:8080/api/v1")
 
+# Photo Asset Registry by Topic Domain
+HARDWARE_PHOTOS = ["cs_photo_1_1080p.jpg", "cs_photo_2_1080p.jpg", "cs_photo_3_1080p.jpg"]
+NETWORK_PHOTOS  = ["cs_photo_network_1080p.jpg", "cs_photo_3_1080p.jpg", "cs_photo_4_1080p.jpg"]
+CODING_PHOTOS   = ["cs_photo_code_1080p.jpg", "cs_photo_3_1080p.jpg", "cs_photo_4_1080p.jpg"]
+DEFAULT_PHOTOS  = ["cs_photo_1_1080p.jpg", "cs_photo_network_1080p.jpg", "cs_photo_code_1080p.jpg", "cs_photo_4_1080p.jpg"]
+
+def select_photos_for_topic(title: str, tags: list = None) -> list:
+    text = (title + " " + " ".join(tags or [])).lower()
+    if any(k in text for k in ["internet", "network", "cloud", "web", "http", "ip"]):
+        return NETWORK_PHOTOS
+    elif any(k in text for k in ["code", "program", "python", "algorithm", "variable", "function", "software"]):
+        return CODING_PHOTOS
+    elif any(k in text for k in ["cpu", "hardware", "computer", "ram", "memory", "input", "output", "chip"]):
+        return HARDWARE_PHOTOS
+    return DEFAULT_PHOTOS
+
 def load_curriculum():
     with open(CURRICULUM_PATH, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -39,7 +56,11 @@ def trigger_moneyprinter_short(topic, slot="Morning"):
     day = topic.get("day", 1)
     title = topic.get("title", "Computer Science")
     key_points = topic.get("key_points", [])
+    tags = topic.get("tags", [])
     points_text = " ".join(key_points[:3]) if key_points else "Learn core computer science concepts step by step."
+    
+    selected_photos = select_photos_for_topic(title, tags)
+    materials_payload = [{"provider": "local", "url": url} for url in selected_photos]
     
     script = (
         f"Good {slot}! Welcome to Day {day} of 100 Days Computer Course. "
@@ -50,14 +71,9 @@ def trigger_moneyprinter_short(topic, slot="Morning"):
     payload = {
         "video_subject": f"Day {day} ({slot}): {title}",
         "video_script": script,
-        "video_terms": "computer, technology, future",
+        "video_terms": title,
         "video_source": "local",
-        "video_materials": [
-            {"provider": "local", "url": "cs_photo_1_1080p.jpg"},
-            {"provider": "local", "url": "cs_photo_2_1080p.jpg"},
-            {"provider": "local", "url": "cs_photo_3_1080p.jpg"},
-            {"provider": "local", "url": "cs_photo_4_1080p.jpg"}
-        ],
+        "video_materials": materials_payload,
         "video_clip_duration": 4,
         "voice_name": "en-US-AvaNeural-Female" if slot == "Morning" else "en-US-ChristopherNeural-Male",
         "video_aspect": "9:16",
@@ -73,7 +89,8 @@ def trigger_moneyprinter_short(topic, slot="Morning"):
         "bgm_volume": 0.15
     }
     
-    print(f"\n[🚀 {slot.upper()} SHORT] Submitting pipeline task for Day {day}: {title}...")
+    print(f"\n[🚀 {slot.upper()} SHORT] Submitting task for Day {day}: {title}...")
+    print(f"[📷 VISUALS] Selected topic photo set: {selected_photos}")
     try:
         resp = requests.post(f"{API_BASE_URL}/videos", json=payload, timeout=30)
         if resp.status_code != 200:
@@ -137,4 +154,5 @@ if __name__ == "__main__":
         run_slot("Evening")
     elif args.slot == "morning":
         run_slot("Morning")
-        topic_night = run_slot("Evening")
+    elif args.slot == "evening":
+        run_slot("Evening")
