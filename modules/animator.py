@@ -8,7 +8,7 @@ import os
 import math
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
-from moviepy.editor import ImageClip, concatenate_videoclips
+from moviepy import ImageClip, concatenate_videoclips
 
 # ── Palette ─────────────────────────────────────────────────────────────────
 BG       = (15, 20, 40)
@@ -254,7 +254,7 @@ def create_animation(script_data: dict, topic: dict,
 
     # ── Intro ──
     frame = _title_slide(topic, elapsed / audio_duration)
-    clips.append(ImageClip(frame, duration=INTRO_DUR))
+    clips.append(ImageClip(frame).with_duration(INTRO_DUR))
     elapsed += INTRO_DUR
 
     # ── Content ──
@@ -268,17 +268,17 @@ def create_animation(script_data: dict, topic: dict,
         for i in range(1, n + 1):
             pct   = elapsed / audio_duration
             frame = _content_slide(seg.get("title", ""), points, i, code, pct)
-            clips.append(ImageClip(frame, duration=pt_dur))
+            clips.append(ImageClip(frame).with_duration(pt_dur))
             elapsed += pt_dur
 
     # ── Summary ──
     frame = _summary_slide(topic["title"], summary, elapsed / audio_duration)
-    clips.append(ImageClip(frame, duration=SUMM_DUR))
+    clips.append(ImageClip(frame).with_duration(SUMM_DUR))
     elapsed += SUMM_DUR
 
     # ── Outro ──
     frame = _outro_slide(next_topic, 1.0)
-    clips.append(ImageClip(frame, duration=OUTRO_DUR))
+    clips.append(ImageClip(frame).with_duration(OUTRO_DUR))
 
     # Concatenate and write
     video = concatenate_videoclips(clips, method="compose")

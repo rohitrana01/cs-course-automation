@@ -1,8 +1,8 @@
-# 🖥️ Automated CS Course Video Bot (cs-course-automation)
+# 🖥️ Automated CS Course Video Bot (`cs-course-automation`)
 
-Uploads a **daily animated educational video** to YouTube — fully automated, 100% free.
+Generates **2 daily animated CS course shorts (1 Morning & 1 Evening)** powered by MoneyPrinterTurbo 9:16 vertical HD pipeline with 3D animated photos, neural voiceover, and karaoke subtitle cards.
 
-**100 topics · Basic → Advanced · No manual work after setup**
+**100 topics · 2 Shorts Daily (Morning @ 8:30 AM IST & Evening @ 5:30 PM IST) · Fully Automated**
 
 ---
 

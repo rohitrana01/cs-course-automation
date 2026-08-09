@@ -6,7 +6,7 @@ Handles duration mismatches (loops or trims the video to match audio length).
 import os
 import glob
 import random
-from moviepy.editor import VideoFileClip, AudioFileClip, CompositeAudioClip, concatenate_videoclips
+from moviepy import VideoFileClip, AudioFileClip, CompositeAudioClip, concatenate_videoclips, afx, vfx
 from config import ENABLE_MUSIC, BACKGROUND_MUSIC_FOLDER, BACKGROUND_MUSIC_VOLUME
 
 
@@ -34,12 +34,12 @@ def assemble_video(animation_path: str, audio_path: str, output_dir: str) -> str
 
     if vid_dur >= aud_dur:
         # Trim video to audio length
-        video = video.subclip(0, aud_dur)
+        video = video.subclipped(0, aud_dur)
     else:
         # Pad video: freeze last frame for remaining duration
         gap = aud_dur - vid_dur
         last_frame_time = max(vid_dur - 0.05, 0)
-        freeze = video.subclip(last_frame_time, vid_dur).loop(duration=gap)
+        freeze = video.subclipped(last_frame_time, vid_dur).with_effects([afx.vfx.Loop(duration=gap)])
         video = concatenate_videoclips([video, freeze])
 
     # Attach audio
@@ -55,15 +55,15 @@ def assemble_video(animation_path: str, audio_path: str, output_dir: str) -> str
             try:
                 bg_audio = AudioFileClip(bg_music_path)
                 if bg_audio.duration < final_audio.duration:
-                    bg_audio = bg_audio.loop(duration=final_audio.duration)
+                    bg_audio = bg_audio.with_effects([afx.vfx.Loop(duration=final_audio.duration)])
                 else:
-                    bg_audio = bg_audio.subclip(0, final_audio.duration)
-                bg_audio = bg_audio.volumex(BACKGROUND_MUSIC_VOLUME)
+                    bg_audio = bg_audio.subclipped(0, final_audio.duration)
+                bg_audio = bg_audio.with_effects([afx.MultiplyVolume(BACKGROUND_MUSIC_VOLUME)])
                 final_audio = CompositeAudioClip([audio, bg_audio])
             except Exception as e:
                 print(f"  [assembler] Warning: Failed to mix background music ({e})")
 
-    final = video.set_audio(final_audio)
+    final = video.with_audio(final_audio)
 
     print(f"  [assembler] Writing final video → {output_path}")
     final.write_videofile(
