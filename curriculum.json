@@ -13,12 +13,8 @@
         "introduction",
         "hardware"
       ],
-      "uploaded": true,
-      "channel": "LearnCS Daily",
-      "video_id": "YZ-A6TQRn1o",
-      "upload_date": "2026-06-14T17:52:01.969368+00:00",
-      "last_generated": "2026-08-09T16:27:46.766366",
-      "slot": "Morning"
+      "uploaded": false,
+      "channel": "LearnCS Daily"
     },
     {
       "id": "cs002",
@@ -31,10 +27,8 @@
         "ENIAC",
         "generations"
       ],
-      "uploaded": true,
-      "channel": "LearnCS Daily",
-      "video_id": "Mh6MPfxfd7Y",
-      "upload_date": "2026-07-26T15:06:55.243828+00:00"
+      "uploaded": false,
+      "channel": "LearnCS Daily"
     },
     {
       "id": "cs003",
@@ -48,10 +42,8 @@
         "monitor",
         "IO"
       ],
-      "uploaded": true,
-      "channel": "LearnCS Daily",
-      "video_id": "krqV8uC9Was",
-      "upload_date": "2026-07-27T06:54:03.379118+00:00"
+      "uploaded": false,
+      "channel": "LearnCS Daily"
     },
     {
       "id": "cs004",
@@ -65,10 +57,8 @@
         "cores",
         "clock speed"
       ],
-      "uploaded": true,
-      "channel": "LearnCS Daily",
-      "video_id": "83hIS5G1gZ8",
-      "upload_date": "2026-07-28T06:13:56.904710+00:00"
+      "uploaded": false,
+      "channel": "LearnCS Daily"
     },
     {
       "id": "cs005",
@@ -82,10 +72,8 @@
         "HDD",
         "memory"
       ],
-      "uploaded": true,
-      "channel": "LearnCS Daily",
-      "video_id": "ThnywSQA9og",
-      "upload_date": "2026-07-29T06:17:56.642927+00:00"
+      "uploaded": false,
+      "channel": "LearnCS Daily"
     },
     {
       "id": "cs006",
@@ -99,10 +87,8 @@
         "Linux",
         "macOS"
       ],
-      "uploaded": true,
-      "channel": "LearnCS Daily",
-      "video_id": "Z2sXiJXsVVE",
-      "upload_date": "2026-07-30T06:12:51.003372+00:00"
+      "uploaded": false,
+      "channel": "LearnCS Daily"
     },
     {
       "id": "cs007",
@@ -116,10 +102,8 @@
         "NTFS",
         "ext4"
       ],
-      "uploaded": true,
-      "channel": "LearnCS Daily",
-      "video_id": "6E7y5YbWhVo",
-      "upload_date": "2026-07-31T06:31:26.524070+00:00"
+      "uploaded": false,
+      "channel": "LearnCS Daily"
     },
     {
       "id": "cs008",
@@ -133,10 +117,8 @@
         "WAN",
         "router"
       ],
-      "uploaded": true,
-      "channel": "LearnCS Daily",
-      "video_id": "vIBXwYNtnwM",
-      "upload_date": "2026-08-01T06:16:52.685825+00:00"
+      "uploaded": false,
+      "channel": "LearnCS Daily"
     },
     {
       "id": "cs009",
@@ -150,9 +132,7 @@
         "packets",
         "DNS"
       ],
-      "uploaded": true,
-      "last_generated": "2026-08-09T16:31:17.596984",
-      "slot": "Evening"
+      "uploaded": false
     },
     {
       "id": "cs010",
