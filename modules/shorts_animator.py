@@ -50,62 +50,61 @@ def create_rich_frame(photo_path: str, badge_text: str, title: str, caption: str
     combined = Image.alpha_composite(bg, overlay)
     draw = ImageDraw.Draw(combined)
 
-    # Load bold fonts with extra large mobile-optimized sizes
+    # Load bold fonts with balanced mobile sizes
     try:
-        badge_font = ImageFont.truetype("arialbd.ttf", 48)
-        title_font = ImageFont.truetype("arialbd.ttf", 76)
-        caption_font = ImageFont.truetype("arialbd.ttf", 64)
+        badge_font = ImageFont.truetype("arialbd.ttf", 38)
+        title_font = ImageFont.truetype("arialbd.ttf", 54)
+        caption_font = ImageFont.truetype("arialbd.ttf", 42)
     except Exception:
         badge_font = ImageFont.load_default()
         title_font = ImageFont.load_default()
         caption_font = ImageFont.load_default()
 
-    # 1. Top Pill Badge (Large & Vibrant)
+    # 1. Top Pill Badge (Compact & Clean)
     is_course = "DAY" in badge_text.upper()
-    badge_bg = (37, 99, 235, 255) if is_course else (245, 158, 11, 255)  # Electric Blue or Vibrant Amber
-    badge_w = len(badge_text) * 30 + 80
+    badge_bg = (37, 99, 235, 255) if is_course else (245, 158, 11, 255)
+    badge_w = len(badge_text) * 24 + 60
     badge_x = (width - badge_w) // 2
-    draw.rounded_rectangle([badge_x, 130, badge_x + badge_w, 230], radius=28, fill=badge_bg)
-    draw.text((badge_x + 40, 155), badge_text, fill=(255, 255, 255), font=badge_font)
+    draw.rounded_rectangle([badge_x, 130, badge_x + badge_w, 210], radius=22, fill=badge_bg)
+    draw.text((badge_x + 30, 148), badge_text, fill=(255, 255, 255), font=badge_font)
 
-    # 2. Main Title (Extra Large 76px Bold with Drop Shadow)
-    wrapped_title = textwrap.fill(title, width=18)
-    y_title = 260
+    # 2. Main Title (54px Bold)
+    wrapped_title = textwrap.fill(title, width=22)
+    y_title = 240
     for line in wrapped_title.split("\n"):
-        line_w = len(line) * 40
+        line_w = len(line) * 28
         line_x = (width - line_w) // 2
-        # Deep Drop Shadow
-        draw.text((line_x + 5, y_title + 5), line, fill=(0, 0, 0, 255), font=title_font)
+        # Drop Shadow
+        draw.text((line_x + 3, y_title + 3), line, fill=(0, 0, 0, 240), font=title_font)
         draw.text((line_x, y_title), line, fill=(255, 255, 255), font=title_font)
-        y_title += 90
+        y_title += 68
 
-    # 3. Center-Bottom Caption Card (Extra Large 64px Bold)
+    # 3. Compact Center-Bottom Caption Card (42px Bold, leaving 80%+ image visible)
     if caption:
-        # Wrap to 18-20 characters for big, punchy text
-        wrapped_caption = textwrap.fill(caption, width=20)
+        wrapped_caption = textwrap.fill(caption, width=28)
         lines = wrapped_caption.split("\n")
-        card_h = len(lines) * 90 + 70
-        card_w = width - 100
-        card_x = 50
-        card_y = height - card_h - 220
+        card_h = len(lines) * 58 + 44
+        card_w = width - 140
+        card_x = 70
+        card_y = height - card_h - 150
 
-        # Translucent dark slate card with glowing border
+        # Sleek translucent dark slate card
         draw.rounded_rectangle(
             [card_x, card_y, card_x + card_w, card_y + card_h],
-            radius=32,
-            fill=(15, 23, 42, 240),
-            outline=(56, 189, 248, 220),
-            width=4
+            radius=24,
+            fill=(15, 23, 42, 220),
+            outline=(56, 189, 248, 180),
+            width=3
         )
         
-        y_line = card_y + 35
+        y_line = card_y + 22
         for line in lines:
-            line_w = len(line) * 34
+            line_w = len(line) * 22
             line_x = (width - line_w) // 2
             # Drop shadow
-            draw.text((line_x + 4, y_line + 4), line, fill=(0, 0, 0, 255), font=caption_font)
+            draw.text((line_x + 2, y_line + 2), line, fill=(0, 0, 0, 220), font=caption_font)
             draw.text((line_x, y_line), line, fill=(248, 250, 252), font=caption_font)
-            y_line += 90
+            y_line += 58
 
     return combined.convert("RGB")
 
