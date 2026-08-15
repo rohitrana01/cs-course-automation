@@ -106,7 +106,7 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
         day = item.get("day", 1)
         title = item.get("title", "Computer Science")
         tags = item.get("tags", ["Shorts", "ComputerScience", "LearnCS"])
-        voice = "en-US-AvaNeural-Female"
+        voice = "en-US-AvaNeural"
         badge = f"DAY {day} • 100 DAYS CS"
         video_title = f"Day {day}: {title} | 100 Days CS Course #Shorts"
         script = f"Welcome to Day {day} of the 100 Days Computer Science Course! Today's topic is {title}. Let's understand the core fundamentals step by step. Stay tuned and subscribe for daily CS lessons!"
@@ -115,7 +115,7 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
         num = item.get("number", 1)
         title = item.get("title", "Tech Fun Fact")
         tags = item.get("tags", ["Shorts", "TechFacts", "Trivia"])
-        voice = "en-US-ChristopherNeural-Male"
+        voice = "en-US-ChristopherNeural"
         badge = f"TECH FACT #{num} 💡"
         video_title = f"Tech Fact #{num}: {title} 💡 #Shorts"
         script = item.get("script", f"Did you know this mind-blowing tech fact? {title}. Subscribe for daily technical trivia!")
