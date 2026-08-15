@@ -15,8 +15,8 @@
       ],
       "uploaded": true,
       "channel": "LearnCS Daily",
-      "video_id": "9REmTpN7Aes",
-      "upload_date": "2026-08-15T11:46:00.503192+00:00"
+      "video_id": "j8_OFbcHHco",
+      "upload_date": "2026-08-15T12:48:10.928870+00:00"
     },
     {
       "id": "cs002",
@@ -29,10 +29,8 @@
         "ENIAC",
         "generations"
       ],
-      "uploaded": true,
-      "channel": "LearnCS Daily",
-      "video_id": "fallback_generated",
-      "upload_date": "2026-08-15T11:37:19.384352+00:00"
+      "uploaded": false,
+      "channel": "LearnCS Daily"
     },
     {
       "id": "cs003",
@@ -46,10 +44,8 @@
         "monitor",
         "IO"
       ],
-      "uploaded": true,
-      "channel": "LearnCS Daily",
-      "video_id": "C2VSzMBNs94",
-      "upload_date": "2026-08-15T12:12:49.934510+00:00"
+      "uploaded": false,
+      "channel": "LearnCS Daily"
     },
     {
       "id": "cs004",
@@ -63,10 +59,8 @@
         "cores",
         "clock speed"
       ],
-      "uploaded": true,
-      "channel": "LearnCS Daily",
-      "video_id": "Qy2uwMM2y3Q",
-      "upload_date": "2026-08-15T12:22:41.558741+00:00"
+      "uploaded": false,
+      "channel": "LearnCS Daily"
     },
     {
       "id": "cs005",
