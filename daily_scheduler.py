@@ -29,10 +29,10 @@ from modules.shorts_animator import build_animated_shorts_video
 from modules.youtube_uploader import upload_video
 
 # Photo Asset Registry by Topic Domain
-HARDWARE_PHOTOS = ["cs_photo_1_1080p.jpg", "cs_photo_2_1080p.jpg", "cs_photo_3_1080p.jpg"]
+HARDWARE_PHOTOS = ["cs_photo_4_1080p.jpg", "cs_photo_1_1080p.jpg", "cs_photo_2_1080p.jpg", "cs_photo_3_1080p.jpg"]
 NETWORK_PHOTOS  = ["cs_photo_network_1080p.jpg", "cs_photo_3_1080p.jpg", "cs_photo_4_1080p.jpg"]
-CODING_PHOTOS   = ["cs_photo_code_1080p.jpg", "cs_photo_3_1080p.jpg", "cs_photo_4_1080p.jpg"]
-DEFAULT_PHOTOS  = ["cs_photo_1_1080p.jpg", "cs_photo_network_1080p.jpg", "cs_photo_code_1080p.jpg", "cs_photo_4_1080p.jpg"]
+CODING_PHOTOS   = ["cs_photo_code_1080p.jpg", "cs_photo_4_1080p.jpg", "cs_photo_3_1080p.jpg"]
+DEFAULT_PHOTOS  = ["cs_photo_4_1080p.jpg", "cs_photo_1_1080p.jpg", "cs_photo_network_1080p.jpg", "cs_photo_code_1080p.jpg"]
 
 def select_photos_for_topic(title: str, tags: list = None) -> list:
     text = (title + " " + " ".join(tags or [])).lower()
