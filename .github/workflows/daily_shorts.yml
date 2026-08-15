@@ -7,9 +7,19 @@ on:
     # 12:00 UTC = 05:30 PM IST (Evening Short)
     - cron: '0 12 * * *'
   workflow_dispatch:
+    inputs:
+      slot:
+        description: 'Slot to run (morning, evening, or both)'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - both
+          - morning
+          - evening
 
 jobs:
-  generate-shorts:
+  generate-and-upload:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -25,16 +35,27 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Dependencies
+      - name: Install System Dependencies (FFmpeg)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests
+          pip install -r requirements.txt
 
-      - name: Run Daily Short Pipeline
+      - name: Run Daily Shorts Pipeline & Upload to YouTube
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          CHANNEL_NAME: ${{ secrets.CHANNEL_NAME || 'LearnCS Daily' }}
+          VIDEO_PRIVACY: ${{ vars.VIDEO_PRIVACY || 'public' }}
         run: |
-          python daily_scheduler.py --slot both
+          python daily_scheduler.py --slot ${{ github.event.inputs.slot || 'both' }}
 
-      - name: Commit Curriculum Updates
+      - name: Commit Progress Updates
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action Bot"
