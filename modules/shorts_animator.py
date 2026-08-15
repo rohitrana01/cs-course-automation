@@ -79,31 +79,26 @@ def create_rich_frame(photo_path: str, badge_text: str, title: str, caption: str
         draw.text((line_x, y_title), line, fill=(255, 255, 255), font=title_font)
         y_title += 68
 
-    # 3. Compact Center-Bottom Caption Card (42px Bold, leaving 80%+ image visible)
+    # 3. Transparent Captions (No Card Background, 100% Transparent with 3D Outline Stroke)
     if caption:
         wrapped_caption = textwrap.fill(caption, width=28)
         lines = wrapped_caption.split("\n")
-        card_h = len(lines) * 58 + 44
-        card_w = width - 140
-        card_x = 70
-        card_y = height - card_h - 150
-
-        # Sleek translucent dark slate card
-        draw.rounded_rectangle(
-            [card_x, card_y, card_x + card_w, card_y + card_h],
-            radius=24,
-            fill=(15, 23, 42, 220),
-            outline=(56, 189, 248, 180),
-            width=3
-        )
+        total_h = len(lines) * 58
+        y_line = height - total_h - 180
         
-        y_line = card_y + 22
         for line in lines:
             line_w = len(line) * 22
             line_x = (width - line_w) // 2
-            # Drop shadow
-            draw.text((line_x + 2, y_line + 2), line, fill=(0, 0, 0, 220), font=caption_font)
-            draw.text((line_x, y_line), line, fill=(248, 250, 252), font=caption_font)
+            
+            # Thick black outline stroke + drop shadow for 100% legibility on any image
+            draw.text(
+                (line_x, y_line),
+                line,
+                fill=(255, 255, 255),
+                font=caption_font,
+                stroke_width=4,
+                stroke_fill=(0, 0, 0)
+            )
             y_line += 58
 
     return combined.convert("RGB")
