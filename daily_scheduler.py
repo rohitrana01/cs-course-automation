@@ -25,7 +25,24 @@ OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 from modules.thumbnail_generator import create_shorts_thumbnail
+from modules.shorts_animator import build_animated_shorts_video
 from modules.youtube_uploader import upload_video
+
+# Photo Asset Registry by Topic Domain
+HARDWARE_PHOTOS = ["cs_photo_1_1080p.jpg", "cs_photo_2_1080p.jpg", "cs_photo_3_1080p.jpg"]
+NETWORK_PHOTOS  = ["cs_photo_network_1080p.jpg", "cs_photo_3_1080p.jpg", "cs_photo_4_1080p.jpg"]
+CODING_PHOTOS   = ["cs_photo_code_1080p.jpg", "cs_photo_3_1080p.jpg", "cs_photo_4_1080p.jpg"]
+DEFAULT_PHOTOS  = ["cs_photo_1_1080p.jpg", "cs_photo_network_1080p.jpg", "cs_photo_code_1080p.jpg", "cs_photo_4_1080p.jpg"]
+
+def select_photos_for_topic(title: str, tags: list = None) -> list:
+    text = (title + " " + " ".join(tags or [])).lower()
+    if any(k in text for k in ["internet", "network", "cloud", "web", "http", "ip", "cable"]):
+        return NETWORK_PHOTOS
+    elif any(k in text for k in ["code", "program", "python", "algorithm", "variable", "function", "software", "language"]):
+        return CODING_PHOTOS
+    elif any(k in text for k in ["cpu", "hardware", "computer", "ram", "memory", "input", "output", "chip", "drive", "mouse", "keyboard"]):
+        return HARDWARE_PHOTOS
+    return DEFAULT_PHOTOS
 
 def load_json(path):
     with open(path, "r", encoding="utf-8") as f:
@@ -132,23 +149,35 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
     print(f"  [1/4] Generating Neural Voiceover...")
     generate_narration_audio(script, voice, audio_path)
 
-    # 2. Generate 9:16 High-Contrast Thumbnail
+    # 2. Select Topic-Matched 1080p Photos
+    chosen_photos = select_photos_for_topic(title, tags)
+
+    # 3. Generate 9:16 High-Contrast Thumbnail
     thumb_path = os.path.join(item_dir, "thumbnail.jpg")
     print(f"  [2/4] Generating 9:16 Vertical Thumbnail...")
+    from modules.shorts_animator import get_photo_path
+    bg_photo = get_photo_path(chosen_photos[0])
     create_shorts_thumbnail(
         title=title,
         subtitle=item.get("module", "Daily Tech Insights"),
         badge_text=badge,
-        bg_image_path=None,
+        bg_image_path=bg_photo,
         output_path=thumb_path
     )
 
-    # 3. Render 9:16 Video
+    # 4. Render 9:16 Multi-Photo Animated Video (with large bold captions & Ken Burns motion)
     video_path = os.path.join(item_dir, "final_short.mp4")
-    print(f"  [3/4] Rendering 9:16 Video...")
-    render_shorts_video(audio_path, thumb_path, video_path)
+    print(f"  [3/4] Rendering 9:16 Animated Multi-Photo Video...")
+    build_animated_shorts_video(
+        audio_path=audio_path,
+        photo_files=chosen_photos,
+        badge_text=badge,
+        title=title,
+        script=script,
+        output_path=video_path
+    )
 
-    # 4. Upload to YouTube
+    # 5. Upload to YouTube
     print(f"  [4/4] Uploading to YouTube Channel...")
     has_token = bool(os.environ.get("YOUTUBE_REFRESH_TOKEN"))
     if has_token:

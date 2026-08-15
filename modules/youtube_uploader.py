@@ -85,7 +85,7 @@ def upload_video(video_path: str, thumbnail_path: str,
                 videoId=video_id,
                 media_body=MediaFileUpload(thumbnail_path, mimetype="image/jpeg"),
             ).execute()
-            print(f"  [uploader] Thumbnail set ✓")
+            print(f"  [uploader] Thumbnail set OK")
         except HttpError as e:
             print(f"  [uploader] Thumbnail failed (non-fatal): {e}")
 
