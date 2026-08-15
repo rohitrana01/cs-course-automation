@@ -14,7 +14,9 @@
         "hardware"
       ],
       "uploaded": false,
-      "channel": "LearnCS Daily"
+      "channel": "LearnCS Daily",
+      "video_id": "fallback_generated",
+      "upload_date": "2026-08-15T11:24:23.337115+00:00"
     },
     {
       "id": "cs002",

@@ -1,0 +1,158 @@
+{
+  "category": "Random Tech Fun Facts",
+  "description": "Mind-blowing daily technical trivia and computer facts for YouTube Shorts",
+  "facts": [
+    {
+      "id": "fact001",
+      "number": 1,
+      "title": "The First Computer Bug Was a Real Moth",
+      "hook": "Did you know why software errors are called bugs?",
+      "script": "Did you know why computer errors are called 'bugs'? In 1947, computer pioneer Grace Hopper was working on the Harvard Mark Two computer when it stopped working. When engineers opened the machine, they found an actual dead moth trapped inside a relay switch! Hopper taped the moth into the logbook, officially naming it the 'First actual case of bug being found'. Subscribe for more crazy tech facts!",
+      "tags": [
+        "tech facts",
+        "history",
+        "fun facts",
+        "programming"
+      ],
+      "domain": "hardware",
+      "uploaded": false,
+      "video_id": "fallback_generated",
+      "upload_date": "2026-08-15T11:24:25.371870+00:00"
+    },
+    {
+      "id": "fact002",
+      "number": 2,
+      "title": "The First 1GB Hard Drive Weighed 500 Pounds",
+      "hook": "How heavy was the world's first 1 Gigabyte hard drive?",
+      "script": "Imagine carrying a 1 Gigabyte flash drive that weighs as much as a refrigerator! In 1980, IBM released the IBM 3380—the world's first commercial hard drive with 1 Gigabyte of storage. It weighed over 550 pounds and cost forty thousand dollars! Today, a tiny microSD card the size of your fingernail holds a thousand times more data for just ten dollars. Follow for more tech evolution facts!",
+      "tags": [
+        "hardware",
+        "storage",
+        "tech facts",
+        "ibm"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact003",
+      "number": 3,
+      "title": "Why is QWERTY the Keyboard Standard?",
+      "hook": "Why are keyboard keys not in alphabetical order?",
+      "script": "Ever wondered why your keyboard isn't ABCDEF? The QWERTY layout was invented in 1873 by Christopher Sholes for mechanical typewriters. When typists typed too fast on alphabetical layouts, the metal type bars would collide and jam! Sholes placed frequently used letter pairs farther apart to slow typists down slightly and prevent mechanical jams. Even in the digital age, we still use this 150-year-old anti-jamming layout!",
+      "tags": [
+        "keyboard",
+        "qwerty",
+        "design",
+        "tech trivia"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact004",
+      "number": 4,
+      "title": "Why 404 Means Page Not Found",
+      "hook": "Where did the famous Error 404 come from?",
+      "script": "Why does '404' mean Page Not Found? When Tim Berners-Lee created the World Wide Web at CERN in Switzerland, HTTP status codes were created with a simple logic: 4xx codes mean Client-Side Errors, and 04 specifically indicates 'Object Not Found'. Urban legend says Room 404 at CERN housed the original central database, but in reality, it's just pure elegant network protocol engineering!",
+      "tags": [
+        "internet",
+        "networking",
+        "404 error",
+        "web trivia"
+      ],
+      "domain": "networking",
+      "uploaded": false
+    },
+    {
+      "id": "fact005",
+      "number": 5,
+      "title": "Your Smartphone Has More Power Than Apollo 11",
+      "hook": "How powerful is your phone compared to NASA moon missions?",
+      "script": "The Apollo Guidance Computer that took Neil Armstrong to the Moon in 1969 had just 4 Kilobytes of RAM and ran at 0.043 Megahertz. Today, the smartphone in your pocket has over millions of times more processing power and storage than the entire NASA command center that put humanity on the Moon! You are holding a supercomputer in your hands!",
+      "tags": [
+        "smartphone",
+        "nasa",
+        "apollo",
+        "computing power"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact006",
+      "number": 6,
+      "title": "Why Python is Named After a Comedy Show",
+      "hook": "Is Python named after the snake?",
+      "script": "Most people think Python was named after the dangerous snake, but that's completely false! In 1989, creator Guido van Rossum was looking for a short, unique, and slightly mysterious name while reading published scripts from 'Monty Python's Flying Circus'—a famous BBC comedy series. Guido was a huge fan of the comedy group, so he named the language Python! Subscribe for more coding trivia!",
+      "tags": [
+        "python",
+        "programming",
+        "coding facts",
+        "software"
+      ],
+      "domain": "coding",
+      "uploaded": false
+    },
+    {
+      "id": "fact007",
+      "number": 7,
+      "title": "90 Percent of World Currency is Just Digital Numbers",
+      "hook": "How much physical cash actually exists in the world?",
+      "script": "Did you know that only about 8 to 10 percent of the world's money exists as physical coins and banknotes? The remaining 90 percent exists purely as digital bits and bytes stored in bank database servers and ledger algorithms. When you swipe a card or transfer money, no physical money moves—computers just update numeric records in milliseconds!",
+      "tags": [
+        "fintech",
+        "banking",
+        "digital currency",
+        "data"
+      ],
+      "domain": "networking",
+      "uploaded": false
+    },
+    {
+      "id": "fact008",
+      "number": 8,
+      "title": "The First Computer Mouse Was Made of Wood",
+      "hook": "What was the very first computer mouse made of?",
+      "script": "In 1964, Douglas Engelbart invented the world's very first computer mouse at Stanford Research Institute. It wasn't made of sleek plastic or aluminum—it was carved out of a block of pine wood with two metal wheels underneath to track movement! It was called a 'mouse' because the electrical cord came out of the back resembling a tail. Follow for more tech origins!",
+      "tags": [
+        "computer mouse",
+        "hardware",
+        "inventors",
+        "tech history"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact009",
+      "number": 9,
+      "title": "There are Over 700 Programming Languages",
+      "hook": "How many coding languages exist in the world?",
+      "script": "While most developers only know Python, JavaScript, C++, and Java, computer scientists have created over 700 distinct programming languages! Some were created as jokes, like 'Brainfuck' and 'Cow', while others like Fortran and COBOL still process over 70 percent of global ATM transactions today. Subscribe for daily tech insights!",
+      "tags": [
+        "programming",
+        "coding",
+        "software engineering",
+        "languages"
+      ],
+      "domain": "coding",
+      "uploaded": false
+    },
+    {
+      "id": "fact010",
+      "number": 10,
+      "title": "Undersea Cables Carry 99 Percent of Global Internet",
+      "hook": "Does satellite or undersea cable power international internet?",
+      "script": "Many people assume international internet runs through space satellites, but in reality, over 99 percent of international data travels through fiber optic cables lying on the bottom of the ocean floor! There are over 500 undersea submarine cables stretching over 1.4 million kilometers—enough to circle the Earth 35 times! Follow for more internet secrets!",
+      "tags": [
+        "internet",
+        "networking",
+        "fiber optic",
+        "undersea cables"
+      ],
+      "domain": "networking",
+      "uploaded": false
+    }
+  ]
+}
