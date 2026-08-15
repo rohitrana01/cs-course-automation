@@ -114,6 +114,25 @@ def render_shorts_video(audio_path: str, thumbnail_path: str, output_video_path:
     
     return output_video_path
 
+COURSE_LESSONS = {
+    1: "A computer is an electronic machine that takes raw input data, processes it at incredible speeds, and outputs meaningful results. It follows the Input, Process, Output, and Storage cycle. The CPU acts as the brain, RAM provides lightning-fast temporary memory, and hard drives store your data permanently. Underneath it all, computers operate entirely on binary code—zeros and ones turning electrical switches on and off billions of times every second!",
+    2: "The history of computing started with mechanical calculators like Charles Babbage's Analytical Engine in the 1800s. In 1945, the world's first electronic general-purpose computer, ENIAC, was built—it weighed 30 tons and occupied an entire room! The invention of the silicon transistor and microchip revolutionized technology, shrinking massive room-sized supercomputers into the powerful smartphones we carry in our pockets today!",
+    3: "Input and output devices bridge the gap between humans and computers! Input devices like keyboards, mice, cameras, and microphones capture real-world human actions and convert them into binary signals for the processor. Output devices like monitors, speakers, and printers take processed digital data and translate it back into visual imagery, sound, and physical media that we can see and interact with!",
+    4: "The Central Processing Unit, or CPU, is the ultimate calculation engine of your computer! Every second, it executes billions of instructions using the Fetch, Decode, and Execute cycle. Inside the CPU, the Control Unit directs data traffic, while the Arithmetic Logic Unit performs high-speed math and logical decision-making at clock speeds reaching several Gigahertz!",
+    5: "Computer memory comes in two main flavors: volatile RAM and non-volatile Storage! RAM is ultra-fast temporary memory that holds active programs and open tabs while your computer is on. Storage drives like SSDs and Hard Disks keep your files, operating system, and games saved permanently even when the power is turned off!"
+}
+
+def get_course_script(day: int, title: str, module: str, tags: list) -> str:
+    if day in COURSE_LESSONS:
+        return COURSE_LESSONS[day]
+    return (
+        f"In Day {day} of our Computer Science course, we explore {title}! "
+        f"In computer science, {title} is a core foundation of {module}. "
+        f"It allows software and systems to process data efficiently and execute complex logic. "
+        f"Understanding {title} helps you build faster software, debug errors, and master how computers work under the hood. "
+        f"Subscribe for daily computer science mastery!"
+    )
+
 def produce_and_upload_short(item, item_type="course", slot="Morning"):
     slot_id = item.get("id", "short")
     item_dir = os.path.join(OUTPUT_DIR, slot_id)
@@ -122,11 +141,12 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
     if item_type == "course":
         day = item.get("day", 1)
         title = item.get("title", "Computer Science")
+        module = item.get("module", "Computer Science")
         tags = item.get("tags", ["Shorts", "ComputerScience", "LearnCS"])
         voice = "en-US-AvaNeural"
         badge = f"DAY {day} • 100 DAYS CS"
         video_title = f"Day {day}: {title} | 100 Days CS Course #Shorts"
-        script = f"Welcome to Day {day} of the 100 Days Computer Science Course! Today's topic is {title}. Let's understand the core fundamentals step by step. Stay tuned and subscribe for daily CS lessons!"
+        script = get_course_script(day, title, module, tags)
         description = f"Day {day}: {title}\nPart of 100 Days Computer Science Course.\n\n#Shorts #ComputerScience #Tech #Education #LearnCoding"
     else:
         num = item.get("number", 1)
