@@ -138,11 +138,13 @@ def build_animated_shorts_video(audio_path: str, photo_files: list, badge_text: 
     num_segments = max(len(photo_files), len(sentences))
     seg_duration = total_duration / num_segments
     
+    from modules.safe_image_fetcher import fetch_safe_image_for_sentence
+
     clips = []
     for i in range(num_segments):
-        photo_name = photo_files[i % len(photo_files)]
-        photo_path = get_photo_path(photo_name)
         caption = sentences[i % len(sentences)]
+        # Dynamically fetch 100% verified, matching safe image for this specific sentence
+        photo_path = fetch_safe_image_for_sentence(caption)
         
         frame_img = create_rich_frame(photo_path, badge_text, title, caption, progress=i / num_segments)
         frame_np = np.array(frame_img)
