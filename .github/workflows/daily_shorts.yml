@@ -35,10 +35,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install System Dependencies (FFmpeg)
+      - name: Install System Dependencies (FFmpeg & TrueType Fonts)
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          sudo apt-get install -y ffmpeg fonts-dejavu-core fonts-liberation
 
       - name: Install Python Dependencies
         run: |

@@ -6,6 +6,8 @@ import os
 import textwrap
 from PIL import Image, ImageDraw, ImageFont
 
+from modules.shorts_animator import load_custom_font
+
 def create_shorts_thumbnail(title: str, subtitle: str, badge_text: str, bg_image_path: str, output_path: str):
     # Base 1080x1920 vertical canvas
     width, height = 1080, 1920
@@ -29,15 +31,10 @@ def create_shorts_thumbnail(title: str, subtitle: str, badge_text: str, bg_image
     combined = Image.alpha_composite(bg, overlay)
     draw = ImageDraw.Draw(combined)
     
-    # Load fonts
-    try:
-        badge_font = ImageFont.truetype("arialbd.ttf", 36)
-        title_font = ImageFont.truetype("arialbd.ttf", 64)
-        sub_font   = ImageFont.truetype("arial.ttf", 38)
-    except Exception:
-        badge_font = ImageFont.load_default()
-        title_font = ImageFont.load_default()
-        sub_font   = ImageFont.load_default()
+    # Load fonts using bundled cross-platform font loader
+    badge_font = load_custom_font(size=36, bold=True)
+    title_font = load_custom_font(size=64, bold=True)
+    sub_font   = load_custom_font(size=38, bold=False)
 
     # Draw Top Badge (e.g. "DAY 1 • 100 DAYS CS" or "TECH FUN FACT #1")
     badge_bg_color = (37, 99, 235, 240) if "DAY" in badge_text.upper() else (217, 119, 6, 240) # Blue for CS, Amber for Trivia

@@ -10,12 +10,32 @@ from PIL import Image, ImageDraw, ImageFont
 
 PHOTOS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "photos")
 
-def get_photo_path(filename: str) -> str:
-    path = os.path.join(PHOTOS_DIR, filename)
-    if os.path.exists(path):
-        return path
-    photos = [os.path.join(PHOTOS_DIR, f) for f in os.listdir(PHOTOS_DIR) if f.endswith(".jpg")] if os.path.exists(PHOTOS_DIR) else []
-    return photos[0] if photos else None
+FONTS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "fonts")
+
+def load_custom_font(size: int, bold: bool = True):
+    font_names = ["arialbd.ttf" if bold else "arial.ttf", "arial.ttf"]
+    for name in font_names:
+        bundled_path = os.path.join(FONTS_DIR, name)
+        if os.path.exists(bundled_path):
+            try:
+                return ImageFont.truetype(bundled_path, size)
+            except Exception:
+                pass
+    linux_paths = [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf" if bold else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"
+    ]
+    for lp in linux_paths:
+        if os.path.exists(lp):
+            try:
+                return ImageFont.truetype(lp, size)
+            except Exception:
+                pass
+    try:
+        return ImageFont.truetype("arialbd.ttf" if bold else "arial.ttf", size)
+    except Exception:
+        return ImageFont.load_default(size=size) if hasattr(ImageFont, "load_default") and "size" in ImageFont.load_default.__code__.co_varnames else ImageFont.load_default()
 
 def create_rich_frame(photo_path: str, badge_text: str, title: str, caption: str, progress: float = 0.0) -> Image.Image:
     width, height = 1080, 1920
@@ -50,15 +70,10 @@ def create_rich_frame(photo_path: str, badge_text: str, title: str, caption: str
     combined = Image.alpha_composite(bg, overlay)
     draw = ImageDraw.Draw(combined)
 
-    # Load bold fonts with balanced mobile sizes
-    try:
-        badge_font = ImageFont.truetype("arialbd.ttf", 38)
-        title_font = ImageFont.truetype("arialbd.ttf", 54)
-        caption_font = ImageFont.truetype("arialbd.ttf", 42)
-    except Exception:
-        badge_font = ImageFont.load_default()
-        title_font = ImageFont.load_default()
-        caption_font = ImageFont.load_default()
+    # Load bold fonts using bundled TTF assets with cross-platform fallbacks
+    badge_font   = load_custom_font(size=38, bold=True)
+    title_font   = load_custom_font(size=54, bold=True)
+    caption_font = load_custom_font(size=42, bold=True)
 
     # 1. Top Pill Badge (Compact & Clean)
     is_course = "DAY" in badge_text.upper()
