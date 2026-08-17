@@ -151,8 +151,13 @@ def build_animated_shorts_video(audio_path: str, photo_files: list, badge_text: 
     clips = []
     for i in range(num_segments):
         caption = sentences[i % len(sentences)]
-        # Dynamically fetch 100% verified, matching safe image for this specific sentence
-        photo_path = fetch_safe_image_for_sentence(caption)
+        
+        # If user passed custom vault photo files, use them in rotation
+        if photo_files and len(photo_files) > 0 and os.path.exists(photo_files[0]):
+            photo_path = photo_files[i % len(photo_files)]
+        else:
+            # Dynamically fetch 100% verified, matching safe image for this specific sentence
+            photo_path = fetch_safe_image_for_sentence(caption)
         
         frame_img = create_rich_frame(photo_path, badge_text, title, caption, progress=i / num_segments)
         frame_np = np.array(frame_img)

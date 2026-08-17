@@ -169,14 +169,14 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
     print(f"  [1/4] Generating Neural Voiceover...")
     generate_narration_audio(script, voice, audio_path)
 
-    # 2. Select Topic-Matched 1080p Photos
-    chosen_photos = select_photos_for_topic(title, tags)
+    # 2. Select Topic-Matched Images (Custom Vault Images -> Safe Stock -> Curated Fallback)
+    from modules.custom_vault_loader import get_images_for_short
+    chosen_photos = get_images_for_short(item, item_type=item_type)
 
     # 3. Generate 9:16 High-Contrast Thumbnail
     thumb_path = os.path.join(item_dir, "thumbnail.jpg")
     print(f"  [2/4] Generating 9:16 Vertical Thumbnail...")
-    from modules.shorts_animator import get_photo_path
-    bg_photo = get_photo_path(chosen_photos[0])
+    bg_photo = chosen_photos[0] if chosen_photos else None
     create_shorts_thumbnail(
         title=title,
         subtitle=item.get("module", "Daily Tech Insights"),
@@ -185,7 +185,7 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
         output_path=thumb_path
     )
 
-    # 4. Render 9:16 Multi-Photo Animated Video (with large bold captions & Ken Burns motion)
+    # 4. Render 9:16 Multi-Photo Animated Video
     video_path = os.path.join(item_dir, "final_short.mp4")
     print(f"  [3/4] Rendering 9:16 Animated Multi-Photo Video...")
     build_animated_shorts_video(
