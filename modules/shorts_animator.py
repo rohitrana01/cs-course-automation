@@ -10,6 +10,14 @@ from PIL import Image, ImageDraw, ImageFont
 
 PHOTOS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "photos")
 
+def get_photo_path(filename: str = None) -> str:
+    if filename:
+        path = os.path.join(PHOTOS_DIR, filename)
+        if os.path.exists(path):
+            return path
+    photos = [os.path.join(PHOTOS_DIR, f) for f in os.listdir(PHOTOS_DIR) if f.endswith(".jpg") or f.endswith(".png")] if os.path.exists(PHOTOS_DIR) else []
+    return photos[0] if photos else None
+
 FONTS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "fonts")
 
 def load_custom_font(size: int, bold: bool = True):
