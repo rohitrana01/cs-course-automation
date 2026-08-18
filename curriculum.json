@@ -63,8 +63,10 @@
         "cores",
         "clock speed"
       ],
-      "uploaded": false,
-      "channel": "LearnCS Daily"
+      "uploaded": true,
+      "channel": "LearnCS Daily",
+      "video_id": "koH-zJvjcY8",
+      "upload_date": "2026-08-18T03:51:01.347106+00:00"
     },
     {
       "id": "cs005",
