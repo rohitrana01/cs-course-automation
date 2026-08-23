@@ -228,7 +228,9 @@
         "print",
         "python basics"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-23T03:54:21.401470+00:00"
     },
     {
       "id": "cs015",
