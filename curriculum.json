@@ -308,7 +308,9 @@
         "parameters",
         "return"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-25T12:22:23.525211+00:00"
     },
     {
       "id": "cs020",
