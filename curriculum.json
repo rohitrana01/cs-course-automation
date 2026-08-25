@@ -292,7 +292,9 @@
         "break",
         "continue"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-25T03:53:06.956879+00:00"
     },
     {
       "id": "cs019",
