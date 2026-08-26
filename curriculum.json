@@ -340,7 +340,9 @@
         "indexing",
         "slicing"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-26T12:23:48.058220+00:00"
     },
     {
       "id": "cs022",
