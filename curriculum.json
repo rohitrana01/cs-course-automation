@@ -324,7 +324,9 @@
         "global",
         "namespace"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-26T03:57:40.492040+00:00"
     },
     {
       "id": "cs021",
