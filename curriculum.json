@@ -356,7 +356,9 @@
         "immutable",
         "unique"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-27T13:58:13.436975+00:00"
     },
     {
       "id": "cs023",
