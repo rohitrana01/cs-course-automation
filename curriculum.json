@@ -404,7 +404,9 @@
         "write",
         "open"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-28T21:34:35.439051+00:00"
     },
     {
       "id": "cs026",
