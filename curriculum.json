@@ -388,7 +388,9 @@
         "f-string",
         "methods"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-28T15:09:25.841526+00:00"
     },
     {
       "id": "cs025",
