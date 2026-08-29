@@ -436,7 +436,9 @@
         "pointers",
         "singly linked"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-29T15:49:41.860981+00:00"
     },
     {
       "id": "cs028",
