@@ -420,7 +420,9 @@
         "indexing",
         "complexity"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-29T09:52:17.064732+00:00"
     },
     {
       "id": "cs027",
