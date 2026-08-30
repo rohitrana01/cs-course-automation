@@ -451,7 +451,9 @@
         "prev next",
         "traversal"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-30T09:03:04.904170+00:00"
     },
     {
       "id": "cs029",
