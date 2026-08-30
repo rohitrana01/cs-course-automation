@@ -467,7 +467,9 @@
         "push pop",
         "call stack"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-30T15:34:31.444822+00:00"
     },
     {
       "id": "cs030",
