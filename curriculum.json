@@ -499,7 +499,9 @@
         "collision",
         "O(1)"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-08-31T18:18:59.755714+00:00"
     },
     {
       "id": "cs032",
