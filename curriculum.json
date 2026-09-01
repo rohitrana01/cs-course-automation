@@ -531,7 +531,9 @@
         "search",
         "delete"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-09-01T15:39:12.257104+00:00"
     },
     {
       "id": "cs034",
