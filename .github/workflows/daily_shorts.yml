@@ -45,6 +45,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Determine Slot (Morning = 1 Lesson, Evening = 1 Tech Fact)
+        run: |
+          if [ -n "${{ github.event.inputs.slot }}" ]; then
+            echo "RUN_SLOT=${{ github.event.inputs.slot }}" >> $GITHUB_ENV
+          else
+            HOUR=$(date -u +%H)
+            if [ "$HOUR" -lt 8 ]; then
+              echo "RUN_SLOT=morning" >> $GITHUB_ENV
+            else
+              echo "RUN_SLOT=evening" >> $GITHUB_ENV
+            fi
+          fi
+
       - name: Run Daily Shorts Pipeline & Upload to YouTube
         env:
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
@@ -53,7 +66,7 @@ jobs:
           CHANNEL_NAME: ${{ secrets.CHANNEL_NAME || 'LearnCS Daily' }}
           VIDEO_PRIVACY: ${{ vars.VIDEO_PRIVACY || 'public' }}
         run: |
-          python daily_scheduler.py --slot ${{ github.event.inputs.slot || 'both' }}
+          python daily_scheduler.py --slot $RUN_SLOT
 
       - name: Commit Progress Updates
         run: |
