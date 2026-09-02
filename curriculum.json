@@ -563,7 +563,9 @@
         "max heap",
         "heapify"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "upload_failed",
+      "upload_date": "2026-09-02T15:26:40.394481+00:00"
     },
     {
       "id": "cs036",
