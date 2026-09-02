@@ -84,15 +84,25 @@ def is_safe_tech_photo(metadata: dict) -> bool:
 
 def get_curated_fallback_photo(keyword: str) -> str:
     kw = keyword.lower()
-    if any(k in kw for k in ["code", "program", "python", "software"]):
+    if any(k in kw for k in ["ram", "memory", "storage", "ssd", "drive", "ddr", "nvme"]):
+        chosen = "cs_photo_ram_ssd_1080p.jpg"
+    elif any(k in kw for k in ["keyboard", "mouse", "input", "output", "peripheral", "device"]):
+        chosen = "cs_photo_peripherals_1080p.jpg"
+    elif any(k in kw for k in ["history", "eniac", "vacuum", "babbage", "vintage", "bug", "tube"]):
+        chosen = "cs_photo_eniac_history_1080p.jpg"
+    elif any(k in kw for k in ["server", "datacenter", "cloud", "rack", "fiber"]):
+        chosen = "cs_photo_datacenter_servers_1080p.jpg"
+    elif any(k in kw for k in ["security", "cyber", "lock", "encrypt", "password", "virus"]):
+        chosen = "cs_photo_cyber_security_1080p.jpg"
+    elif any(k in kw for k in ["code", "program", "python", "software", "variable", "function", "loop", "syntax"]):
         chosen = "cs_photo_code_1080p.jpg"
-    elif any(k in kw for k in ["network", "internet", "cloud", "web", "cable"]):
+    elif any(k in kw for k in ["network", "internet", "web", "cable", "wifi", "browser"]):
         chosen = "cs_photo_network_1080p.jpg"
-    elif any(k in kw for k in ["cpu", "chip", "processor", "logic"]):
+    elif any(k in kw for k in ["cpu", "chip", "processor", "logic", "transistor", "alu"]):
         chosen = "cs_photo_1_1080p.jpg"
-    elif any(k in kw for k in ["circuit", "motherboard", "ram", "memory", "storage", "ssd"]):
+    elif any(k in kw for k in ["circuit", "motherboard", "pcb", "electronics"]):
         chosen = "cs_photo_2_1080p.jpg"
-    elif any(k in kw for k in ["binary", "data", "stream"]):
+    elif any(k in kw for k in ["binary", "data", "stream", "bit", "byte"]):
         chosen = "cs_photo_3_1080p.jpg"
     else:
         chosen = "cs_photo_4_1080p.jpg" # Clean computer workstation desk
@@ -142,10 +152,40 @@ def fetch_safe_image_for_sentence(sentence: str, pexels_api_key: str = None) -> 
     4. Runs 4-layer validation filter.
     5. Returns local path to 1080x1920 HD image.
     """
-    # 1. Extract core nouns/keywords from sentence
-    words = [w.strip(",.!?\"'").lower() for w in sentence.split() if len(w) > 2]
-    candidate_keys = [w for w in words if w in QUERY_EXPANSIONS]
-    keyword = candidate_keys[0] if candidate_keys else (words[0] if words else "computer")
+    # 1. Extract core nouns/keywords from entire sentence
+    words = [w.strip(",.!?\"'()[]{}").lower() for w in sentence.split() if len(w) > 2]
+    keyword = None
+    
+    # Priority keyword check across all words in sentence
+    for w in words:
+        if any(k in w for k in ["ram", "memory", "ssd", "drive", "nvme", "storage"]):
+            keyword = "ssd"
+            break
+        elif any(k in w for k in ["keyboard", "mouse", "input", "output", "peripheral"]):
+            keyword = "keyboard"
+            break
+        elif any(k in w for k in ["server", "servers", "datacenter", "cloud", "rack"]):
+            keyword = "server"
+            break
+        elif any(k in w for k in ["eniac", "vacuum", "history", "babbage", "vintage", "bug"]):
+            keyword = "eniac"
+            break
+        elif any(k in w for k in ["security", "cyber", "lock", "encrypt", "password"]):
+            keyword = "security"
+            break
+        elif any(k in w for k in ["code", "program", "python", "variable", "function", "loop"]):
+            keyword = "code"
+            break
+        elif any(k in w for k in ["network", "internet", "web", "cable", "wifi"]):
+            keyword = "network"
+            break
+        elif any(k in w for k in ["cpu", "chip", "processor", "transistor"]):
+            keyword = "cpu"
+            break
+
+    if not keyword:
+        candidate_keys = [w for w in words if w in QUERY_EXPANSIONS]
+        keyword = candidate_keys[0] if candidate_keys else (words[0] if words else "computer")
     
     expanded_query = expand_tech_query(keyword)
     safe_slug = re.sub(r'[^a-zA-Z0-9]', '_', keyword)[:20]
