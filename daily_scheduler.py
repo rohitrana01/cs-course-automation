@@ -214,12 +214,11 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
             return video_id
         except Exception as e:
             print(f"  [!] YouTube upload error: {e}")
-            mark_item_uploaded(item, item_type, "upload_failed")
-            return None
+            print(f"  [!] Item '{title}' remains un-uploaded and will retry on next run.")
+            raise e
     else:
-        print("  [!] YOUTUBE_REFRESH_TOKEN not found in environment. Video rendered locally.")
-        mark_item_uploaded(item, item_type, "local_rendered")
-        return "local_rendered"
+        print("  [!] YOUTUBE_REFRESH_TOKEN not found in environment.")
+        raise ValueError("Missing YOUTUBE_REFRESH_TOKEN secret in environment.")
 
 def run_schedule(slot="both"):
     print(f"\n[+] Daily 2 Shorts Pipeline Started at {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")

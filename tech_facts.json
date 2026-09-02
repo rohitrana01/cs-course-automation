@@ -171,6 +171,292 @@
       "uploaded": true,
       "video_id": "x0VRHnOFqPA",
       "upload_date": "2026-08-21T12:22:08.407630+00:00"
+    },
+    {
+      "id": "fact011",
+      "number": 11,
+      "title": "The First Website Ever is Still Online",
+      "hook": "Did you know the world's very first website created in 1991 is still online today?",
+      "script": "The world's first website was published on August 6, 1991, by Tim Berners-Lee at CERN. It was dedicated to information about the World Wide Web project. You can still visit the original page today at info.cern.ch!",
+      "tags": [
+        "internet",
+        "history",
+        "tim berners lee",
+        "cern",
+        "www"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact012",
+      "number": 12,
+      "title": "Email Existed Before the Internet",
+      "hook": "Did you know that email was invented before the internet even existed?",
+      "script": "In 1965, the MAILBOX system at MIT allowed users on the same mainframe computer to leave messages for each other. It wasn't until 1971 that Ray Tomlinson sent the first network email using the @ symbol on ARPANET!",
+      "tags": [
+        "email",
+        "history",
+        "arpanet",
+        "tech facts"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact013",
+      "number": 13,
+      "title": "A Single Google Search Takes Less Energy Than a Heartbeat",
+      "hook": "Ever wondered how much computing power happens during a single Google search?",
+      "script": "A single Google query uses approximately 0.0003 kilowatt-hours of energy and consults over 1,000 servers in less than 0.2 seconds. That computation takes less energy than the human body consumes in a single heartbeat!",
+      "tags": [
+        "google",
+        "servers",
+        "datacenter",
+        "energy",
+        "search"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact014",
+      "number": 14,
+      "title": "CAPTCHA Digitized Millions of Books",
+      "hook": "Did you know those annoying 'I am not a robot' tests helped transcribe millions of ancient books?",
+      "script": "When you solved reCAPTCHA words in the late 2000s, one word was for verification, while the second was an unreadable scanned word from the Google Books archive. Millions of humans collectively digitized entire historical libraries!",
+      "tags": [
+        "captcha",
+        "ai",
+        "google books",
+        "crowdsourcing"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact015",
+      "number": 15,
+      "title": "The First Computer Programmer Was a Woman in 1843",
+      "hook": "Who was the world's first computer programmer?",
+      "script": "Ada Lovelace wrote the world's first machine algorithm in 1843 for Charles Babbage's mechanical Analytical Engine. She realized computers could manipulate not just numbers, but anything representable by symbols, including music and art!",
+      "tags": [
+        "ada lovelace",
+        "algorithm",
+        "history",
+        "programming"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact016",
+      "number": 16,
+      "title": "The First Domain Name Ever Registered",
+      "hook": "What was the very first .com domain name in history?",
+      "script": "On March 15, 1985, Symbolics.com became the first registered .com domain name in history, registered by the Symbolics Computer Corporation. Today, over 370 million domain names exist worldwide!",
+      "tags": [
+        "domain",
+        "symbolics",
+        "dns",
+        "web history"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact017",
+      "number": 17,
+      "title": "Your GPU Calculates Millions of Triangles Every Second",
+      "hook": "How do modern graphics cards render photorealistic 3D worlds?",
+      "script": "Modern GPUs contain thousands of micro-cores working simultaneously. To draw a 3D game character or environment, the GPU calculates the lighting, texture, and geometry of over 50 million polygons and triangles every single second!",
+      "tags": [
+        "gpu",
+        "graphics",
+        "nvidia",
+        "gaming",
+        "hardware"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact018",
+      "number": 18,
+      "title": "WiFi Doesn't Stand for Wireless Fidelity",
+      "hook": "Did you know WiFi does not stand for Wireless Fidelity?",
+      "script": "The term 'WiFi' was actually created in 1999 by branding firm Interbrand as a catchy consumer-friendly name for the IEEE 802.11b wireless networking standard. It was never an acronym for Wireless Fidelity!",
+      "tags": [
+        "wifi",
+        "networking",
+        "technology",
+        "wireless"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact019",
+      "number": 19,
+      "title": "The Password for US Nuclear Missiles Was 00000000",
+      "hook": "What was the most insecure critical computer password in history?",
+      "script": "For nearly 20 years during the Cold War, the launch code for US Minuteman nuclear missiles was set to eight zeros: 00000000. It was chosen to ensure missiles could be launched instantly without delay during an emergency!",
+      "tags": [
+        "security",
+        "passwords",
+        "history",
+        "military tech"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact020",
+      "number": 20,
+      "title": "Linux Runs 100 Percent of the Top 500 Supercomputers",
+      "hook": "Which operating system controls the most powerful machines on Earth?",
+      "script": "Every single one of the world's Top 500 fastest supercomputers runs on Linux. From weather forecasting and nuclear simulations to large-scale AI training, open-source Linux dominates high-performance supercomputing!",
+      "tags": [
+        "linux",
+        "supercomputers",
+        "open source",
+        "hpc"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact021",
+      "number": 21,
+      "title": "The First Digital Camera Weighed 8 Pounds",
+      "hook": "How big was the very first digital camera?",
+      "script": "In 1975, Kodak engineer Steve Sasson invented the first digital camera. It weighed 8 pounds, captured black-and-white 0.01 megapixel photos, and took 23 seconds to record the image onto a standard cassette tape!",
+      "tags": [
+        "camera",
+        "kodak",
+        "invention",
+        "digital photography"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact022",
+      "number": 22,
+      "title": "Why Computer Memory is Counted in Powers of 2",
+      "hook": "Why do phones and computers come in 64GB, 128GB, or 256GB?",
+      "script": "Because computers operate in binary (base-2), memory chips are addressed using electrical binary lines. Adding a single address line doubles the addressable memory capacity: 2, 4, 8, 16, 32, 64, 128, 256, 512, and 1024!",
+      "tags": [
+        "ram",
+        "storage",
+        "binary",
+        "hardware",
+        "memory"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact023",
+      "number": 23,
+      "title": "The First Computer Mouse Was Made of Wood",
+      "hook": "Did you know Douglas Engelbart made the first computer mouse out of a wooden block?",
+      "script": "In 1964, Douglas Engelbart built the first prototype computer mouse using a carved wooden shell and two metal wheels. It was called a 'mouse' because the cord tail extending out the back resembled a real rodent!",
+      "tags": [
+        "mouse",
+        "hardware",
+        "invention",
+        "douglas engelbart"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact024",
+      "number": 24,
+      "title": "NASA Still Uses 1970s Technology on Voyager 1",
+      "hook": "How much memory does NASA's farthest spacecraft possess?",
+      "script": "Voyager 1, currently over 15 billion miles away in interstellar space, runs on three computers with just 69 kilobytes of memory combined. That is millions of times less memory than a modern smart lightbulb!",
+      "tags": [
+        "nasa",
+        "voyager",
+        "space",
+        "embedded systems"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact025",
+      "number": 25,
+      "title": "Bluetooth Was Named After a Viking King",
+      "hook": "Did you know Bluetooth is named after a 10th-century Scandinavian King?",
+      "script": "Intel engineer Jim Kardach named the technology after King Harald Bluetooth, who united Scandinavian tribes. Just as the king united tribes, Bluetooth was designed to unite communication protocols across PC and cellular devices!",
+      "tags": [
+        "bluetooth",
+        "wireless",
+        "history",
+        "vikings"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact026",
+      "number": 26,
+      "title": "Over 5 Billion Videos are Watched on YouTube Daily",
+      "hook": "How much video data flows across YouTube every single day?",
+      "script": "Every minute, over 500 hours of video are uploaded to YouTube. That equals over 720,000 hours of video per day! Google uses intelligent distributed storage clusters to encode and stream petabytes of video in real time!",
+      "tags": [
+        "youtube",
+        "streaming",
+        "datacenter",
+        "cloud"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact027",
+      "number": 27,
+      "title": "The First Video Game Was Created in 1958",
+      "hook": "What was the very first electronic video game?",
+      "script": "In October 1958, physicist William Higinbotham created 'Tennis for Two' using an analog computer and a 5-inch oscilloscope screen at Brookhaven National Laboratory. It was the world's first interactive electronic game!",
+      "tags": [
+        "gaming",
+        "history",
+        "video games",
+        "oscilloscope"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact028",
+      "number": 28,
+      "title": "Why Transistors are Approaching the Size of Atoms",
+      "hook": "How small are the transistors inside your smartphone chip?",
+      "script": "Modern 3-nanometer microchips contain over 15 billion transistors packed into a chip the size of a fingernail. A single transistor is now only about 15 silicon atoms wide, reaching the limits of quantum physics!",
+      "tags": [
+        "cpu",
+        "transistors",
+        "semiconductors",
+        "physics",
+        "nanometer"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact029",
+      "number": 29,
+      "title": "The First Computer Virus Was Created as a Prank in 1971",
+      "hook": "What did the world's very first computer virus do?",
+      "script": "In 1971, Bob Thomas created the 'Creeper virus' on ARPANET. It didn't damage files—it simply printed: 'I'm the creeper, catch me if you can!' It led to the creation of the first antivirus program called Reaper!",
+      "tags": [
+        "cybersecurity",
+        "virus",
+        "creeper",
+        "arpanet"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact030",
+      "number": 30,
+      "title": "Why 1 Kilobyte is 1024 Bytes Instead of 1000",
+      "hook": "Why isn't a kilobyte exactly 1,000 bytes?",
+      "script": "In decimal metric systems, 'kilo' means 1,000. But computers calculate in binary powers of 2. 2 to the power of 10 equals 1,024, which is the closest binary number to 1,000, creating the binary kilobyte standard!",
+      "tags": [
+        "binary",
+        "bytes",
+        "storage",
+        "math",
+        "memory"
+      ],
+      "uploaded": false
     }
   ]
 }
