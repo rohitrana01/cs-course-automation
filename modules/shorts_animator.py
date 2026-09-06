@@ -169,10 +169,36 @@ def build_animated_shorts_video(audio_path: str, photo_files: list, badge_text: 
         clips.append(clip)
         
     final_video = concatenate_videoclips(clips, method="compose")
+    
+    # Mix ambient lo-fi background beat behind voiceover for high retention
+    bg_music_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "audio", "bg_music.wav")
+    final_audio = audio
+    if os.path.exists(bg_music_path):
+        try:
+            if is_v2:
+                from moviepy import CompositeAudioClip, concatenate_audioclips
+            else:
+                from moviepy.editor import CompositeAudioClip, concatenate_audioclips
+                
+            bg_audio = AudioFileClip(bg_music_path)
+            if bg_audio.duration < total_duration:
+                num_loops = int(np.ceil(total_duration / bg_audio.duration)) + 1
+                bg_audio = concatenate_audioclips([bg_audio] * num_loops)
+            
+            if is_v2:
+                bg_scaled = bg_audio.subclipped(0, total_duration).with_volume_scaled(0.12)
+                final_audio = CompositeAudioClip([audio, bg_scaled])
+            else:
+                bg_scaled = bg_audio.subclip(0, total_duration).volumex(0.12)
+                final_audio = CompositeAudioClip([audio, bg_scaled])
+        except Exception as e:
+            print(f"  [!] Audio mixing fallback: {e}")
+            final_audio = audio
+
     if is_v2:
-        final_video = final_video.with_audio(audio)
+        final_video = final_video.with_audio(final_audio)
     else:
-        final_video = final_video.set_audio(audio)
+        final_video = final_video.set_audio(final_audio)
         
     final_video.write_videofile(output_path, fps=24, codec="libx264", audio_codec="aac", preset="ultrafast")
     return output_path
