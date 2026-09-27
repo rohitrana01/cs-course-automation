@@ -66,7 +66,15 @@ def get_next_item(slot_name="Morning"):
         for f in facts:
             if not f.get("uploaded", False):
                 return f, "fact"
-        return None, "fact"
+        
+        # Infinite Auto-Recycle: never stop uploading evening facts!
+        print("  [*] All Tech Facts uploaded! Automatically recycling queue from Fact #1...")
+        for f in facts:
+            f["uploaded"] = False
+            f.pop("video_id", None)
+            f.pop("upload_date", None)
+        save_json(FACTS_PATH, facts_data)
+        return facts[0], "fact"
 
 def mark_item_uploaded(item, item_type="course", video_id="uploaded"):
     now_iso = datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -124,7 +132,17 @@ VIRAL_COURSE_LESSONS = {
     17: "How do Python for loops actually work under the hood? Python doesn't use simple index counters like C++ or Java—it uses iterators! When you loop over a list or string, Python automatically requests the next element until the sequence is exhausted! Follow for Day 18!",
     18: "The most dangerous bug in computer programming is the infinite while loop! If your loop condition never evaluates to False, your CPU core gets pegged at 100% until the program crashes. Always ensure your while loop has a guaranteed exit condition or break statement! Follow for Day 19!",
     19: "Write once, execute everywhere! Functions are the building blocks of clean software engineering. Instead of copy-pasting code, bundle your logic into a reusable function with inputs and outputs to eliminate bugs instantly! Follow for Day 20!",
-    20: "Why did Python throw an UnboundLocalError? Because Python uses the LEGB rule for variable scope: Local, Enclosing, Global, and Built-in! A variable defined inside a function does not exist outside it. Master scope to keep your code bulletproof! Follow for Day 21!"
+    20: "Why did Python throw an UnboundLocalError? Because Python uses the LEGB rule for variable scope: Local, Enclosing, Global, and Built-in! A variable defined inside a function does not exist outside it. Master scope to keep your code bulletproof! Follow for Day 21!",
+    21: "Python lists are not simple arrays! Under the hood, Python lists are dynamic arrays of memory pointers. When a list grows beyond its allocated capacity, Python allocates a brand new, larger block of RAM and moves the pointers over! Follow for Day 22!",
+    22: "Why do professional Python programmers use Tuples instead of Lists? Because tuples are immutable—once created, their memory block is frozen in RAM! This makes tuples faster to iterate through and safe against accidental mutation in multithreaded applications! Follow for Day 23!",
+    23: "Stop using Python lists when you need speed! Searching a list of 1 million items takes 1 million checks, but searching a Python dictionary takes O(1) instantaneous time! That's because dictionaries use a cryptographic hash table under the hood to jump straight to the exact memory address! Follow for Day 24!",
+    24: "99% of Python beginners format strings the slow, outdated way! Never use plus signs or percent operators to join strings—use F-strings! F-strings are evaluated at runtime directly in bytecode, making them twice as fast and 10 times cleaner to read! Follow for Day 25!",
+    25: "Why does opening files in Python leak your computer's memory? If your script crashes before close is called, that file handle stays locked by the OS! Always use the with open context manager—it automatically guarantees safe file closure even if your code errors out! Follow for Day 26!",
+    26: "Did you know Python gives you access to over 500,000 free software libraries with 1 command? When you type pip install, your computer talks to the Python Package Index and downloads pre-compiled wheels written by the world's best engineers! Follow for Day 27!",
+    27: "Never let your software crash in production! Python's try and except blocks catch runtime errors before they terminate your application. Catch specific exceptions like KeyError and ValueError instead of bare except to prevent masking hidden bugs! Follow for Day 28!",
+    28: "How do real software engineers model complex real-world systems in code? With Classes! A class is the architectural blueprint, and an object is the living instance created in memory. Classes bundle data and behavior together to power modern software! Follow for Day 29!",
+    29: "Don't repeat yourself! In Python, inheritance allows a child class to inherit every method and property from a parent class, while polymorphism lets different classes respond to the same method call in unique ways! Master this to write scalable code! Follow for Day 30!",
+    30: "Turn 5 lines of messy Python loops into 1 elegant line of code! List comprehensions are not just syntactic sugar—they run in optimized C bytecode under the hood, executing up to 30% faster than standard for loops! Follow for Day 31!"
 }
 
 VIRAL_TITLES = {
@@ -135,7 +153,17 @@ VIRAL_TITLES = {
     17: "How Python For Loops WORK Under The Hood 🔁 (Day 17) #Shorts #Coding",
     18: "The Most Dangerous Bug in Python Programming ⚠️ (Day 18) #Shorts #Python",
     19: "Write Python Code 10x Faster With Functions 💡 (Day 19) #Shorts #Coding",
-    20: "Why Python Throws UnboundLocalError! 🧠 (Day 20) #Shorts #Python #Coding"
+    20: "Why Python Throws UnboundLocalError! 🧠 (Day 20) #Shorts #Python #Coding",
+    21: "The Secret Way Python Lists Work in Memory 🐍 (Day 21) #Shorts #Coding",
+    22: "Why Senior Developers ALWAYS Use Tuples ⚡ (Day 22) #Shorts #Python",
+    23: "Stop Using Python Lists When You Need SPEED! 🚀 (Day 23) #Shorts #Python",
+    24: "Stop Formatting Python Strings The Wrong Way! ❌ (Day 24) #Shorts #Coding",
+    25: "The 1 Python File Handling Bug That Crashes Servers ⚠️ (Day 25) #Shorts",
+    26: "How Pip Install ACTUALLY Works Behind The Scenes 📦 (Day 26) #Shorts",
+    27: "Never Let Python Crash In Production Again! 🛡️ (Day 27) #Shorts #Python",
+    28: "How OOP & Classes WORK in Python Explained In 30s 💡 (Day 28) #Shorts",
+    29: "Inheritance vs Polymorphism Explained Simply 🧠 (Day 29) #Shorts #Coding",
+    30: "Turn 5 Lines of Python Into 1 Line! ⚡ (Day 30) #Shorts #Python"
 }
 
 def get_course_script(day: int, title: str, module: str, tags: list) -> str:

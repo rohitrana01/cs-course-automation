@@ -102,26 +102,48 @@ def create_rich_frame(photo_path: str, badge_text: str, title: str, caption: str
         draw.text((line_x, y_title), line, fill=(255, 255, 255), font=title_font)
         y_title += 68
 
-    # 3. Transparent Captions (No Card Background, 100% Transparent with 3D Outline Stroke)
+    # 3. Transparent Captions with Two-Tone Karaoke Word Highlighting (Gold + White)
+    EMPHASIS_KEYWORDS = {
+        "python", "ram", "cpu", "memory", "ssd", "stop", "never", "always",
+        "secret", "bug", "speed", "fast", "crash", "object", "classes", "oop",
+        "f-strings", "lists", "tuples", "hash", "loop", "loops", "function", "functions",
+        "o(1)", "10x", "1", "10", "100", "90%", "99%", "bytes", "bits", "1024", "error",
+        "free", "speed", "million", "billion", "trick", "secret", "dictionary", "dictionaries"
+    }
+
     if caption:
         wrapped_caption = textwrap.fill(caption, width=28)
         lines = wrapped_caption.split("\n")
         total_h = len(lines) * 58
         y_line = height - total_h - 180
         
+        space_w = draw.textlength(" ", font=caption_font)
+        
         for line in lines:
-            line_w = len(line) * 22
-            line_x = (width - line_w) // 2
+            words = line.split(" ")
+            word_widths = [draw.textlength(w, font=caption_font) for w in words]
+            total_w = sum(word_widths) + space_w * max(0, len(words) - 1)
+            cur_x = (width - total_w) // 2
             
-            # Thick black outline stroke + drop shadow for 100% legibility on any image
-            draw.text(
-                (line_x, y_line),
-                line,
-                fill=(255, 255, 255),
-                font=caption_font,
-                stroke_width=4,
-                stroke_fill=(0, 0, 0)
-            )
+            for w, w_width in zip(words, word_widths):
+                clean_w = w.strip(".,!?\"'()[]{}").lower()
+                # Highlight tech terms, numbers, or action keywords in Vibrant Golden Yellow
+                if clean_w in EMPHASIS_KEYWORDS or any(char.isdigit() for char in clean_w):
+                    text_color = (250, 204, 21) # Vibrant Yellow Gold
+                else:
+                    text_color = (255, 255, 255) # Pure Crisp White
+                
+                # 4px black stroke for 100% legibility on any background
+                draw.text(
+                    (cur_x, y_line),
+                    w,
+                    fill=text_color,
+                    font=caption_font,
+                    stroke_width=4,
+                    stroke_fill=(0, 0, 0)
+                )
+                cur_x += w_width + space_w
+            
             y_line += 58
 
     return combined.convert("RGB")
@@ -143,7 +165,9 @@ def build_animated_shorts_video(audio_path: str, photo_files: list, badge_text: 
     if not sentences:
         sentences = [script]
     
-    num_segments = max(len(photo_files), len(sentences))
+    # Rapid kinetic visual cuts (every 2.5 to 2.8 seconds max for high retention)
+    target_seg_dur = min(2.8, total_duration / max(1, len(sentences)))
+    num_segments = max(len(sentences), int(np.ceil(total_duration / target_seg_dur)))
     seg_duration = total_duration / num_segments
     
     from modules.safe_image_fetcher import fetch_safe_image_for_sentence

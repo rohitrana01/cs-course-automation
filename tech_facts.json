@@ -497,6 +497,456 @@
       "uploaded": true,
       "video_id": "LdRbYwCoh2A",
       "upload_date": "2026-09-17T08:31:07.908243+00:00"
+    },
+    {
+      "id": "fact031",
+      "number": 31,
+      "title": "Why Every iPhone Ad Displays Exactly 9:41 AM",
+      "hook": "Have you ever noticed that every Apple iPhone commercial displays 9:41 AM on the clock?",
+      "script": "When Steve Jobs unveiled the very first iPhone in 2007, his keynote was timed so the slide appeared at approximately 9:42 AM. Apple later adjusted it to 9:41 AM, and to this day, every official Apple product launch photo is set to 9:41!",
+      "tags": [
+        "apple",
+        "iphone",
+        "steve jobs",
+        "tech history",
+        "easter egg"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact032",
+      "number": 32,
+      "title": "Google Was Originally Named BackRub",
+      "hook": "Did you know that Google's original name was actually BackRub?",
+      "script": "In 1996, Larry Page and Sergey Brin named their revolutionary search engine BackRub because it analyzed web back-links to determine page importance. They renamed it Google in 1997, inspired by the mathematical term Googol, representing a 1 followed by 100 zeros!",
+      "tags": [
+        "google",
+        "larry page",
+        "search engine",
+        "history",
+        "algorithm"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact033",
+      "number": 33,
+      "title": "The First Webcam Was Created to Watch a Coffee Pot",
+      "hook": "Why did Cambridge University scientists invent the world's first webcam?",
+      "script": "In 1991, researchers in the Cambridge computer lab were tired of walking down three flights of stairs only to find the Trojan Room coffee pot empty! They pointed a video camera at the pot and streamed 1 frame per second to their computer screens, creating the world's first live webcam!",
+      "tags": [
+        "webcam",
+        "internet",
+        "cambridge",
+        "invention",
+        "coffee"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact034",
+      "number": 34,
+      "title": "Why Dark Mode Saves Up to 60 Percent Battery on OLED",
+      "hook": "Does dark mode really save phone battery, or is it just an aesthetic myth?",
+      "script": "On OLED and AMOLED smartphone screens, each individual sub-pixel produces its own light. When a pixel displays true black, that pixel turns off completely and consumes zero electrical power! Tests show dark mode can save up to 60% battery life on OLED displays!",
+      "tags": [
+        "oled",
+        "battery",
+        "dark mode",
+        "smartphones",
+        "hardware"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact035",
+      "number": 35,
+      "title": "GPS Requires Einstein's Theory of Relativity to Work",
+      "hook": "Did you know GPS satellites would fail in minutes without Einstein's physics?",
+      "script": "Because GPS satellites orbit 12,000 miles above Earth moving at 8,700 miles per hour, gravitational time dilation makes their onboard atomic clocks tick 38 microseconds faster every day! Engineers must continuously apply Einstein's general and special relativity formulas, or your map would drift by 6 miles every single day!",
+      "tags": [
+        "gps",
+        "physics",
+        "einstein",
+        "satellites",
+        "clocks"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact036",
+      "number": 36,
+      "title": "CAPTCHA Tests Were Secretly Training Self-Driving AI",
+      "hook": "Why do CAPTCHA security tests constantly ask you to click traffic lights and crosswalks?",
+      "script": "When Google acquired reCAPTCHA, they trained neural networks for Waymo self-driving cars! Every time hundreds of millions of internet users click stop signs, motorcycles, and fire hydrants to prove they are human, they are actually labeling high-difficulty edge cases for autonomous driving vision models!",
+      "tags": [
+        "captcha",
+        "ai",
+        "self driving",
+        "waymo",
+        "machine learning"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact037",
+      "number": 37,
+      "title": "Why Transistors are Approaching the Size of Atoms",
+      "hook": "How small are the transistors inside your smartphone processor?",
+      "script": "Modern 3-nanometer computer chips pack over 15 billion transistors onto a silicon wafer the size of your fingernail! At this microscopic scale, the gate of a transistor is only about 10 to 15 silicon atoms wide, and electrons can literally quantum-tunnel straight through barriers!",
+      "tags": [
+        "semiconductor",
+        "cpu",
+        "transistor",
+        "nanometer",
+        "quantum"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact038",
+      "number": 38,
+      "title": "The Entire Internet Weights About 50 Grams of Electrons",
+      "hook": "How much does all the stored data on the entire internet weigh?",
+      "script": "Physicist John Kubiatowicz calculated that storing data on silicon flash memory trapped extra electrons. Storing an entire web server's petabytes of data adds an immeasurably tiny mass of moving electrical charge. In total, all the active electricity powering the global internet weighs approximately 50 grams—about the weight of a single strawberry!",
+      "tags": [
+        "physics",
+        "internet",
+        "data",
+        "electrons",
+        "science"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact039",
+      "number": 39,
+      "title": "Why Ethernet Cables Have Twisted Pairs of Wires",
+      "hook": "Why are the colorful copper wires inside an internet cable tightly twisted together?",
+      "script": "In 1881, Alexander Graham Bell discovered that twisting pairs of telephone wires together balanced out electromagnetic interference! In modern Cat6 Ethernet cables, each twisted pair cancels out external radiation and cross-talk from neighboring wires, allowing gigabit signals to transmit without data corruption!",
+      "tags": [
+        "ethernet",
+        "networking",
+        "cables",
+        "hardware",
+        "engineering"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact040",
+      "number": 40,
+      "title": "The First Commercial Hard Drive Was Leased for $3,200 a Month",
+      "hook": "How much did the world's very first computer hard disk cost in 1956?",
+      "script": "The IBM 350 RAMAC disk storage unit arrived in 1956. It weighed over one ton, used fifty 24-inch magnetic platters, and stored just 3.75 megabytes of data! IBM refused to sell it outright and instead leased it to businesses for $3,200 per month—equivalent to over $36,000 per month today!",
+      "tags": [
+        "ibm",
+        "storage",
+        "hard drive",
+        "history",
+        "retro tech"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact041",
+      "number": 41,
+      "title": "Why Keyboard Keys Are Staggered Instead of Aligned",
+      "hook": "Why aren't computer keyboard keys arranged in a straight vertical grid?",
+      "script": "Modern keyboards inherit their layout from mechanical typewriters built in the 1870s! Each key was connected to a physical metal strike lever. If keys were aligned in straight columns, the mechanical levers would collide and jam constantly. The staggering prevented mechanical jams, and computers simply kept the tradition!",
+      "tags": [
+        "keyboard",
+        "qwerty",
+        "design",
+        "typewriter",
+        "hardware"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact042",
+      "number": 42,
+      "title": "Over 90 Percent of World Passwords Are in the RockYou Wordlist",
+      "hook": "What is the most famous password leak database in cybersecurity history?",
+      "script": "In 2009, a company called RockYou was breached, leaking over 32 million plaintext passwords stored without encryption! Security researchers compiled this into the legendary 'rockyou.txt' wordlist. Today, automated hacking bots use this exact list to crack millions of weak user passwords in milliseconds!",
+      "tags": [
+        "cybersecurity",
+        "passwords",
+        "hacking",
+        "rockyou",
+        "security"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact043",
+      "number": 43,
+      "title": "Why Minecraft Worlds Are Limited by 64-Bit Integer Bounds",
+      "hook": "Why does Minecraft's infinite world glitch out at 30 million blocks?",
+      "script": "Minecraft calculates coordinates using 64-bit floating point numbers. As players travel past 30 million blocks from spawn, the mathematical precision of floating-point coordinates degrades, causing the physics engine and terrain generation to break down into the famous 'Far Lands' glitch!",
+      "tags": [
+        "minecraft",
+        "gaming",
+        "floating point",
+        "math",
+        "integers"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact044",
+      "number": 44,
+      "title": "Why macOS and iOS Are Built on Top of UNIX",
+      "hook": "What operating system actually powers Apple's iPhones and Macs under the hood?",
+      "script": "When Steve Jobs returned to Apple with NeXT in 1997, he brought NeXTSTEP, an operating system built on the open-source BSD UNIX kernel called Darwin. Beneath Apple's sleek interface lies a genuine POSIX-certified UNIX foundation that powers macOS, iOS, iPadOS, and watchOS!",
+      "tags": [
+        "apple",
+        "unix",
+        "macos",
+        "ios",
+        "operating system"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact045",
+      "number": 45,
+      "title": "The First Computer Bug Was Removed with Tweezers",
+      "hook": "Where did the phrase 'debugging a computer' literally come from?",
+      "script": "On September 9, 1947, computer pioneer Grace Hopper's team was troubleshooting the Harvard Mark II relay computer. Inside Relay 70, they discovered an actual moth stuck between the electrical contacts! They removed it with tweezers, taped it into their daily logbook, and wrote: 'First actual case of bug being found!'",
+      "tags": [
+        "grace hopper",
+        "debugging",
+        "bug",
+        "history",
+        "computer science"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact046",
+      "number": 46,
+      "title": "Why SSDs Wear Out Over Time While HDDs Don't Suffer Write Fatigue",
+      "hook": "Why do solid state drives have a finite write lifespan?",
+      "script": "NAND flash memory stores data by trapping electrons inside floating-gate transistors using high-voltage tunneling. Over time, each write and erase cycle physically degrades the microscopic silicon dioxide insulating layer until the cell can no longer hold charge reliably. Modern SSD controllers use wear-leveling algorithms to spread writes evenly across trillions of cells!",
+      "tags": [
+        "ssd",
+        "storage",
+        "nand flash",
+        "hardware",
+        "engineering"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact047",
+      "number": 47,
+      "title": "The First Video Uploaded to YouTube Was Shot at a Zoo",
+      "hook": "What was the very first video ever uploaded to YouTube?",
+      "script": "On April 23, 2005, YouTube co-founder Jawed Karim uploaded a 19-second video titled 'Me at the zoo'. Standing in front of elephants at the San Diego Zoo, he casually commented on their trunks. That single 19-second test clip launched the largest video sharing network in human history!",
+      "tags": [
+        "youtube",
+        "history",
+        "internet",
+        "video",
+        "tech history"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact048",
+      "number": 48,
+      "title": "Why Python Uses Indentation Instead of Curly Braces",
+      "hook": "Why is Python the only mainstream language that enforces whitespace indentation?",
+      "script": "Python creator Guido van Rossum hated how programmers wrote messy, unreadable code with mismatched curly braces in C and Java. He decided that since developers already indent their code for readability, the Python compiler should use indentation itself as the block structure, making Python the most readable language on Earth!",
+      "tags": [
+        "python",
+        "guido van rossum",
+        "programming",
+        "code",
+        "syntax"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact049",
+      "number": 49,
+      "title": "Why 1 Byte Equals 8 Bits",
+      "hook": "Why did computer scientists standardize a byte to exactly 8 bits instead of 10?",
+      "script": "In the early computing era, character sets like IBM's EBCDIC and the 7-bit ASCII standard required an 8th bit for parity error-checking across memory buses. In 1964, IBM standardized the 8-bit byte for the legendary System/360 mainframe, and the 8-bit byte became the global foundation of digital computing!",
+      "tags": [
+        "byte",
+        "bit",
+        "binary",
+        "ibm",
+        "computer science"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact050",
+      "number": 50,
+      "title": "The Symbolics.com Domain Was Registered 40 Years Ago",
+      "hook": "What is the oldest registered dot-com domain name in the world?",
+      "script": "On March 15, 1985, Symbolics.com was registered by the Symbolics Computer Corporation, creators of Lisp programming workstations. It was registered four years before the World Wide Web was even invented by Tim Berners-Lee, and remains active online today as a living computing monument!",
+      "tags": [
+        "dns",
+        "domain",
+        "internet",
+        "history",
+        "symbolics"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact051",
+      "number": 51,
+      "title": "Why CPUs Have L1, L2, and L3 Cache Layers",
+      "hook": "Why does your processor need three different layers of memory cache inside the chip?",
+      "script": "Accessing RAM takes about 60 nanoseconds—which is an eternity to a 4 GHz CPU! L1 cache sits directly inside each core and responds in under 1 nanosecond! L2 and L3 caches act as high-speed stepping stones, preventing the CPU from stalling while waiting on system memory!",
+      "tags": [
+        "cpu",
+        "cache",
+        "hardware",
+        "architecture",
+        "ram"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact052",
+      "number": 52,
+      "title": "The First Computer Worm Caused $10 Million in Damage",
+      "hook": "What happened when the first internet worm was unleashed in 1988?",
+      "script": "Cornell graduate student Robert Tappan Morris wrote a 99-line program to gauge the size of the nascent internet. Due to a coding error, it infected machines repeatedly, paralyzing 10% of all computers connected to ARPANET within 24 hours! It led to the creation of the world's first cybersecurity CERT team!",
+      "tags": [
+        "morris worm",
+        "cybersecurity",
+        "history",
+        "hacking",
+        "arpanet"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact053",
+      "number": 53,
+      "title": "Why GPUs Have Thousands of Cores While CPUs Have 8 to 16",
+      "hook": "Why does an Nvidia graphics card have 10,000 cores while an Intel CPU has only 16?",
+      "script": "A CPU core is like a master mathematician that can solve any complex, sequential logic problem with low latency. A GPU core is like a kindergarten student who can only do simple math, but with 10,000 students working simultaneously, they can calculate every pixel and neural network matrix multiplication in parallel!",
+      "tags": [
+        "gpu",
+        "cpu",
+        "nvidia",
+        "hardware",
+        "ai"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact054",
+      "number": 54,
+      "title": "Why Optical Fiber Transmits Data Using Total Internal Reflection",
+      "hook": "How does glass bend light around the world without losing data?",
+      "script": "Fiber optic cables are thinner than a human hair and made of pure silica glass. Light pulses travel inside the core by striking the glass-cladding boundary at an angle greater than the critical angle, causing 100% total internal reflection with virtually zero signal leakage across thousands of miles!",
+      "tags": [
+        "fiber optic",
+        "physics",
+        "networking",
+        "telecom",
+        "lasers"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact055",
+      "number": 55,
+      "title": "Why Python's GIL Limits Multi-Threading",
+      "hook": "What is Python's Global Interpreter Lock, and why is it controversial?",
+      "script": "In CPython, the Global Interpreter Lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecode simultaneously. It makes memory management safe and simple, but prevents Python from using all CPU cores in CPU-heavy multithreaded tasks!",
+      "tags": [
+        "python",
+        "gil",
+        "multithreading",
+        "concurrency",
+        "performance"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact056",
+      "number": 56,
+      "title": "Why RAM Loses Data the Moment Power is Cut",
+      "hook": "Why can't computer RAM retain files like a storage drive?",
+      "script": "Dynamic RAM stores each bit as an electrical charge on a microscopic capacitor with a single transistor. Because capacitors naturally leak electricity within milliseconds, RAM must be refreshed with electricity thousands of times per second. Cut the power, and the charge vanishes instantly!",
+      "tags": [
+        "ram",
+        "electronics",
+        "capacitors",
+        "hardware",
+        "memory"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact057",
+      "number": 57,
+      "title": "The First Computer Animated Movie Used 117 Sun Workstations",
+      "hook": "How much computer hardware rendered the original 1995 Toy Story?",
+      "script": "Pixar's 1995 Toy Story was the first entirely computer-animated feature film in history. Pixar used a render farm of 117 dual-processor Sun Microsystems computers running 24/7. Each frame took between 45 minutes and 30 hours to compute, totaling 800,000 machine hours!",
+      "tags": [
+        "pixar",
+        "cgi",
+        "animation",
+        "render farm",
+        "toy story"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact058",
+      "number": 58,
+      "title": "Why DNS is the Phonebook of the Entire Internet",
+      "hook": "What actually happens when you type google.com into your browser?",
+      "script": "Computers don't speak English—they communicate using numerical IP addresses like 142.250.190.46. The Domain Name System, or DNS, acts as the world's master distributed phonebook, translating human-friendly names into binary IP addresses in under 20 milliseconds!",
+      "tags": [
+        "dns",
+        "networking",
+        "internet",
+        "web",
+        "ip address"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact059",
+      "number": 59,
+      "title": "Why Quantum Computers Threaten Modern RSA Encryption",
+      "hook": "How could quantum computers break all current internet encryption?",
+      "script": "Modern RSA encryption relies on the fact that classical supercomputers take billions of years to factorize massive prime numbers. Shor's quantum algorithm can solve prime factorization exponentially faster, prompting governments and tech giants to develop Post-Quantum Cryptography standards today!",
+      "tags": [
+        "quantum",
+        "rsa",
+        "cryptography",
+        "cybersecurity",
+        "physics"
+      ],
+      "uploaded": false
+    },
+    {
+      "id": "fact060",
+      "number": 60,
+      "title": "The First Apple Computer Sold for Exactly $666.66",
+      "hook": "Why did Steve Wozniak price the Apple I at $666.66 in 1976?",
+      "script": "When Steve Wozniak built the hand-crafted Apple I computer, the wholesale cost was about $500. He marked it up by one-third to $666.66 because he liked repeating digits and thought it looked symmetrical, completely unaware of any numerological superstition!",
+      "tags": [
+        "apple",
+        "steve jobs",
+        "steve wozniak",
+        "history",
+        "retro tech"
+      ],
+      "uploaded": false
     }
   ]
 }
