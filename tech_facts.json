@@ -783,7 +783,9 @@
         "video",
         "tech history"
       ],
-      "uploaded": false
+      "uploaded": true,
+      "video_id": "f-CT9WE07WM",
+      "upload_date": "2026-10-06T09:55:12.500652+00:00"
     },
     {
       "id": "fact048",
