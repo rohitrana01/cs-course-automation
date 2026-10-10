@@ -84,7 +84,13 @@ def is_safe_tech_photo(metadata: dict) -> bool:
 
 def get_curated_fallback_photo(keyword: str) -> str:
     kw = keyword.lower()
-    if any(k in kw for k in ["ram", "memory", "storage", "ssd", "drive", "ddr", "nvme"]):
+    if any(k in kw for k in ["ai", "neural", "deep learning", "machine learning", "model", "intelligence", "gpt"]):
+        chosen = "cs_photo_ai_neural_1080p.jpg"
+    elif any(k in kw for k in ["code", "developer", "program", "python", "software", "variable", "function", "loop", "syntax", "dictionary", "list"]):
+        chosen = "cs_photo_developer_1080p.jpg"
+    elif any(k in kw for k in ["supercomputer", "cluster", "hpc", "mainframe", "fast", "speed", "billion"]):
+        chosen = "cs_photo_supercomputer_1080p.jpg"
+    elif any(k in kw for k in ["ram", "memory", "storage", "ssd", "drive", "ddr", "nvme", "1024", "byte"]):
         chosen = "cs_photo_ram_ssd_1080p.jpg"
     elif any(k in kw for k in ["keyboard", "mouse", "input", "output", "peripheral", "device"]):
         chosen = "cs_photo_peripherals_1080p.jpg"
@@ -94,8 +100,6 @@ def get_curated_fallback_photo(keyword: str) -> str:
         chosen = "cs_photo_datacenter_servers_1080p.jpg"
     elif any(k in kw for k in ["security", "cyber", "lock", "encrypt", "password", "virus"]):
         chosen = "cs_photo_cyber_security_1080p.jpg"
-    elif any(k in kw for k in ["code", "program", "python", "software", "variable", "function", "loop", "syntax"]):
-        chosen = "cs_photo_code_1080p.jpg"
     elif any(k in kw for k in ["network", "internet", "web", "cable", "wifi", "browser"]):
         chosen = "cs_photo_network_1080p.jpg"
     elif any(k in kw for k in ["cpu", "chip", "processor", "logic", "transistor", "alu"]):
@@ -105,7 +109,7 @@ def get_curated_fallback_photo(keyword: str) -> str:
     elif any(k in kw for k in ["binary", "data", "stream", "bit", "byte"]):
         chosen = "cs_photo_3_1080p.jpg"
     else:
-        chosen = "cs_photo_4_1080p.jpg" # Clean computer workstation desk
+        chosen = "cs_photo_developer_1080p.jpg" # Authentic modern developer workstation desk
 
     path = os.path.join(PHOTOS_DIR, chosen)
     if os.path.exists(path):

@@ -997,6 +997,485 @@
         "retro tech"
       ],
       "uploaded": false
+    },
+    {
+      "id": "fact061",
+      "number": 61,
+      "title": "Submarine Cables Carry 99% of Global Internet Traffic",
+      "hook": "Do you think the internet travels through space satellites?",
+      "script": "Over 99% of all international data travels through undersea fiber optic cables resting on the ocean floor! Stretched across 800,000 miles, these fragile glass strands are only as thick as a garden hose, yet transmit terabits of data every second using beams of light!",
+      "tags": [
+        "networking",
+        "submarine cables",
+        "internet",
+        "fiber optic",
+        "hardware"
+      ],
+      "domain": "network",
+      "uploaded": false
+    },
+    {
+      "id": "fact062",
+      "number": 62,
+      "title": "Why GPUs Crush CPUs at Artificial Intelligence Math",
+      "hook": "Why does AI need thousands of GPUs instead of powerful CPUs?",
+      "script": "A CPU has a few ultra-fast cores designed for sequential tasks, like a team of mathematicians. A GPU has tens of thousands of smaller cores designed for simultaneous matrix multiplication, like an army of calculators! That is why training large AI models happens 100 times faster on GPUs!",
+      "tags": [
+        "gpu",
+        "cpu",
+        "ai",
+        "hardware",
+        "machine learning"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact063",
+      "number": 63,
+      "title": "Why 0.1 Plus 0.2 Does NOT Equal 0.3 in Code",
+      "hook": "Why does every programming language fail basic kindergarten math?",
+      "script": "If you ask Python, JavaScript, or C++ what 0.1 plus 0.2 equals, they answer 0.30000000000000004! Computers store numbers in binary base-2, where decimal fractions like one-tenth result in repeating infinite decimals. Rounding errors in IEEE 754 float precision cause this famous programming quirk!",
+      "tags": [
+        "coding",
+        "math",
+        "python",
+        "javascript",
+        "binary"
+      ],
+      "domain": "coding",
+      "uploaded": false
+    },
+    {
+      "id": "fact064",
+      "number": 64,
+      "title": "Bluetooth is Named After a 10th-Century Viking King",
+      "hook": "Where did the strange name Bluetooth actually come from?",
+      "script": "In 1997, engineers at Intel, Ericsson, and Nokia wanted a unified wireless protocol. They named it after King Harald Bluetooth, who united Scandinavian tribes in the 10th century! Even the Bluetooth logo combines the Nordic runes for his initials, H and B!",
+      "tags": [
+        "bluetooth",
+        "history",
+        "wireless",
+        "tech history",
+        "trivia"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact065",
+      "number": 65,
+      "title": "The Year 2038 Unix Bug That Could Crash Computers",
+      "hook": "Will the world face another massive digital apocalypse in 2038?",
+      "script": "Unix systems track time as seconds elapsed since January 1, 1970. On 32-bit systems, the maximum integer value is reached on January 19, 2038 at 3:14 AM UTC. After that second, the integer overflows into negative numbers, resetting the clock to 1901 and crashing legacy embedded systems worldwide!",
+      "tags": [
+        "y2k38",
+        "unix",
+        "bugs",
+        "coding",
+        "linux"
+      ],
+      "domain": "coding",
+      "uploaded": false
+    },
+    {
+      "id": "fact066",
+      "number": 66,
+      "title": "How CAPTCHA Secretly Trained AI & Digitized Books",
+      "hook": "Did you know you've been working as an unpaid AI trainer?",
+      "script": "When CAPTCHA showed you two distorted words, one was a known security check, but the second was an unreadable scan from the New York Times archives or Google Books! Millions of humans solving puzzles digitized decades of history and later trained Google's self-driving car vision models!",
+      "tags": [
+        "captcha",
+        "ai",
+        "machine learning",
+        "google",
+        "security"
+      ],
+      "domain": "ai",
+      "uploaded": false
+    },
+    {
+      "id": "fact067",
+      "number": 67,
+      "title": "Why RAM Must Refresh Millions of Times Per Second",
+      "hook": "Why does your computer lose all its memory when you pull the plug?",
+      "script": "Dynamic RAM stores each bit of data as a tiny electrical charge inside a microscopic capacitor. But capacitors leak charge rapidly! To prevent data loss, the memory controller must recharge every single memory cell thousands of times every second, making RAM truly volatile!",
+      "tags": [
+        "ram",
+        "memory",
+        "hardware",
+        "electronics",
+        "cpu"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact068",
+      "number": 68,
+      "title": "GPS Satellites Must Obey Einstein's Relativity",
+      "hook": "How does Albert Einstein keep your Google Maps navigation accurate?",
+      "script": "GPS satellites orbit Earth at 8,700 mph, causing atomic clocks to run 7 microseconds slower per day due to Special Relativity, yet weaker gravity makes them run 45 microseconds faster due to General Relativity! Without subtracting 38 microseconds daily, GPS navigation would drift by 6 miles every day!",
+      "tags": [
+        "gps",
+        "relativity",
+        "physics",
+        "satellites",
+        "science"
+      ],
+      "domain": "science",
+      "uploaded": false
+    },
+    {
+      "id": "fact069",
+      "number": 69,
+      "title": "Linux Powers 100% of the World's Top 500 Supercomputers",
+      "hook": "Which operating system runs the fastest computers on planet Earth?",
+      "script": "While Windows dominates desktop PCs, Linux runs every single one of the world's top 500 fastest supercomputers! Because Linux is open-source and modular, scientists can customize the operating system kernel for maximum mathematical throughput and multi-petabyte clusters!",
+      "tags": [
+        "linux",
+        "supercomputers",
+        "open source",
+        "operating systems"
+      ],
+      "domain": "software",
+      "uploaded": false
+    },
+    {
+      "id": "fact070",
+      "number": 70,
+      "title": "The Apollo 11 Computer Crash That Almost Aborted Landing",
+      "hook": "How did software save Neil Armstrong and Buzz Aldrin from doom?",
+      "script": "Three minutes before Apollo 11 landed on the Moon, a radar overload flooded the computer CPU with unexpected interrupts! Pioneering software engineer Margaret Hamilton designed priority scheduling, allowing the computer to drop non-critical tasks and focus purely on landing thrusters!",
+      "tags": [
+        "apollo 11",
+        "nasa",
+        "history",
+        "space",
+        "software"
+      ],
+      "domain": "history",
+      "uploaded": false
+    },
+    {
+      "id": "fact071",
+      "number": 71,
+      "title": "Why Git Uses Cryptographic Hash Trees (Merkle DAGs)",
+      "hook": "How does Git track millions of code changes with zero corruption?",
+      "script": "Git doesn't store file diffs—it creates a cryptographic SHA hash of your entire directory tree called a Merkle Directed Acyclic Graph! If even a single comma in a codebase changes, its hash changes completely, guaranteeing mathematical integrity across millions of developer branches!",
+      "tags": [
+        "git",
+        "version control",
+        "cryptography",
+        "coding",
+        "software"
+      ],
+      "domain": "coding",
+      "uploaded": false
+    },
+    {
+      "id": "fact072",
+      "number": 72,
+      "title": "Why Python Has the Infamous Global Interpreter Lock (GIL)",
+      "hook": "Why can't standard Python run real multithreading across CPU cores?",
+      "script": "Python uses reference counting for automatic memory management. To prevent two CPU threads from modifying memory counts simultaneously and causing memory corruption, Python introduced the GIL: a master lock ensuring only one thread executes Python bytecode at any given moment!",
+      "tags": [
+        "python",
+        "gil",
+        "multithreading",
+        "coding",
+        "cpu"
+      ],
+      "domain": "coding",
+      "uploaded": false
+    },
+    {
+      "id": "fact073",
+      "number": 73,
+      "title": "Why Sharks Bite Undersea Internet Cables",
+      "hook": "What is the biggest natural enemy of international high-speed internet?",
+      "script": "Deep beneath the ocean, sharks have been caught on camera biting undersea fiber optic cables! Sharks possess electroreceptors called Ampullae of Lorenzini, and they confuse the electromagnetic fields emitted by high-voltage cable power repeaters with struggling prey!",
+      "tags": [
+        "sharks",
+        "internet",
+        "cables",
+        "networking",
+        "wildlife"
+      ],
+      "domain": "network",
+      "uploaded": false
+    },
+    {
+      "id": "fact074",
+      "number": 74,
+      "title": "Why Unpowered SSDs Can Leak Data Over Time",
+      "hook": "Can a solid state drive lose all your photos if kept in a drawer?",
+      "script": "Unlike magnetic hard drives, SSDs store data by trapping electrons inside floating-gate transistor cells. Without electrical power, these trapped electrons gradually leak away over several years, especially in high heat! Never use SSDs as cold offline storage for decades without powering them on!",
+      "tags": [
+        "ssd",
+        "storage",
+        "hardware",
+        "data loss",
+        "electronics"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact075",
+      "number": 75,
+      "title": "The First Computer Mouse Was Carved Out of Wood",
+      "hook": "What was the very first computer mouse made out of in 1964?",
+      "script": "In 1964, Douglas Engelbart invented the world's first computer mouse using a carved wooden block, two perpendicular wheels, and a single red button on top! It was nicknamed the 'mouse' because the cord attached at the back looked like a rodent's tail!",
+      "tags": [
+        "mouse",
+        "peripherals",
+        "history",
+        "retro tech",
+        "hardware"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact076",
+      "number": 76,
+      "title": "Why Microwaves Disrupt Your Wi-Fi Signal",
+      "hook": "Why does your streaming video lag when someone pops popcorn?",
+      "script": "Both standard 2.4 Gigahertz Wi-Fi routers and kitchen microwave ovens operate on the exact same 2.45 Gigahertz radio frequency! If your microwave door has even minor electromagnetic shielding leakage, it overwhelms your Wi-Fi router with radio noise, dropping packets instantly!",
+      "tags": [
+        "wifi",
+        "networking",
+        "microwave",
+        "physics",
+        "hardware"
+      ],
+      "domain": "network",
+      "uploaded": false
+    },
+    {
+      "id": "fact077",
+      "number": 77,
+      "title": "13 Root Server IP Addresses Power the Global Web",
+      "hook": "How many computers control the backbone of the entire internet?",
+      "script": "At the top of the internet's Domain Name System are exactly 13 master root IP addresses, named A through M! Using Anycast routing, these 13 addresses are distributed across more than 1,000 physical server clusters worldwide to protect the internet against catastrophic denial-of-service attacks!",
+      "tags": [
+        "dns",
+        "root servers",
+        "internet",
+        "networking",
+        "security"
+      ],
+      "domain": "network",
+      "uploaded": false
+    },
+    {
+      "id": "fact078",
+      "number": 78,
+      "title": "Email Spam Was Named After a Monty Python Comedy Sketch",
+      "hook": "Why do we call annoying unsolicited emails 'Spam'?",
+      "script": "In a 1970 Monty Python comedy sketch, a cafe waitress insists that every single dish contains Spam canned meat, while a chorus of Vikings loudly repeats 'Spam! Spam! Spam!' drown out conversation. Early internet users adopted the term for unwanted repetitive junk mail that floods inboxes!",
+      "tags": [
+        "spam",
+        "email",
+        "history",
+        "internet culture",
+        "trivia"
+      ],
+      "domain": "software",
+      "uploaded": false
+    },
+    {
+      "id": "fact079",
+      "number": 79,
+      "title": "Zero-Knowledge Proofs: Verifying Passwords Without Sending Them",
+      "hook": "Can you prove you know a secret password without telling anyone what it is?",
+      "script": "Zero-Knowledge Proofs are an incredible mathematical breakthrough in cryptography. They allow a computer to mathematically prove that a statement is 100% true without revealing any underlying data, allowing password verification and private transactions with zero risk of leak!",
+      "tags": [
+        "cryptography",
+        "zero knowledge",
+        "security",
+        "math",
+        "cybersecurity"
+      ],
+      "domain": "security",
+      "uploaded": false
+    },
+    {
+      "id": "fact080",
+      "number": 80,
+      "title": "Microchip Transistors Are Smaller Than Human DNA",
+      "hook": "How tiny are modern smartphone processor transistors?",
+      "script": "A single strand of human DNA is approximately 2.5 nanometers wide. Modern 3-nanometer semiconductor chips cram tens of billions of silicon transistors onto a die smaller than a postage stamp, with gate dimensions approaching the atomic width of just a dozen silicon atoms!",
+      "tags": [
+        "semiconductors",
+        "transistor",
+        "nanotechnology",
+        "cpu",
+        "chips"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact081",
+      "number": 81,
+      "title": "High Frequency Traders Shoot Lasers Through the Air",
+      "hook": "Why don't Wall Street trading firms use underground fiber optic cables?",
+      "script": "Light travels 30% slower through glass fiber optic cables than through open air! To gain a 3-millisecond advantage in high-frequency trading, financial firms built networks of microwave laser towers between Chicago and New York, beating fiber cables to execute stock trades first!",
+      "tags": [
+        "finance",
+        "lasers",
+        "networking",
+        "speed",
+        "trading"
+      ],
+      "domain": "network",
+      "uploaded": false
+    },
+    {
+      "id": "fact082",
+      "number": 82,
+      "title": "Ancient Mechanical Clocks Gave Us CPU Clock Speeds",
+      "hook": "Why do computers measure speed in Gigahertz clock cycles?",
+      "script": "Just as mechanical clock pendulums tick to synchronize gear movements, computer processors use oscillating quartz crystals that vibrate billions of times per second. Each tick coordinates billions of logic gates across the chip, ensuring memory reads and ALU calculations never collide!",
+      "tags": [
+        "clock speed",
+        "cpu",
+        "ghz",
+        "hardware",
+        "physics"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact083",
+      "number": 83,
+      "title": "Dark Mode Only Saves Battery on OLED Screens",
+      "hook": "Does using dark mode actually save your smartphone battery?",
+      "script": "On traditional LCD screens, a continuous backlight shines behind the panel regardless of color, saving zero battery in dark mode. But on OLED and AMOLED screens, individual black pixels are completely powered off, saving up to 30% to 40% battery life throughout your day!",
+      "tags": [
+        "oled",
+        "dark mode",
+        "battery",
+        "display",
+        "smartphone"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact084",
+      "number": 84,
+      "title": "How Hard Drives Use Nobel Prize Quantum Physics",
+      "hook": "How do magnetic hard drives pack 20 Terabytes into a 3.5-inch case?",
+      "script": "Modern hard drive read heads utilize Giant Magnetoresistance, a quantum mechanical effect discovered in 1988 that won the 2007 Nobel Prize in Physics! Tiny magnetic fluctuations on spinning platters alter electrical resistance, allowing nanoscopic magnetic bits to be read at gigabit speeds!",
+      "tags": [
+        "storage",
+        "hdd",
+        "physics",
+        "quantum",
+        "hardware"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact085",
+      "number": 85,
+      "title": "QR Codes Still Work When 30% Damaged",
+      "hook": "Why do QR codes scan instantly even when scratched or torn?",
+      "script": "QR codes use Reed-Solomon algebraic error correction codes. When generated, mathematical parity data is woven into the matrix, allowing phone cameras to reconstruct missing or damaged data even if up to 30% of the QR code is smudged, torn, or covered by a custom logo!",
+      "tags": [
+        "qr code",
+        "algorithms",
+        "error correction",
+        "math",
+        "technology"
+      ],
+      "domain": "software",
+      "uploaded": false
+    },
+    {
+      "id": "fact086",
+      "number": 86,
+      "title": "Quantum Computers Are Colder Than Deep Outer Space",
+      "hook": "What is the coldest place in the known universe?",
+      "script": "Deep interstellar outer space sits at 2.7 Kelvin above absolute zero. But superconducting quantum computers inside dilution refrigerators are chilled with liquid helium to 15 milliKelvin—hundreds of times colder than deep space, preventing thermal vibration from collapsing qubit superpositions!",
+      "tags": [
+        "quantum",
+        "physics",
+        "supercomputer",
+        "science",
+        "hardware"
+      ],
+      "domain": "hardware",
+      "uploaded": false
+    },
+    {
+      "id": "fact087",
+      "number": 87,
+      "title": "Why Programmers Always Count From Zero",
+      "hook": "Why do arrays in computer science start at index 0 instead of 1?",
+      "script": "In computer memory, an array name points to the base memory address of the first item. The index represents the offset distance from that base address. The first element is located exactly zero memory offsets away from the start, making zero-based indexing mathematically optimal for CPUs!",
+      "tags": [
+        "coding",
+        "memory",
+        "arrays",
+        "programming",
+        "algorithms"
+      ],
+      "domain": "coding",
+      "uploaded": false
+    },
+    {
+      "id": "fact088",
+      "number": 88,
+      "title": "Google PageRank Was Named After Larry Page, Not Web Pages",
+      "hook": "What was Google's billion-dollar search algorithm named after?",
+      "script": "Everyone assumes Google's iconic PageRank algorithm was named after web pages. In reality, it was named directly after Google co-founder Larry Page, who developed the mathematical eigenvector ranking system during his Stanford PhD thesis in 1996!",
+      "tags": [
+        "google",
+        "algorithms",
+        "larry page",
+        "search",
+        "history"
+      ],
+      "domain": "software",
+      "uploaded": false
+    },
+    {
+      "id": "fact089",
+      "number": 89,
+      "title": "Unicode Has Over 150,000 Characters and Emojis",
+      "hook": "How does every device on Earth display text in every language?",
+      "script": "Before 1991, different operating systems used incompatible character encodings, causing text to turn into unreadable gibberish called Mojibake. Unicode solved this by assigning a unique universal numerical code point to over 150,000 characters, covering 161 modern and ancient scripts plus emojis!",
+      "tags": [
+        "unicode",
+        "utf8",
+        "coding",
+        "software",
+        "text"
+      ],
+      "domain": "software",
+      "uploaded": false
+    },
+    {
+      "id": "fact090",
+      "number": 90,
+      "title": "Modern AI Clusters Consume Cities Worth of Electricity",
+      "hook": "How much electrical power does training modern AI actually take?",
+      "script": "A single state-of-the-art AI data center cluster containing 100,000 modern AI accelerator chips consumes over 100 Megawatts of continuous electrical power—enough electricity to power a city of 80,000 homes! This has driven tech giants to invest billions into dedicated nuclear and geothermal energy plants!",
+      "tags": [
+        "ai",
+        "supercomputer",
+        "energy",
+        "datacenter",
+        "future tech"
+      ],
+      "domain": "ai",
+      "uploaded": false
     }
   ]
 }

@@ -6,6 +6,9 @@ import os
 import json
 from google_auth_oauthlib.flow import InstalledAppFlow
 
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
+
 SCOPES = [
     "https://www.googleapis.com/auth/youtube.upload",
     "https://www.googleapis.com/auth/youtube",
@@ -20,7 +23,7 @@ def main():
 
     flow = InstalledAppFlow.from_client_secrets_file(secrets_file, SCOPES)
     print("\n[+] Opening browser for YouTube Channel authorization...")
-    creds = flow.run_local_server(port=8080, prompt="consent", access_type="offline")
+    creds = flow.run_local_server(port=0, prompt="consent", access_type="offline")
 
     print("\n" + "=" * 60)
     print("  🎉 AUTHENTICATION SUCCESSFUL!")

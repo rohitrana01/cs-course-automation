@@ -148,7 +148,54 @@ def create_rich_frame(photo_path: str, badge_text: str, title: str, caption: str
 
     return combined.convert("RGB")
 
-def build_animated_shorts_video(audio_path: str, photo_files: list, badge_text: str, title: str, script: str, output_path: str):
+def split_sentence_subtitles(subtitles: list, max_duration: float = 4.2) -> list:
+    """
+    Splits long sentence subtitle boundaries into punchy, natural phrases (at commas/midpoints)
+    so captions remain dynamic and 100% synchronized with the speaker's pace.
+    """
+    refined = []
+    for sub in subtitles:
+        text = sub.get("text", "").strip()
+        dur = sub.get("duration", 0.0)
+        start = sub.get("start", 0.0)
+        end = sub.get("end", start + dur)
+        
+        if dur <= max_duration or len(text.split()) <= 6:
+            refined.append({"start": start, "end": end, "duration": dur, "text": text})
+            continue
+            
+        words = text.split(" ")
+        total_words = len(words)
+        split_pos = -1
+        best_diff = 999
+        
+        # Look for natural punctuation pause (comma, semicolon) near the midpoint
+        for i, w in enumerate(words):
+            for d in [",", ";"]:
+                if w.endswith(d) and 0.25 * total_words <= i <= 0.75 * total_words:
+                    diff = abs(i - (total_words / 2))
+                    if diff < best_diff:
+                        best_diff = diff
+                        split_pos = i + 1
+        
+        if split_pos != -1 and split_pos < total_words:
+            part1 = " ".join(words[:split_pos]).strip()
+            part2 = " ".join(words[split_pos:]).strip()
+        else:
+            mid = total_words // 2
+            part1 = " ".join(words[:mid]).strip()
+            part2 = " ".join(words[mid:]).strip()
+
+        w1 = max(1, len(part1.split()))
+        w2 = max(1, len(part2.split()))
+        dur1 = round(dur * (w1 / (w1 + w2)), 3)
+        dur2 = round(dur - dur1, 3)
+        refined.append({"start": start, "end": round(start + dur1, 3), "duration": dur1, "text": part1})
+        refined.append({"start": round(start + dur1, 3), "end": end, "duration": dur2, "text": part2})
+        
+    return refined
+
+def build_animated_shorts_video(audio_path: str, photo_files: list, badge_text: str, title: str, script: str, output_path: str, subtitles: list = None):
     import moviepy
     is_v2 = int(moviepy.__version__.split(".")[0]) >= 2
     
@@ -160,37 +207,67 @@ def build_animated_shorts_video(audio_path: str, photo_files: list, badge_text: 
     audio = AudioFileClip(audio_path)
     total_duration = audio.duration
     
-    # Split script into clean sentence phrases for captions
-    sentences = [s.strip() for s in script.replace("!", ".").replace("?", ".").split(".") if len(s.strip()) > 5]
-    if not sentences:
-        sentences = [script]
-    
-    # Rapid kinetic visual cuts (every 2.5 to 2.8 seconds max for high retention)
-    target_seg_dur = min(2.8, total_duration / max(1, len(sentences)))
-    num_segments = max(len(sentences), int(np.ceil(total_duration / target_seg_dur)))
-    seg_duration = total_duration / num_segments
-    
     from modules.safe_image_fetcher import fetch_safe_image_for_sentence
 
     clips = []
-    for i in range(num_segments):
-        caption = sentences[i % len(sentences)]
+    
+    # Check if exact speech subtitle timeline was provided
+    if subtitles and len(subtitles) > 0:
+        synced_segments = split_sentence_subtitles(subtitles, max_duration=4.2)
+        num_segments = len(synced_segments)
         
-        # If user passed custom vault photo files, use them in rotation
-        if photo_files and len(photo_files) > 0 and os.path.exists(photo_files[0]):
-            photo_path = photo_files[i % len(photo_files)]
-        else:
-            # Dynamically fetch 100% verified, matching safe image for this specific sentence
-            photo_path = fetch_safe_image_for_sentence(caption)
+        for i, seg in enumerate(synced_segments):
+            caption = seg["text"]
+            
+            # Start of this clip
+            curr_start = 0.0 if i == 0 else seg["start"]
+            # End of this clip matches start of next clip, or total_duration
+            if i + 1 < num_segments:
+                next_start = synced_segments[i + 1]["start"]
+                clip_dur = max(0.5, next_start - curr_start)
+            else:
+                clip_dur = max(0.5, total_duration - curr_start)
+            
+            # Rotate through photo assets
+            if photo_files and len(photo_files) > 0 and os.path.exists(photo_files[0]):
+                photo_path = photo_files[i % len(photo_files)]
+            else:
+                photo_path = fetch_safe_image_for_sentence(caption)
+                
+            frame_img = create_rich_frame(photo_path, badge_text, title, caption, progress=i / max(1, num_segments))
+            frame_np = np.array(frame_img)
+            
+            if is_v2:
+                clip = ImageClip(frame_np).with_duration(clip_dur)
+            else:
+                clip = ImageClip(frame_np).set_duration(clip_dur)
+            clips.append(clip)
+            
+    else:
+        # Fallback if no subtitle timestamps available
+        sentences = [s.strip() for s in script.replace("!", ".").replace("?", ".").split(".") if len(s.strip()) > 5]
+        if not sentences:
+            sentences = [script]
         
-        frame_img = create_rich_frame(photo_path, badge_text, title, caption, progress=i / num_segments)
-        frame_np = np.array(frame_img)
+        target_seg_dur = min(2.8, total_duration / max(1, len(sentences)))
+        num_segments = max(len(sentences), int(np.ceil(total_duration / target_seg_dur)))
+        seg_duration = total_duration / num_segments
         
-        if is_v2:
-            clip = ImageClip(frame_np).with_duration(seg_duration)
-        else:
-            clip = ImageClip(frame_np).set_duration(seg_duration)
-        clips.append(clip)
+        for i in range(num_segments):
+            caption = sentences[i % len(sentences)]
+            if photo_files and len(photo_files) > 0 and os.path.exists(photo_files[0]):
+                photo_path = photo_files[i % len(photo_files)]
+            else:
+                photo_path = fetch_safe_image_for_sentence(caption)
+            
+            frame_img = create_rich_frame(photo_path, badge_text, title, caption, progress=i / num_segments)
+            frame_np = np.array(frame_img)
+            
+            if is_v2:
+                clip = ImageClip(frame_np).with_duration(seg_duration)
+            else:
+                clip = ImageClip(frame_np).set_duration(seg_duration)
+            clips.append(clip)
         
     final_video = concatenate_videoclips(clips, method="compose")
     

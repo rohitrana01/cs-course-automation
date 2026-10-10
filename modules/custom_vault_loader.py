@@ -91,10 +91,39 @@ def find_custom_vault_images(item_id: str, item_day: int = None, item_type: str 
 
     return unique_paths
 
+def get_topic_curated_photos(text: str) -> list:
+    """
+    Returns a sequence of 3-4 high-quality 1080x1920 authentic photos matching the topic.
+    """
+    txt = text.lower()
+    if any(k in txt for k in ["ai", "neural", "deep learning", "machine learning", "model", "intelligence", "gpt"]):
+        photos = ["cs_photo_ai_neural_1080p.jpg", "cs_photo_supercomputer_1080p.jpg", "cs_photo_developer_1080p.jpg", "cs_photo_code_1080p.jpg"]
+    elif any(k in txt for k in ["code", "program", "python", "software", "function", "variable", "loop", "syntax", "dictionary", "list", "array", "stack", "queue", "tree", "graph", "hash", "algorithm"]):
+        photos = ["cs_photo_developer_1080p.jpg", "cs_photo_code_1080p.jpg", "cs_photo_ai_neural_1080p.jpg", "cs_photo_supercomputer_1080p.jpg"]
+    elif any(k in txt for k in ["server", "datacenter", "supercomputer", "cloud", "speed", "cluster", "hpc"]):
+        photos = ["cs_photo_supercomputer_1080p.jpg", "cs_photo_datacenter_servers_1080p.jpg", "cs_photo_network_1080p.jpg", "cs_photo_1_1080p.jpg"]
+    elif any(k in txt for k in ["ram", "memory", "ssd", "storage", "drive", "nvme", "ddr", "byte", "kilobyte", "1024"]):
+        photos = ["cs_photo_ram_ssd_1080p.jpg", "cs_photo_1_1080p.jpg", "cs_photo_2_1080p.jpg", "cs_photo_supercomputer_1080p.jpg"]
+    elif any(k in txt for k in ["security", "cyber", "hack", "encrypt", "password", "virus"]):
+        photos = ["cs_photo_cyber_security_1080p.jpg", "cs_photo_developer_1080p.jpg", "cs_photo_code_1080p.jpg", "cs_photo_supercomputer_1080p.jpg"]
+    elif any(k in txt for k in ["network", "internet", "web", "wifi", "cable", "protocol", "dns", "http"]):
+        photos = ["cs_photo_network_1080p.jpg", "cs_photo_datacenter_servers_1080p.jpg", "cs_photo_3_1080p.jpg", "cs_photo_developer_1080p.jpg"]
+    elif any(k in txt for k in ["history", "vintage", "eniac", "vacuum", "babbage", "turing", "1940"]):
+        photos = ["cs_photo_eniac_history_1080p.jpg", "cs_photo_1_1080p.jpg", "cs_photo_2_1080p.jpg", "cs_photo_supercomputer_1080p.jpg"]
+    else:
+        photos = ["cs_photo_developer_1080p.jpg", "cs_photo_ai_neural_1080p.jpg", "cs_photo_supercomputer_1080p.jpg", "cs_photo_code_1080p.jpg"]
+
+    res = []
+    for p in photos:
+        full = os.path.join(PHOTOS_DIR, p)
+        if os.path.exists(full):
+            res.append(full)
+    return res
+
 def get_images_for_short(item: dict, item_type: str = "course", count: int = 3) -> list:
     """
     Returns a list of image paths for the short.
-    Prioritizes user's custom vault images, then fallback safe assets.
+    Prioritizes user's custom vault images, then topic-curated authentic photo sequences.
     """
     day_num = item.get("day") or item.get("number")
     item_id = item.get("id")
@@ -104,8 +133,8 @@ def get_images_for_short(item: dict, item_type: str = "course", count: int = 3) 
         print(f"  [+] Found {len(custom_imgs)} custom vault image(s) for {item_id or day_num}")
         return custom_imgs
 
-    # Fallback to curated base assets
-    from modules.safe_image_fetcher import get_curated_fallback_photo
+    # Return topic-curated authentic photo sequence
     title = item.get("title", "")
-    base_photo = get_curated_fallback_photo(title)
-    return [base_photo] if base_photo else []
+    hook = item.get("hook", "")
+    script = item.get("script", "")
+    return get_topic_curated_photos(f"{title} {hook} {script}")

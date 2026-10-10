@@ -97,13 +97,27 @@ def mark_item_uploaded(item, item_type="course", video_id="uploaded"):
                 break
         save_json(FACTS_PATH, facts_data)
 
-async def _gen_tts(text: str, voice: str, out_path: str):
+async def _gen_tts_with_subtitles(text: str, voice: str, out_path: str):
     comm = edge_tts.Communicate(text, voice)
-    await comm.save(out_path)
+    subtitles = []
+    with open(out_path, "wb") as f_out:
+        async for chunk in comm.stream():
+            if chunk["type"] == "audio":
+                f_out.write(chunk["data"])
+            elif chunk["type"] == "SentenceBoundary":
+                start_s = chunk["offset"] / 10_000_000.0
+                dur_s = chunk["duration"] / 10_000_000.0
+                subtitles.append({
+                    "start": round(start_s, 3),
+                    "end": round(start_s + dur_s, 3),
+                    "duration": round(dur_s, 3),
+                    "text": chunk["text"].strip()
+                })
+    return subtitles
 
 def generate_narration_audio(text: str, voice: str, out_path: str):
-    asyncio.run(_gen_tts(text, voice, out_path))
-    return out_path
+    subtitles = asyncio.run(_gen_tts_with_subtitles(text, voice, out_path))
+    return out_path, subtitles
 
 def render_shorts_video(audio_path: str, thumbnail_path: str, output_video_path: str):
     import moviepy
@@ -142,7 +156,27 @@ VIRAL_COURSE_LESSONS = {
     27: "Never let your software crash in production! Python's try and except blocks catch runtime errors before they terminate your application. Catch specific exceptions like KeyError and ValueError instead of bare except to prevent masking hidden bugs! Follow for Day 28!",
     28: "How do real software engineers model complex real-world systems in code? With Classes! A class is the architectural blueprint, and an object is the living instance created in memory. Classes bundle data and behavior together to power modern software! Follow for Day 29!",
     29: "Don't repeat yourself! In Python, inheritance allows a child class to inherit every method and property from a parent class, while polymorphism lets different classes respond to the same method call in unique ways! Master this to write scalable code! Follow for Day 30!",
-    30: "Turn 5 lines of messy Python loops into 1 elegant line of code! List comprehensions are not just syntactic sugar—they run in optimized C bytecode under the hood, executing up to 30% faster than standard for loops! Follow for Day 31!"
+    30: "Turn 5 lines of messy Python loops into 1 elegant line of code! List comprehensions are not just syntactic sugar—they run in optimized C bytecode under the hood, executing up to 30% faster than standard for loops! Follow for Day 31!",
+    31: "How does your computer find a password among 100 million accounts in 1 millisecond? With a Hash Function! A hash function takes any input and calculates a deterministic mathematical index into memory. This gives hash tables O(1) instantaneous lookup time, powering databases, caches, and search engines worldwide! Follow for Day 32!",
+    32: "Why do software engineers organize data hierarchically instead of flat lists? Because Trees mirror reality! A binary tree connects a root node to at most two child nodes—left and right. This structure forms the foundation of file systems, DOM elements in web browsers, and AI decision trees! Follow for Day 33!",
+    33: "A Binary Search Tree is one of the most elegant structures ever invented. Every item smaller than the node goes left, and every item larger goes right! This simple rule cuts your search space in half with every single step, turning an impossible 1-billion-item search into just 30 comparisons! Follow for Day 34!",
+    34: "What is the secret flaw of standard binary search trees? If you insert sorted data, the tree degrades into a slow, linear linked list! AVL trees solve this with auto-rotations: whenever branches become unbalanced by more than one level, the tree instantly rotates itself to maintain lightning-fast O(log N) speed! Follow for Day 35!",
+    35: "How does your operating system decide which app gets CPU time first? Using a Priority Queue built on a Binary Heap! A Min-Heap or Max-Heap guarantees the highest-priority task is always sitting right at the top in O(1) instantaneous access! Follow for Day 36!",
+    36: "From Google Maps to social networks, Graphs represent the real world! A graph consists of vertices connected by edges. Whether finding flight routes, mapping friendships, or routing internet packets across continents, graph theory powers the modern interconnected internet! Follow for Day 37!",
+    37: "How do computers store graph networks in memory? You have two choices: an Adjacency Matrix or an Adjacency List. Matrices provide instant edge lookup but waste massive RAM on sparse networks, while lists save memory by only storing connections that actually exist! Follow for Day 38!",
+    38: "Ever wonder how Google autocompletes your search before you finish typing? That is a Trie! Instead of searching every word in the dictionary, a Trie organizes characters into a tree where common prefixes share the same branch, returning search recommendations in microseconds! Follow for Day 39!",
+    39: "Why should you never use standard Python lists for FIFO queues? Because popping from the beginning forces Python to shift every remaining item in memory! A Deque or Circular Buffer wraps pointers around in a ring, making insertions and deletions at both ends instantaneous O(1) operations! Follow for Day 40!",
+    40: "Choosing the wrong data structure will destroy your application's performance! Need random access by index? Use an Array. Need instant key lookup? Use a Hash Map. Need strict ordering and hierarchy? Use a Tree. Mastering data structure trade-offs is the number one superpower of top software engineers! Follow for Day 41!",
+    41: "What is an algorithm really? It's not magic—it's a finite, step-by-step recipe to solve a specific problem. A great algorithm doesn't just work—it minimizes CPU instructions and RAM usage. The difference between a bad algorithm and a great algorithm is the difference between a program taking 1 second or 300 years to finish! Follow for Day 42!",
+    42: "Big O Notation measures how your algorithm's runtime scales as your data grows to infinity! O(1) is instant, O(N) grows linearly, and O(N squared) will crash your server when traffic spikes! Always calculate your Big O before shipping code to production! Follow for Day 43!",
+    43: "Linear search is the simplest search algorithm: check element zero, then element one, until you find your target. It works on unsorted data, but takes O(N) time. If you have 10 million items, you might have to check all 10 million! That's why we need faster search algorithms! Follow for Day 44!",
+    44: "Binary search is algorithmic cheat code! By sorting your data first, you check the middle element and discard half the entire list with every single question. You can search through all 8 billion people on Earth in just 33 steps! Follow for Day 45!",
+    45: "Bubble sort works by repeatedly swapping adjacent items until the largest elements bubble up to the top of the array. While easy to understand, its O(N squared) time complexity makes it one of the slowest sorting algorithms in computer science history! Follow for Day 46!",
+    46: "Selection sort scans the entire array, selects the absolute smallest item, and places it at the front, repeating until sorted. While it minimizes the total number of memory swaps, it still checks every pair, remaining stuck at slow O(N squared) speed! Follow for Day 47!",
+    47: "Insertion sort mimics how you sort playing cards in your hand: taking one card at a time and inserting it into its correct position among the sorted cards! For small or nearly-sorted datasets, insertion sort is shockingly fast and beats complex algorithms! Follow for Day 48!",
+    48: "Merge sort is the master of Divide and Conquer! It recursively splits your array down to single elements, then merges them back together in sorted order. With a guaranteed O(N log N) runtime in best, average, and worst cases, it powers production sorting worldwide! Follow for Day 49!",
+    49: "QuickSort selects a pivot element and partitions the array into items smaller and larger than the pivot. In practice, QuickSort is often faster than MergeSort because its memory access patterns leverage CPU cache lines with zero extra RAM allocation! Follow for Day 50!",
+    50: "Heap sort transforms an unsorted array into a binary max-heap, then repeatedly extracts the maximum root element to the end of the array. It combines the guaranteed O(N log N) speed of Merge Sort with the zero-extra-memory advantage of QuickSort! Follow for Day 51!"
 }
 
 VIRAL_TITLES = {
@@ -163,7 +197,27 @@ VIRAL_TITLES = {
     27: "Never Let Python Crash In Production Again! 🛡️ (Day 27) #Shorts #Python",
     28: "How OOP & Classes WORK in Python Explained In 30s 💡 (Day 28) #Shorts",
     29: "Inheritance vs Polymorphism Explained Simply 🧠 (Day 29) #Shorts #Coding",
-    30: "Turn 5 Lines of Python Into 1 Line! ⚡ (Day 30) #Shorts #Python"
+    30: "Turn 5 Lines of Python Into 1 Line! ⚡ (Day 30) #Shorts #Python",
+    31: "How Databases Search Passwords in 1 Millisecond! ⚡ (Day 31) #Shorts #Coding",
+    32: "Why Trees Rule Computer Science 🌳 (Day 32) #Shorts #Programming",
+    33: "Search 1 BILLION Items in 30 Steps! 🤯 (Day 33) #Shorts #Algorithms",
+    34: "The Self-Balancing Tree Senior Devs Love ⚖️ (Day 34) #Shorts #Coding",
+    35: "How Operating Systems Prioritize Your Tasks ⚡ (Day 35) #Shorts #ComputerScience",
+    36: "How Google Maps ACTUALLY Finds Shortest Routes 🗺️ (Day 36) #Shorts #Tech",
+    37: "Stop Wasting RAM With The Wrong Graph Structure! 🧠 (Day 37) #Shorts #Coding",
+    38: "How Google Autocomplete Works Under The Hood 🔍 (Day 38) #Shorts #Tech",
+    39: "Stop Popping Python Lists Like This! ⚠️ (Day 39) #Shorts #Python #Coding",
+    40: "The Data Structure Cheat Sheet You NEED 💡 (Day 40) #Shorts #Coding",
+    41: "What is an Algorithm? (Explained in 30s) ⚡ (Day 41) #Shorts #Coding",
+    42: "Big O Notation: The ONLY Guide You Need 📈 (Day 42) #Shorts #Algorithms",
+    43: "Why Linear Search Fails at Scale ❌ (Day 43) #Shorts #Coding",
+    44: "Find Anyone on Earth in 33 Steps! 🤯 (Day 44) #Shorts #Algorithms",
+    45: "Why Nobody Uses Bubble Sort in Production 🧼 (Day 45) #Shorts #Coding",
+    46: "How Selection Sort Works in Memory 🔢 (Day 46) #Shorts #ComputerScience",
+    47: "The Playing Card Sorting Algorithm 🃏 (Day 47) #Shorts #Algorithms",
+    48: "Divide and Conquer: How Merge Sort Wins ⚔️ (Day 48) #Shorts #Coding",
+    49: "Why QuickSort is the King of Sorting 👑 (Day 49) #Shorts #Algorithms",
+    50: "Heap Sort: The Best of Both Worlds 🚀 (Day 50) #Shorts #ComputerScience"
 }
 
 def get_course_script(day: int, title: str, module: str, tags: list) -> str:
@@ -198,7 +252,7 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
         title = item.get("title", "Computer Science")
         module = item.get("module", "Computer Science")
         tags = ["Shorts", "Python", "Coding", "Programming", "ComputerScience", "LearnToCode", "Tech", "Developer"]
-        voice = "en-US-AvaNeural"
+        voice = "en-US-JennyNeural"
         badge = f"DAY {day} • 100 DAYS CS"
         video_title = generate_viral_title(day, title, "course")
         script = get_course_script(day, title, module, tags)
@@ -212,7 +266,7 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
         num = item.get("number", 1)
         title = item.get("title", "Tech Fun Fact")
         tags = ["Shorts", "TechFacts", "Technology", "Trivia", "DidYouKnow", "Science", "Tech"]
-        voice = "en-US-ChristopherNeural"
+        voice = "en-US-AriaNeural"
         badge = f"TECH FACT #{num} 💡"
         video_title = generate_viral_title(num, title, "fact")
         raw_script = item.get("script", title)
@@ -230,10 +284,10 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
     print(f"  🗣️ Voice: {voice}")
     print(f"=" * 60)
 
-    # 1. Generate Voiceover Audio
+    # 1. Generate Voiceover Audio with Exact Subtitle Synchronization
     audio_path = os.path.join(item_dir, "narration.mp3")
-    print(f"  [1/4] Generating Neural Voiceover...")
-    generate_narration_audio(script, voice, audio_path)
+    print(f"  [1/4] Generating Neural Voiceover & Subtitle Timeline...")
+    audio_path, subtitles = generate_narration_audio(script, voice, audio_path)
 
     # 2. Select Topic-Matched Images (Custom Vault Images -> Safe Stock -> Curated Fallback)
     from modules.custom_vault_loader import get_images_for_short
@@ -251,16 +305,17 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
         output_path=thumb_path
     )
 
-    # 4. Render 9:16 Multi-Photo Animated Video
+    # 4. Render 9:16 Multi-Photo Animated Video with Subtitles Synchronized to Speech
     video_path = os.path.join(item_dir, "final_short.mp4")
-    print(f"  [3/4] Rendering 9:16 Animated Multi-Photo Video...")
+    print(f"  [3/4] Rendering 9:16 Animated Multi-Photo Video (Synchronized Captions)...")
     build_animated_shorts_video(
         audio_path=audio_path,
         photo_files=chosen_photos,
         badge_text=badge,
         title=title,
         script=script,
-        output_path=video_path
+        output_path=video_path,
+        subtitles=subtitles
     )
 
     # 5. Upload to YouTube

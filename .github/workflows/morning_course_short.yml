@@ -1,0 +1,57 @@
+name: Morning CS Course Short (08:30 AM IST)
+
+on:
+  schedule:
+    # 03:00 UTC = 08:30 AM IST
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  generate-and-upload:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install System Dependencies (FFmpeg & TrueType Fonts)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-dejavu-core fonts-liberation
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Morning CS Course Pipeline & Upload to YouTube
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          CHANNEL_NAME: ${{ secrets.CHANNEL_NAME || 'LearnCS Daily' }}
+          VIDEO_PRIVACY: ${{ vars.VIDEO_PRIVACY || 'public' }}
+        run: |
+          python daily_scheduler.py --slot morning
+
+      - name: Commit Progress Updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action Bot"
+          git add curriculum.json tech_facts.json
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto-update CS course daily shorts status [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          else
+            echo "Nothing to commit"
+          fi
