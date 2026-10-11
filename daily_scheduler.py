@@ -282,6 +282,18 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
     print(f"  🎬 PRODUCING {slot.upper()} SHORT [{item_type.upper()}]")
     print(f"  📌 Title: {video_title}")
     print(f"  🗣️ Voice: {voice}")
+
+    # YouTube Agent Skill: Hook & Packaging Audit
+    try:
+        from modules.youtube_agent_linter import evaluate_hook, lint_packaging
+        first_clause = script.split(".")[0].split("!")[0]
+        hook_audit = evaluate_hook(first_clause)
+        pkg_audit = lint_packaging(video_title, badge)
+        print(f"  🎯 Hook Score: {hook_audit['verdict']}/100 [{hook_audit['band']}] (Formula: {hook_audit['formula']})")
+        print(f"  📦 Package Score: {pkg_audit['score']}/100 ({pkg_audit['chars']} chars)")
+    except Exception as e:
+        print(f"  [i] YouTube Agent Skill audit: {e}")
+
     print(f"=" * 60)
 
     # 1. Generate Voiceover Audio with Exact Subtitle Synchronization
