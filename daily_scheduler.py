@@ -98,22 +98,58 @@ def mark_item_uploaded(item, item_type="course", video_id="uploaded"):
         save_json(FACTS_PATH, facts_data)
 
 async def _gen_tts_with_subtitles(text: str, voice: str, out_path: str):
-    comm = edge_tts.Communicate(text, voice)
-    subtitles = []
-    with open(out_path, "wb") as f_out:
-        async for chunk in comm.stream():
-            if chunk["type"] == "audio":
-                f_out.write(chunk["data"])
-            elif chunk["type"] == "SentenceBoundary":
-                start_s = chunk["offset"] / 10_000_000.0
-                dur_s = chunk["duration"] / 10_000_000.0
-                subtitles.append({
-                    "start": round(start_s, 3),
-                    "end": round(start_s + dur_s, 3),
-                    "duration": round(dur_s, 3),
-                    "text": chunk["text"].strip()
-                })
-    return subtitles
+    # Rotating list of high-quality female voices for retry resilience
+    fallback_voices = [
+        voice,
+        "en-US-JennyNeural" if voice != "en-US-JennyNeural" else "en-US-AriaNeural",
+        "en-US-AvaNeural",
+        "en-US-EmmaNeural"
+    ]
+    
+    last_error = None
+    for attempt, v in enumerate(fallback_voices, start=1):
+        try:
+            print(f"  [TTS] Attempt {attempt}/{len(fallback_voices)}: Requesting voice '{v}'...")
+            comm = edge_tts.Communicate(text, v)
+            subtitles = []
+            with open(out_path, "wb") as f_out:
+                async for chunk in comm.stream():
+                    if chunk["type"] == "audio":
+                        f_out.write(chunk["data"])
+                    elif chunk["type"] == "SentenceBoundary":
+                        start_s = chunk["offset"] / 10_000_000.0
+                        dur_s = chunk["duration"] / 10_000_000.0
+                        subtitles.append({
+                            "start": round(start_s, 3),
+                            "end": round(start_s + dur_s, 3),
+                            "duration": round(dur_s, 3),
+                            "text": chunk["text"].strip()
+                        })
+            
+            if os.path.exists(out_path) and os.path.getsize(out_path) > 1024:
+                print(f"  [TTS] Success with '{v}' ({len(subtitles)} sentence boundaries)")
+                return subtitles
+            else:
+                raise ValueError("Generated audio file is missing or zero bytes.")
+        except Exception as e:
+            last_error = e
+            print(f"  [!] Edge-TTS attempt {attempt} failed ({v}): {e}")
+            if attempt < len(fallback_voices):
+                wait_s = attempt * 3
+                print(f"  [*] Waiting {wait_s}s before next attempt...")
+                await asyncio.sleep(wait_s)
+
+    # Bulletproof emergency fallback to gTTS (never blocks cloud runner IPs)
+    print(f"  [!] Edge-TTS exhausted ({last_error}). Triggering gTTS fallback...")
+    try:
+        from gtts import gTTS
+        tts = gTTS(text=text, lang="en", tld="com")
+        tts.save(out_path)
+        print("  [TTS] Emergency gTTS voiceover generated successfully!")
+        return None
+    except Exception as ge:
+        print(f"  [!] gTTS fallback also failed: {ge}")
+        raise last_error
 
 def generate_narration_audio(text: str, voice: str, out_path: str):
     subtitles = asyncio.run(_gen_tts_with_subtitles(text, voice, out_path))
