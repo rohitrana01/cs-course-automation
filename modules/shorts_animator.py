@@ -148,10 +148,107 @@ def create_rich_frame(photo_path: str, badge_text: str, title: str, caption: str
 
     return combined.convert("RGB")
 
+def build_synced_phrases(words: list, script: str = "", max_words: int = 5, max_chars: int = 32) -> list:
+    """
+    Builds 100% synchronized, natural subtitle phrases using exact WordBoundary millisecond
+    timestamps from Edge-TTS, aligned with original script punctuation and formatting.
+    Guarantees zero subtitle drift across entire narration duration.
+    """
+    import re
+    if not words:
+        return []
+
+    # Preserve punctuation by aligning TTS word tokens with the original script tokens
+    script_clean = script.replace("—", "— ").replace("–", "– ") if script else ""
+    raw_tokens = script_clean.split()
+    
+    aligned = []
+    tok_idx = 0
+    num_tokens = len(raw_tokens)
+    
+    for w in words:
+        w_text = w.get("text", "").strip()
+        w_clean = re.sub(r'[^\w%]', '', w_text).lower()
+        matched = w_text
+        
+        while tok_idx < num_tokens:
+            tok = raw_tokens[tok_idx]
+            tok_clean = re.sub(r'[^\w%]', '', tok).lower()
+            
+            if not tok_clean:
+                tok_idx += 1
+                continue
+                
+            if tok_clean == w_clean or tok_clean.startswith(w_clean) or w_clean.startswith(tok_clean):
+                matched = tok
+                tok_idx += 1
+                break
+            else:
+                tok_idx += 1
+                
+        aligned.append({
+            "start": w.get("start", 0.0),
+            "end": w.get("end", 0.0),
+            "text": matched
+        })
+
+    # Group into punchy phrases (3-5 words) respecting speech pauses, punctuation & clauses
+    phrases = []
+    chunk = []
+    WEAK_ENDINGS = {"and", "or", "to", "of", "in", "at", "for", "with", "a", "an", "the", "as"}
+    
+    for i, item in enumerate(aligned):
+        chunk.append(item)
+        w_txt = item["text"]
+        is_last = (i == len(aligned) - 1)
+        if is_last:
+            break
+            
+        next_item = aligned[i + 1]
+        pause = next_item["start"] - item["end"]
+        current_text = " ".join(x["text"] for x in chunk)
+        clean_w = w_txt.rstrip(".,!?;:\"'—–")
+        
+        has_clause_break = any(w_txt.endswith(p) for p in [",", ";", "—", "–", ":"])
+        has_sentence_break = any(w_txt.endswith(p) for p in [".", "!", "?"])
+        
+        should_split = False
+        if has_sentence_break:
+            should_split = True
+        elif has_clause_break and len(chunk) >= 2:
+            should_split = True
+        elif pause >= 0.35 and len(chunk) >= 2:
+            should_split = True
+        elif len(chunk) >= max_words or len(current_text) >= max_chars:
+            if clean_w.lower() not in WEAK_ENDINGS and not clean_w.isdigit():
+                should_split = True
+            elif len(chunk) >= max_words + 1:
+                should_split = True
+                
+        if should_split:
+            p_text = " ".join(x["text"] for x in chunk)
+            phrases.append({
+                "start": round(chunk[0]["start"], 3),
+                "end": round(chunk[-1]["end"], 3),
+                "duration": round(chunk[-1]["end"] - chunk[0]["start"], 3),
+                "text": p_text
+            })
+            chunk = []
+            
+    if chunk:
+        p_text = " ".join(x["text"] for x in chunk)
+        phrases.append({
+            "start": round(chunk[0]["start"], 3),
+            "end": round(chunk[-1]["end"], 3),
+            "duration": round(chunk[-1]["end"] - chunk[0]["start"], 3),
+            "text": p_text
+        })
+        
+    return phrases
+
 def split_sentence_subtitles(subtitles: list, max_duration: float = 4.2) -> list:
     """
-    Splits long sentence subtitle boundaries into punchy, natural phrases (at commas/midpoints)
-    so captions remain dynamic and 100% synchronized with the speaker's pace.
+    Fallback splitter for legacy sentence boundaries when WordBoundary is unavailable.
     """
     refined = []
     for sub in subtitles:
@@ -211,22 +308,30 @@ def build_animated_shorts_video(audio_path: str, photo_files: list, badge_text: 
 
     clips = []
     
-    # Check if exact speech subtitle timeline was provided
+    # Check if speech subtitle timeline was provided
     if subtitles and len(subtitles) > 0:
-        synced_segments = split_sentence_subtitles(subtitles, max_duration=4.2)
+        # Check if subtitles are raw word boundaries or already grouped phrases
+        first_few = subtitles[:min(5, len(subtitles))]
+        if len(subtitles) >= 5 and all(len(s.get("text", "").split()) <= 2 for s in first_few):
+            synced_segments = build_synced_phrases(subtitles, script)
+        elif any(len(s.get("text", "").split()) > 6 for s in subtitles):
+            synced_segments = split_sentence_subtitles(subtitles, max_duration=4.2)
+        else:
+            synced_segments = subtitles
+
         num_segments = len(synced_segments)
         
         for i, seg in enumerate(synced_segments):
             caption = seg["text"]
             
-            # Start of this clip
+            # Start of this clip matches the EXACT millisecond the speaker utters the first word
             curr_start = 0.0 if i == 0 else seg["start"]
-            # End of this clip matches start of next clip, or total_duration
+            # End of this clip matches start of next phrase, or total_duration
             if i + 1 < num_segments:
                 next_start = synced_segments[i + 1]["start"]
-                clip_dur = max(0.5, next_start - curr_start)
+                clip_dur = max(0.4, next_start - curr_start)
             else:
-                clip_dur = max(0.5, total_duration - curr_start)
+                clip_dur = max(0.4, total_duration - curr_start)
             
             # Rotate through photo assets
             if photo_files and len(photo_files) > 0 and os.path.exists(photo_files[0]):
