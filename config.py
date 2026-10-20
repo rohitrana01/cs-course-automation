@@ -27,13 +27,16 @@ CHANNEL_NAME  = os.getenv("CHANNEL_NAME") or "LearnCS Daily"
 TTS_VOICE     = os.getenv("TTS_VOICE") or "en-US-AriaNeural"
 VIDEO_PRIVACY = os.getenv("VIDEO_PRIVACY") or "public"
 
+# Visual Theme & Mascot Style ("deepbeepmeep" or "classic")
+STYLE = os.getenv("STYLE", "deepbeepmeep").lower()
+
 # Niche & Art Style Configurations (Strictly G-Rated & Child-Friendly)
 NICHE                 = os.getenv("NICHE", "Computer Science")
-CHARACTER_DESCRIPTION = os.getenv("CHARACTER_DESCRIPTION", "A friendly cute cartoon teacher mascot wearing glasses and a blue sweater, wholesome 3rd-grade educational style, clean vector art")
-VISUAL_STYLE          = os.getenv("VISUAL_STYLE", "cute child-friendly educational cartoon, G-rated, wholesome, bright pastel colors, clean vector illustration, safe for work, SFW")
+CHARACTER_DESCRIPTION = os.getenv("CHARACTER_DESCRIPTION", "A cute friendly 3D Pixar-style orange tech mascot wearing headphones at a futuristic workstation")
+VISUAL_STYLE          = os.getenv("VISUAL_STYLE", "3D CGI animation, Pixar Disney aesthetic, Octane render, volumetric studio lighting, neon cyber glow")
 
 # Safety & Image Provider Settings
-IMAGE_PROVIDER        = os.getenv("IMAGE_PROVIDER", "online").lower()  # "online" (Pollinations AI) or "local" (Procedural Pillow)
+IMAGE_PROVIDER        = os.getenv("IMAGE_PROVIDER", "local").lower()  # "local" (Curated 3D Mascot Assets) or "online"
 SAFE_MODE             = os.getenv("SAFE_MODE", "true").lower() in ("true", "1", "yes")
 
 # Audio & Background Music Configurations

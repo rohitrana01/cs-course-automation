@@ -45,7 +45,7 @@ def load_custom_font(size: int, bold: bool = True):
     except Exception:
         return ImageFont.load_default(size=size) if hasattr(ImageFont, "load_default") and "size" in ImageFont.load_default.__code__.co_varnames else ImageFont.load_default()
 
-def create_rich_frame(photo_path: str, badge_text: str, title: str, caption: str, progress: float = 0.0) -> Image.Image:
+def create_rich_frame(photo_path: str, badge_text: str, title: str, caption: str, progress: float = 0.0, theme: str = "deepbeepmeep") -> Image.Image:
     width, height = 1080, 1920
     
     if photo_path and os.path.exists(photo_path):
@@ -78,18 +78,33 @@ def create_rich_frame(photo_path: str, badge_text: str, title: str, caption: str
     combined = Image.alpha_composite(bg, overlay)
     draw = ImageDraw.Draw(combined)
 
+    # In DeepBeepMeep theme, render kinetic cyber progress bar at the top
+    if theme == "deepbeepmeep":
+        bar_w = int(width * progress)
+        if bar_w > 0:
+            draw.rectangle([0, 0, bar_w, 14], fill=(56, 189, 248, 255))
+
     # Load bold fonts using bundled TTF assets with cross-platform fallbacks
     badge_font   = load_custom_font(size=38, bold=True)
     title_font   = load_custom_font(size=54, bold=True)
     caption_font = load_custom_font(size=42, bold=True)
 
-    # 1. Top Pill Badge (Compact & Clean)
-    is_course = "DAY" in badge_text.upper()
-    badge_bg = (37, 99, 235, 255) if is_course else (245, 158, 11, 255)
-    badge_w = len(badge_text) * 24 + 60
+    # 1. Top Pill Badge (DeepBeepMeep Cyber Glow vs Classic)
+    clean_badge = "".join(c for c in badge_text if ord(c) < 128 or c in "•—–-").strip()
+    is_course = "DAY" in clean_badge.upper()
+    text_w = draw.textlength(clean_badge, font=badge_font)
+    badge_w = int(text_w + 60)
     badge_x = (width - badge_w) // 2
-    draw.rounded_rectangle([badge_x, 130, badge_x + badge_w, 210], radius=22, fill=badge_bg)
-    draw.text((badge_x + 30, 148), badge_text, fill=(255, 255, 255), font=badge_font)
+    if theme == "deepbeepmeep":
+        badge_border = (56, 189, 248, 240) if is_course else (250, 204, 21, 240)
+        badge_bg = (15, 23, 42, 235)
+        badge_text_color = (56, 189, 248) if is_course else (250, 204, 21)
+        draw.rounded_rectangle([badge_x, 130, badge_x + badge_w, 210], radius=24, fill=badge_bg, outline=badge_border, width=3)
+        draw.text((badge_x + 30, 148), clean_badge, fill=badge_text_color, font=badge_font)
+    else:
+        badge_bg = (37, 99, 235, 255) if is_course else (245, 158, 11, 255)
+        draw.rounded_rectangle([badge_x, 130, badge_x + badge_w, 210], radius=22, fill=badge_bg)
+        draw.text((badge_x + 30, 148), clean_badge, fill=(255, 255, 255), font=badge_font)
 
     # 2. Main Title (54px Bold)
     wrapped_title = textwrap.fill(title, width=22)
@@ -292,7 +307,7 @@ def split_sentence_subtitles(subtitles: list, max_duration: float = 4.2) -> list
         
     return refined
 
-def build_animated_shorts_video(audio_path: str, photo_files: list, badge_text: str, title: str, script: str, output_path: str, subtitles: list = None):
+def build_animated_shorts_video(audio_path: str, photo_files: list, badge_text: str, title: str, script: str, output_path: str, subtitles: list = None, theme: str = "deepbeepmeep"):
     import moviepy
     is_v2 = int(moviepy.__version__.split(".")[0]) >= 2
     
@@ -339,7 +354,7 @@ def build_animated_shorts_video(audio_path: str, photo_files: list, badge_text: 
             else:
                 photo_path = fetch_safe_image_for_sentence(caption)
                 
-            frame_img = create_rich_frame(photo_path, badge_text, title, caption, progress=i / max(1, num_segments))
+            frame_img = create_rich_frame(photo_path, badge_text, title, caption, progress=i / max(1, num_segments), theme=theme)
             frame_np = np.array(frame_img)
             
             if is_v2:
@@ -365,7 +380,7 @@ def build_animated_shorts_video(audio_path: str, photo_files: list, badge_text: 
             else:
                 photo_path = fetch_safe_image_for_sentence(caption)
             
-            frame_img = create_rich_frame(photo_path, badge_text, title, caption, progress=i / num_segments)
+            frame_img = create_rich_frame(photo_path, badge_text, title, caption, progress=i / num_segments, theme=theme)
             frame_np = np.array(frame_img)
             
             if is_v2:

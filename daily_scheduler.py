@@ -2,6 +2,7 @@
 daily_scheduler.py — Full End-to-End Daily 2 Shorts Generator & YouTube Uploader
 Morning Short (08:30 AM IST): 100 Days CS Course Lesson (curriculum.json)
 Evening Short (05:30 PM IST): Viral Technical Fun Facts & Trivia (tech_facts.json)
+DeepBeepMeep 3D Cyber Cartoon Mascot & Wan2GP Prompt Batching Integrated
 """
 import sys
 import os
@@ -27,8 +28,10 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 from modules.thumbnail_generator import create_shorts_thumbnail
 from modules.shorts_animator import build_animated_shorts_video
 from modules.youtube_uploader import upload_video
+from modules.deepbeepmeep_engine import get_deepbeepmeep_photos, export_wan2gp_batch_file
+from config import STYLE
 
-# Photo Asset Registry by Topic Domain
+# Photo Asset Registry by Topic Domain (Classic Fallback)
 HARDWARE_PHOTOS = ["cs_photo_4_1080p.jpg", "cs_photo_1_1080p.jpg", "cs_photo_2_1080p.jpg", "cs_photo_3_1080p.jpg"]
 NETWORK_PHOTOS  = ["cs_photo_network_1080p.jpg", "cs_photo_3_1080p.jpg", "cs_photo_4_1080p.jpg"]
 CODING_PHOTOS   = ["cs_photo_code_1080p.jpg", "cs_photo_4_1080p.jpg", "cs_photo_3_1080p.jpg"]
@@ -295,10 +298,12 @@ def generate_viral_title(day: int, title: str, itype: str = "course") -> str:
         clean = title.replace("?", "").strip()
         return f"Mind-Blowing Tech Fact: {clean} 💡 #Shorts #TechFacts #Technology"
 
-def produce_and_upload_short(item, item_type="course", slot="Morning"):
+def produce_and_upload_short(item, item_type="course", slot="Morning", style=None, dry_run=False):
     slot_id = item.get("id", "short")
     item_dir = os.path.join(OUTPUT_DIR, slot_id)
     os.makedirs(item_dir, exist_ok=True)
+
+    active_style = (style or STYLE or "deepbeepmeep").lower()
 
     if item_type == "course":
         day = item.get("day", 1)
@@ -320,7 +325,7 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
         title = item.get("title", "Tech Fun Fact")
         tags = ["Shorts", "TechFacts", "Technology", "Trivia", "DidYouKnow", "Science", "Tech"]
         voice = "en-US-AriaNeural"
-        badge = f"TECH FACT #{num} 💡"
+        badge = f"TECH FACT #{num}"
         video_title = generate_viral_title(num, title, "fact")
         raw_script = item.get("script", title)
         hook = item.get("hook", "Did you know this mind-blowing tech secret?")
@@ -334,6 +339,7 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
     print(f"\n" + "=" * 60)
     print(f"  🎬 PRODUCING {slot.upper()} SHORT [{item_type.upper()}]")
     print(f"  📌 Title: {video_title}")
+    print(f"  🎨 Visual Style: {active_style.upper()}")
     print(f"  🗣️ Voice: {voice}")
 
     # YouTube Agent Skill: Hook & Packaging Audit
@@ -354,25 +360,37 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
     print(f"  [1/4] Generating Neural Voiceover & Subtitle Timeline...")
     audio_path, subtitles = generate_narration_audio(script, voice, audio_path)
 
-    # 2. Select Topic-Matched Images (Custom Vault Images -> Safe Stock -> Curated Fallback)
-    from modules.custom_vault_loader import get_images_for_short
-    chosen_photos = get_images_for_short(item, item_type=item_type)
+    # 2. Select Images & Wan2GP Prompt Generation
+    print(f"  [2/4] Selecting Visual Assets & Formatting Wan2GP Prompts...")
+    if active_style == "deepbeepmeep":
+        # Export DeepBeepMeep Wan2GP batch generation prompt file
+        export_wan2gp_batch_file(item, item_type=item_type)
+        # Select 3D mascot assets
+        chosen_photos = get_deepbeepmeep_photos(item, item_type=item_type)
+    else:
+        from modules.custom_vault_loader import get_images_for_short
+        chosen_photos = get_images_for_short(item, item_type=item_type)
+
+    if not chosen_photos:
+        from modules.custom_vault_loader import get_images_for_short
+        chosen_photos = get_images_for_short(item, item_type=item_type)
 
     # 3. Generate 9:16 High-Contrast Thumbnail
     thumb_path = os.path.join(item_dir, "thumbnail.jpg")
-    print(f"  [2/4] Generating 9:16 Vertical Thumbnail...")
+    print(f"  [3/4] Generating 9:16 Vertical Thumbnail ({active_style.upper()} Theme)...")
     bg_photo = chosen_photos[0] if chosen_photos else None
     create_shorts_thumbnail(
         title=title,
         subtitle=item.get("module", "Daily Tech Insights"),
         badge_text=badge,
         bg_image_path=bg_photo,
-        output_path=thumb_path
+        output_path=thumb_path,
+        theme=active_style
     )
 
     # 4. Render 9:16 Multi-Photo Animated Video with Subtitles Synchronized to Speech
     video_path = os.path.join(item_dir, "final_short.mp4")
-    print(f"  [3/4] Rendering 9:16 Animated Multi-Photo Video (Synchronized Captions)...")
+    print(f"  [4/4] Rendering 9:16 Animated Multi-Photo Video ({active_style.upper()} Theme, Synchronized Captions)...")
     build_animated_shorts_video(
         audio_path=audio_path,
         photo_files=chosen_photos,
@@ -380,11 +398,22 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
         title=title,
         script=script,
         output_path=video_path,
-        subtitles=subtitles
+        subtitles=subtitles,
+        theme=active_style
     )
 
+    # Dry-Run Return Check
+    if dry_run:
+        print(f"\n  ✨ Dry-Run complete! Video and assets generated locally:")
+        print(f"     🎬 Video: {video_path}")
+        print(f"     🖼️ Thumbnail: {thumb_path}")
+        wan_path = os.path.join(item_dir, "wan2gp_batch_prompts.txt")
+        if os.path.exists(wan_path):
+            print(f"     📝 Wan2GP Prompts: {wan_path}")
+        return "dry_run"
+
     # 5. Upload to YouTube
-    print(f"  [4/4] Uploading to YouTube Channel...")
+    print(f"  [Upload] Uploading to YouTube Channel...")
     has_token = bool(os.environ.get("YOUTUBE_REFRESH_TOKEN"))
     if has_token:
         try:
@@ -406,28 +435,30 @@ def produce_and_upload_short(item, item_type="course", slot="Morning"):
         print("  [!] YOUTUBE_REFRESH_TOKEN not found in environment.")
         raise ValueError("Missing YOUTUBE_REFRESH_TOKEN secret in environment.")
 
-def run_schedule(slot="both"):
+def run_schedule(slot="both", style=None, dry_run=False):
     print(f"\n[+] Daily 2 Shorts Pipeline Started at {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     
     if slot in ["morning", "both"]:
         item, itype = get_next_item("Morning")
         if item:
-            produce_and_upload_short(item, itype, "Morning")
+            produce_and_upload_short(item, itype, "Morning", style=style, dry_run=dry_run)
         else:
             print("[i] All Morning CS Course lessons have been uploaded!")
 
     if slot in ["evening", "both"]:
         item, itype = get_next_item("Evening")
         if item:
-            produce_and_upload_short(item, itype, "Evening")
+            produce_and_upload_short(item, itype, "Evening", style=style, dry_run=dry_run)
         else:
             print("[i] All Evening Tech Fun Facts have been uploaded!")
 
 def main():
     parser = argparse.ArgumentParser(description="Daily 2 Shorts Automation Pipeline")
     parser.add_argument("--slot", choices=["morning", "evening", "both"], default="both", help="Schedule slot to run")
+    parser.add_argument("--style", choices=["deepbeepmeep", "classic"], default=STYLE, help="Visual mascot and theme style")
+    parser.add_argument("--dry-run", action="store_true", help="Render video and thumbnail locally without uploading to YouTube")
     args = parser.parse_args()
-    run_schedule(args.slot)
+    run_schedule(slot=args.slot, style=args.style, dry_run=args.dry_run)
 
 if __name__ == "__main__":
     main()
