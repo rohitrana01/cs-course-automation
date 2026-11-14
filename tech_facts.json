@@ -16,8 +16,8 @@
       ],
       "domain": "hardware",
       "uploaded": true,
-      "video_id": "4XzipKA-O-8",
-      "upload_date": "2026-08-16T03:53:34.875514+00:00"
+      "video_id": "HhytPBTfO-c",
+      "upload_date": "2026-11-14T17:45:19.346547+00:00"
     },
     {
       "id": "fact002",
@@ -32,9 +32,7 @@
         "ibm"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "AfsnvI6VDdU",
-      "upload_date": "2026-08-17T15:56:18.876474+00:00"
+      "uploaded": false
     },
     {
       "id": "fact003",
@@ -49,9 +47,7 @@
         "tech trivia"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "Dhi1xCKNwuA",
-      "upload_date": "2026-08-18T03:52:02.989980+00:00"
+      "uploaded": false
     },
     {
       "id": "fact004",
@@ -66,9 +62,7 @@
         "web trivia"
       ],
       "domain": "networking",
-      "uploaded": true,
-      "video_id": "30mFvmcnNuQ",
-      "upload_date": "2026-08-18T12:20:32.365535+00:00"
+      "uploaded": false
     },
     {
       "id": "fact005",
@@ -83,9 +77,7 @@
         "computing power"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "egzaRJ829Hg",
-      "upload_date": "2026-08-19T04:05:34.704022+00:00"
+      "uploaded": false
     },
     {
       "id": "fact006",
@@ -100,9 +92,7 @@
         "software"
       ],
       "domain": "coding",
-      "uploaded": true,
-      "video_id": "LsFXvNRNXA0",
-      "upload_date": "2026-08-19T12:24:39.688197+00:00"
+      "uploaded": false
     },
     {
       "id": "fact007",
@@ -117,9 +107,7 @@
         "data"
       ],
       "domain": "networking",
-      "uploaded": true,
-      "video_id": "D0ltxiXf5Xo",
-      "upload_date": "2026-08-20T03:51:42.969903+00:00"
+      "uploaded": false
     },
     {
       "id": "fact008",
@@ -134,9 +122,7 @@
         "tech history"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "TMnAS0FTGBY",
-      "upload_date": "2026-08-20T12:22:11.176854+00:00"
+      "uploaded": false
     },
     {
       "id": "fact009",
@@ -151,9 +137,7 @@
         "languages"
       ],
       "domain": "coding",
-      "uploaded": true,
-      "video_id": "Z_AE81tIkLQ",
-      "upload_date": "2026-08-21T03:55:18.035863+00:00"
+      "uploaded": false
     },
     {
       "id": "fact010",
@@ -168,9 +152,7 @@
         "undersea cables"
       ],
       "domain": "networking",
-      "uploaded": true,
-      "video_id": "x0VRHnOFqPA",
-      "upload_date": "2026-08-21T12:22:08.407630+00:00"
+      "uploaded": false
     },
     {
       "id": "fact011",
@@ -185,9 +167,7 @@
         "cern",
         "www"
       ],
-      "uploaded": true,
-      "video_id": "15qjTTPT6FQ",
-      "upload_date": "2026-09-03T15:19:47.560968+00:00"
+      "uploaded": false
     },
     {
       "id": "fact012",
@@ -201,9 +181,7 @@
         "arpanet",
         "tech facts"
       ],
-      "uploaded": true,
-      "video_id": "k8jU4ct1AQk",
-      "upload_date": "2026-09-04T15:14:30.502163+00:00"
+      "uploaded": false
     },
     {
       "id": "fact013",
@@ -218,9 +196,7 @@
         "energy",
         "search"
       ],
-      "uploaded": true,
-      "video_id": "kqFZJNRagi0",
-      "upload_date": "2026-09-05T14:06:38.250714+00:00"
+      "uploaded": false
     },
     {
       "id": "fact014",
@@ -234,9 +210,7 @@
         "google books",
         "crowdsourcing"
       ],
-      "uploaded": true,
-      "video_id": "E_3u1Bpf02Q",
-      "upload_date": "2026-09-06T14:29:50.828014+00:00"
+      "uploaded": false
     },
     {
       "id": "fact015",
@@ -250,9 +224,7 @@
         "history",
         "programming"
       ],
-      "uploaded": true,
-      "video_id": "l2161njgg-A",
-      "upload_date": "2026-09-07T08:05:14.741821+00:00"
+      "uploaded": false
     },
     {
       "id": "fact016",
@@ -266,9 +238,7 @@
         "dns",
         "web history"
       ],
-      "uploaded": true,
-      "video_id": "6q-jepNVjNY",
-      "upload_date": "2026-09-07T17:23:38.253637+00:00"
+      "uploaded": false
     },
     {
       "id": "fact017",
@@ -283,9 +253,7 @@
         "gaming",
         "hardware"
       ],
-      "uploaded": true,
-      "video_id": "FechaTXZrIY",
-      "upload_date": "2026-09-08T15:29:32.645011+00:00"
+      "uploaded": false
     },
     {
       "id": "fact018",
@@ -299,9 +267,7 @@
         "technology",
         "wireless"
       ],
-      "uploaded": true,
-      "video_id": "LMI1UnYmw8A",
-      "upload_date": "2026-09-09T15:25:56.216263+00:00"
+      "uploaded": false
     },
     {
       "id": "fact019",
@@ -315,9 +281,7 @@
         "history",
         "military tech"
       ],
-      "uploaded": true,
-      "video_id": "nBDPRxpPW14",
-      "upload_date": "2026-09-10T15:19:28.057264+00:00"
+      "uploaded": false
     },
     {
       "id": "fact020",
@@ -331,9 +295,7 @@
         "open source",
         "hpc"
       ],
-      "uploaded": true,
-      "video_id": "NnrXRGJdUrw",
-      "upload_date": "2026-09-11T15:21:15.808839+00:00"
+      "uploaded": false
     },
     {
       "id": "fact021",
@@ -347,9 +309,7 @@
         "invention",
         "digital photography"
       ],
-      "uploaded": true,
-      "video_id": "1Kzrp3NPSkM",
-      "upload_date": "2026-09-12T14:29:00.069137+00:00"
+      "uploaded": false
     },
     {
       "id": "fact022",
@@ -364,9 +324,7 @@
         "hardware",
         "memory"
       ],
-      "uploaded": true,
-      "video_id": "FdYKx9zwZ54",
-      "upload_date": "2026-09-13T08:08:49.559927+00:00"
+      "uploaded": false
     },
     {
       "id": "fact023",
@@ -380,9 +338,7 @@
         "invention",
         "douglas engelbart"
       ],
-      "uploaded": true,
-      "video_id": "IY2fYJ6Z-40",
-      "upload_date": "2026-09-13T15:10:00.193842+00:00"
+      "uploaded": false
     },
     {
       "id": "fact024",
@@ -396,9 +352,7 @@
         "space",
         "embedded systems"
       ],
-      "uploaded": true,
-      "video_id": "9YKDoVFCEzw",
-      "upload_date": "2026-09-14T08:42:44.967969+00:00"
+      "uploaded": false
     },
     {
       "id": "fact025",
@@ -412,9 +366,7 @@
         "history",
         "vikings"
       ],
-      "uploaded": true,
-      "video_id": "om85tgxVvgI",
-      "upload_date": "2026-09-14T17:07:32.522016+00:00"
+      "uploaded": false
     },
     {
       "id": "fact026",
@@ -428,9 +380,7 @@
         "datacenter",
         "cloud"
       ],
-      "uploaded": true,
-      "video_id": "ehjoBGEnV5w",
-      "upload_date": "2026-09-15T08:31:07.457055+00:00"
+      "uploaded": false
     },
     {
       "id": "fact027",
@@ -444,9 +394,7 @@
         "video games",
         "oscilloscope"
       ],
-      "uploaded": true,
-      "video_id": "ldOfzRpDC24",
-      "upload_date": "2026-09-15T15:47:14.493181+00:00"
+      "uploaded": false
     },
     {
       "id": "fact028",
@@ -461,9 +409,7 @@
         "physics",
         "nanometer"
       ],
-      "uploaded": true,
-      "video_id": "2TbHBmrPNOY",
-      "upload_date": "2026-09-16T08:24:55.406432+00:00"
+      "uploaded": false
     },
     {
       "id": "fact029",
@@ -477,9 +423,7 @@
         "creeper",
         "arpanet"
       ],
-      "uploaded": true,
-      "video_id": "J8LjqRTXGQ0",
-      "upload_date": "2026-09-16T15:39:08.740293+00:00"
+      "uploaded": false
     },
     {
       "id": "fact030",
@@ -494,9 +438,7 @@
         "math",
         "memory"
       ],
-      "uploaded": true,
-      "video_id": "LdRbYwCoh2A",
-      "upload_date": "2026-09-17T08:31:07.908243+00:00"
+      "uploaded": false
     },
     {
       "id": "fact031",
@@ -511,9 +453,7 @@
         "tech history",
         "easter egg"
       ],
-      "uploaded": true,
-      "video_id": "_vE-qebRFv8",
-      "upload_date": "2026-09-28T09:32:17.643355+00:00"
+      "uploaded": false
     },
     {
       "id": "fact032",
@@ -528,9 +468,7 @@
         "history",
         "algorithm"
       ],
-      "uploaded": true,
-      "video_id": "CRGg051TYzU",
-      "upload_date": "2026-09-28T18:50:37.867460+00:00"
+      "uploaded": false
     },
     {
       "id": "fact033",
@@ -545,9 +483,7 @@
         "invention",
         "coffee"
       ],
-      "uploaded": true,
-      "video_id": "_BE3TfF7mLY",
-      "upload_date": "2026-09-29T09:36:51.067501+00:00"
+      "uploaded": false
     },
     {
       "id": "fact034",
@@ -562,9 +498,7 @@
         "smartphones",
         "hardware"
       ],
-      "uploaded": true,
-      "video_id": "umIr4h5VthM",
-      "upload_date": "2026-09-29T17:07:18.822574+00:00"
+      "uploaded": false
     },
     {
       "id": "fact035",
@@ -579,9 +513,7 @@
         "satellites",
         "clocks"
       ],
-      "uploaded": true,
-      "video_id": "SwOUdHvOH3A",
-      "upload_date": "2026-09-30T09:29:12.727757+00:00"
+      "uploaded": false
     },
     {
       "id": "fact036",
@@ -596,9 +528,7 @@
         "waymo",
         "machine learning"
       ],
-      "uploaded": true,
-      "video_id": "tl3xBtJVA4c",
-      "upload_date": "2026-09-30T17:05:36.907523+00:00"
+      "uploaded": false
     },
     {
       "id": "fact037",
@@ -613,9 +543,7 @@
         "nanometer",
         "quantum"
       ],
-      "uploaded": true,
-      "video_id": "nhbxKo6Jm2k",
-      "upload_date": "2026-10-01T09:55:16.003881+00:00"
+      "uploaded": false
     },
     {
       "id": "fact038",
@@ -630,9 +558,7 @@
         "electrons",
         "science"
       ],
-      "uploaded": true,
-      "video_id": "c6LMvKvh9tQ",
-      "upload_date": "2026-10-01T17:48:38.642957+00:00"
+      "uploaded": false
     },
     {
       "id": "fact039",
@@ -647,9 +573,7 @@
         "hardware",
         "engineering"
       ],
-      "uploaded": true,
-      "video_id": "JgNt7-XF2jg",
-      "upload_date": "2026-10-02T09:31:58.407389+00:00"
+      "uploaded": false
     },
     {
       "id": "fact040",
@@ -664,9 +588,7 @@
         "history",
         "retro tech"
       ],
-      "uploaded": true,
-      "video_id": "f1kEzdJgsQc",
-      "upload_date": "2026-10-02T16:54:55.216587+00:00"
+      "uploaded": false
     },
     {
       "id": "fact041",
@@ -681,9 +603,7 @@
         "typewriter",
         "hardware"
       ],
-      "uploaded": true,
-      "video_id": "AJomdssYFdc",
-      "upload_date": "2026-10-03T08:59:20.504031+00:00"
+      "uploaded": false
     },
     {
       "id": "fact042",
@@ -698,9 +618,7 @@
         "rockyou",
         "security"
       ],
-      "uploaded": true,
-      "video_id": "2Czeozvjb58",
-      "upload_date": "2026-10-03T15:19:46.215366+00:00"
+      "uploaded": false
     },
     {
       "id": "fact043",
@@ -715,9 +633,7 @@
         "math",
         "integers"
       ],
-      "uploaded": true,
-      "video_id": "6JyT1aJAM7g",
-      "upload_date": "2026-10-04T09:30:43.777208+00:00"
+      "uploaded": false
     },
     {
       "id": "fact044",
@@ -732,9 +648,7 @@
         "ios",
         "operating system"
       ],
-      "uploaded": true,
-      "video_id": "srgtUujexF4",
-      "upload_date": "2026-10-04T16:03:10.628466+00:00"
+      "uploaded": false
     },
     {
       "id": "fact045",
@@ -749,9 +663,7 @@
         "history",
         "computer science"
       ],
-      "uploaded": true,
-      "video_id": "gqaF7BoKZjE",
-      "upload_date": "2026-10-05T10:11:18.897993+00:00"
+      "uploaded": false
     },
     {
       "id": "fact046",
@@ -766,9 +678,7 @@
         "hardware",
         "engineering"
       ],
-      "uploaded": true,
-      "video_id": "tknISyy-4ME",
-      "upload_date": "2026-10-05T20:00:13.929313+00:00"
+      "uploaded": false
     },
     {
       "id": "fact047",
@@ -783,9 +693,7 @@
         "video",
         "tech history"
       ],
-      "uploaded": true,
-      "video_id": "f-CT9WE07WM",
-      "upload_date": "2026-10-06T09:55:12.500652+00:00"
+      "uploaded": false
     },
     {
       "id": "fact048",
@@ -800,9 +708,7 @@
         "code",
         "syntax"
       ],
-      "uploaded": true,
-      "video_id": "gOJdCFRC7XQ",
-      "upload_date": "2026-10-06T17:29:17.826265+00:00"
+      "uploaded": false
     },
     {
       "id": "fact049",
@@ -817,9 +723,7 @@
         "ibm",
         "computer science"
       ],
-      "uploaded": true,
-      "video_id": "87QxXmvsxzQ",
-      "upload_date": "2026-10-07T10:01:52.060378+00:00"
+      "uploaded": false
     },
     {
       "id": "fact050",
@@ -834,9 +738,7 @@
         "history",
         "symbolics"
       ],
-      "uploaded": true,
-      "video_id": "h7Mgsc59NP4",
-      "upload_date": "2026-10-07T18:09:40.991577+00:00"
+      "uploaded": false
     },
     {
       "id": "fact051",
@@ -851,9 +753,7 @@
         "architecture",
         "ram"
       ],
-      "uploaded": true,
-      "video_id": "28wEHP9pPPk",
-      "upload_date": "2026-10-08T10:14:19.972415+00:00"
+      "uploaded": false
     },
     {
       "id": "fact052",
@@ -868,9 +768,7 @@
         "hacking",
         "arpanet"
       ],
-      "uploaded": true,
-      "video_id": "tHb_crxcdhA",
-      "upload_date": "2026-10-08T18:04:11.576946+00:00"
+      "uploaded": false
     },
     {
       "id": "fact053",
@@ -885,9 +783,7 @@
         "hardware",
         "ai"
       ],
-      "uploaded": true,
-      "video_id": "zmYj9elJ0lc",
-      "upload_date": "2026-10-09T10:15:19.596724+00:00"
+      "uploaded": false
     },
     {
       "id": "fact054",
@@ -902,9 +798,7 @@
         "telecom",
         "lasers"
       ],
-      "uploaded": true,
-      "video_id": "gcH7b71puoo",
-      "upload_date": "2026-10-09T17:37:30.708983+00:00"
+      "uploaded": false
     },
     {
       "id": "fact055",
@@ -919,9 +813,7 @@
         "concurrency",
         "performance"
       ],
-      "uploaded": true,
-      "video_id": "j_qFvggm_o0",
-      "upload_date": "2026-10-10T09:36:36.606814+00:00"
+      "uploaded": false
     },
     {
       "id": "fact056",
@@ -936,9 +828,7 @@
         "hardware",
         "memory"
       ],
-      "uploaded": true,
-      "video_id": "wqCjXp8_SE0",
-      "upload_date": "2026-10-10T17:04:47.546027+00:00"
+      "uploaded": false
     },
     {
       "id": "fact057",
@@ -953,9 +843,7 @@
         "render farm",
         "toy story"
       ],
-      "uploaded": true,
-      "video_id": "h8IeaR6kS4A",
-      "upload_date": "2026-10-11T17:28:28.450538+00:00"
+      "uploaded": false
     },
     {
       "id": "fact058",
@@ -970,9 +858,7 @@
         "web",
         "ip address"
       ],
-      "uploaded": true,
-      "video_id": "GO80rk9lut4",
-      "upload_date": "2026-10-12T21:02:20.572401+00:00"
+      "uploaded": false
     },
     {
       "id": "fact059",
@@ -987,9 +873,7 @@
         "cybersecurity",
         "physics"
       ],
-      "uploaded": true,
-      "video_id": "ZUprcp5tBmw",
-      "upload_date": "2026-10-13T19:00:28.705964+00:00"
+      "uploaded": false
     },
     {
       "id": "fact060",
@@ -1004,9 +888,7 @@
         "history",
         "retro tech"
       ],
-      "uploaded": true,
-      "video_id": "cEucN-IvU18",
-      "upload_date": "2026-10-14T16:43:54.465407+00:00"
+      "uploaded": false
     },
     {
       "id": "fact061",
@@ -1022,9 +904,7 @@
         "hardware"
       ],
       "domain": "network",
-      "uploaded": true,
-      "video_id": "scSEpj0JDV4",
-      "upload_date": "2026-10-15T16:29:26.984125+00:00"
+      "uploaded": false
     },
     {
       "id": "fact062",
@@ -1040,9 +920,7 @@
         "machine learning"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "-pfR3SCO1bI",
-      "upload_date": "2026-10-16T16:14:57.059175+00:00"
+      "uploaded": false
     },
     {
       "id": "fact063",
@@ -1058,9 +936,7 @@
         "binary"
       ],
       "domain": "coding",
-      "uploaded": true,
-      "video_id": "2vVRuoYtJCg",
-      "upload_date": "2026-10-17T15:08:30.802518+00:00"
+      "uploaded": false
     },
     {
       "id": "fact064",
@@ -1076,9 +952,7 @@
         "trivia"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "mbYEnkZsfvQ",
-      "upload_date": "2026-10-18T15:31:12.558497+00:00"
+      "uploaded": false
     },
     {
       "id": "fact065",
@@ -1094,9 +968,7 @@
         "linux"
       ],
       "domain": "coding",
-      "uploaded": true,
-      "video_id": "VT8JmiT_XmA",
-      "upload_date": "2026-10-19T18:28:04.637554+00:00"
+      "uploaded": false
     },
     {
       "id": "fact066",
@@ -1112,9 +984,7 @@
         "security"
       ],
       "domain": "ai",
-      "uploaded": true,
-      "video_id": "47vJmfEyz6s",
-      "upload_date": "2026-10-20T16:29:53.321017+00:00"
+      "uploaded": false
     },
     {
       "id": "fact067",
@@ -1130,9 +1000,7 @@
         "cpu"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "G1kE_VQ8joc",
-      "upload_date": "2026-10-21T16:47:02.237481+00:00"
+      "uploaded": false
     },
     {
       "id": "fact068",
@@ -1148,9 +1016,7 @@
         "science"
       ],
       "domain": "science",
-      "uploaded": true,
-      "video_id": "PM_srtVvxVk",
-      "upload_date": "2026-10-22T16:49:05.783622+00:00"
+      "uploaded": false
     },
     {
       "id": "fact069",
@@ -1165,9 +1031,7 @@
         "operating systems"
       ],
       "domain": "software",
-      "uploaded": true,
-      "video_id": "YHSx4ZrE1WQ",
-      "upload_date": "2026-10-23T17:15:57.781255+00:00"
+      "uploaded": false
     },
     {
       "id": "fact070",
@@ -1183,9 +1047,7 @@
         "software"
       ],
       "domain": "history",
-      "uploaded": true,
-      "video_id": "JT1V3A0RKiA",
-      "upload_date": "2026-10-24T15:32:43.481949+00:00"
+      "uploaded": false
     },
     {
       "id": "fact071",
@@ -1201,9 +1063,7 @@
         "software"
       ],
       "domain": "coding",
-      "uploaded": true,
-      "video_id": "eCLtYHINzc4",
-      "upload_date": "2026-10-25T15:42:21.218067+00:00"
+      "uploaded": false
     },
     {
       "id": "fact072",
@@ -1219,9 +1079,7 @@
         "cpu"
       ],
       "domain": "coding",
-      "uploaded": true,
-      "video_id": "ARfzrNtoFKE",
-      "upload_date": "2026-10-26T18:22:58.707581+00:00"
+      "uploaded": false
     },
     {
       "id": "fact073",
@@ -1237,9 +1095,7 @@
         "wildlife"
       ],
       "domain": "network",
-      "uploaded": true,
-      "video_id": "E7tHbdvHXxc",
-      "upload_date": "2026-10-27T17:43:55.670941+00:00"
+      "uploaded": false
     },
     {
       "id": "fact074",
@@ -1255,9 +1111,7 @@
         "electronics"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "rmkj57-jSsU",
-      "upload_date": "2026-10-28T18:00:34.282620+00:00"
+      "uploaded": false
     },
     {
       "id": "fact075",
@@ -1273,9 +1127,7 @@
         "hardware"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "okbABg909gU",
-      "upload_date": "2026-10-29T18:09:32.294485+00:00"
+      "uploaded": false
     },
     {
       "id": "fact076",
@@ -1291,9 +1143,7 @@
         "hardware"
       ],
       "domain": "network",
-      "uploaded": true,
-      "video_id": "vM5xZ8namjc",
-      "upload_date": "2026-10-30T17:49:26.362827+00:00"
+      "uploaded": false
     },
     {
       "id": "fact077",
@@ -1309,9 +1159,7 @@
         "security"
       ],
       "domain": "network",
-      "uploaded": true,
-      "video_id": "Ns47hn_Ia4c",
-      "upload_date": "2026-10-31T16:56:51.404181+00:00"
+      "uploaded": false
     },
     {
       "id": "fact078",
@@ -1327,9 +1175,7 @@
         "trivia"
       ],
       "domain": "software",
-      "uploaded": true,
-      "video_id": "sdf--sE3RAs",
-      "upload_date": "2026-11-01T17:44:15.824971+00:00"
+      "uploaded": false
     },
     {
       "id": "fact079",
@@ -1345,9 +1191,7 @@
         "cybersecurity"
       ],
       "domain": "security",
-      "uploaded": true,
-      "video_id": "Ky3kUNIcA1I",
-      "upload_date": "2026-11-02T21:30:06.623213+00:00"
+      "uploaded": false
     },
     {
       "id": "fact080",
@@ -1363,9 +1207,7 @@
         "chips"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "khyx_XDwFG8",
-      "upload_date": "2026-11-03T19:12:52.491884+00:00"
+      "uploaded": false
     },
     {
       "id": "fact081",
@@ -1381,9 +1223,7 @@
         "trading"
       ],
       "domain": "network",
-      "uploaded": true,
-      "video_id": "8B5Z8ffEqyM",
-      "upload_date": "2026-11-04T19:30:31.812307+00:00"
+      "uploaded": false
     },
     {
       "id": "fact082",
@@ -1399,9 +1239,7 @@
         "physics"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "UjgfxE5NKOU",
-      "upload_date": "2026-11-05T19:39:14.120894+00:00"
+      "uploaded": false
     },
     {
       "id": "fact083",
@@ -1417,9 +1255,7 @@
         "smartphone"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "tYK7NAjVm9M",
-      "upload_date": "2026-11-06T19:00:25.020032+00:00"
+      "uploaded": false
     },
     {
       "id": "fact084",
@@ -1435,9 +1271,7 @@
         "hardware"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "cSzANmn6p14",
-      "upload_date": "2026-11-07T17:32:32.995280+00:00"
+      "uploaded": false
     },
     {
       "id": "fact085",
@@ -1453,9 +1287,7 @@
         "technology"
       ],
       "domain": "software",
-      "uploaded": true,
-      "video_id": "CATW5mgsqqQ",
-      "upload_date": "2026-11-08T17:44:11.463522+00:00"
+      "uploaded": false
     },
     {
       "id": "fact086",
@@ -1471,9 +1303,7 @@
         "hardware"
       ],
       "domain": "hardware",
-      "uploaded": true,
-      "video_id": "jarSeGSD_CQ",
-      "upload_date": "2026-11-09T22:01:11.142291+00:00"
+      "uploaded": false
     },
     {
       "id": "fact087",
@@ -1489,9 +1319,7 @@
         "algorithms"
       ],
       "domain": "coding",
-      "uploaded": true,
-      "video_id": "sSphHwvOSdY",
-      "upload_date": "2026-11-10T19:26:39.439136+00:00"
+      "uploaded": false
     },
     {
       "id": "fact088",
@@ -1507,9 +1335,7 @@
         "history"
       ],
       "domain": "software",
-      "uploaded": true,
-      "video_id": "iP_ZHAois8Y",
-      "upload_date": "2026-11-11T19:21:10.268480+00:00"
+      "uploaded": false
     },
     {
       "id": "fact089",
@@ -1525,9 +1351,7 @@
         "text"
       ],
       "domain": "software",
-      "uploaded": true,
-      "video_id": "9_vgGboA6To",
-      "upload_date": "2026-11-12T19:39:22.692686+00:00"
+      "uploaded": false
     },
     {
       "id": "fact090",
@@ -1543,9 +1367,7 @@
         "future tech"
       ],
       "domain": "ai",
-      "uploaded": true,
-      "video_id": "k8miXO1U0vs",
-      "upload_date": "2026-11-13T19:20:27.348863+00:00"
+      "uploaded": false
     }
   ]
 }
